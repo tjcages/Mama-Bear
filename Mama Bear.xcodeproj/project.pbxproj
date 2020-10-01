@@ -1,0 +1,619 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F59B5F3252646DA002E057A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F59B5F2252646DA002E057A /* AppDelegate.swift */; };
+		2F59B5F5252646DA002E057A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F59B5F4252646DA002E057A /* SceneDelegate.swift */; };
+		2F59B5F7252646DA002E057A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F59B5F6252646DA002E057A /* ContentView.swift */; };
+		2F59B5FA252646DA002E057A /* Mama_Bear.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F59B5F8252646DA002E057A /* Mama_Bear.xcdatamodeld */; };
+		2F59B5FC252646DB002E057A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F59B5FB252646DB002E057A /* Assets.xcassets */; };
+		2F59B5FF252646DB002E057A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F59B5FE252646DB002E057A /* Preview Assets.xcassets */; };
+		2F59B602252646DB002E057A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F59B600252646DB002E057A /* LaunchScreen.storyboard */; };
+		2F59B60D252646DB002E057A /* Mama_BearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F59B60C252646DB002E057A /* Mama_BearTests.swift */; };
+		2F59B618252646DB002E057A /* Mama_BearUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F59B617252646DB002E057A /* Mama_BearUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2F59B609252646DB002E057A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F59B5E7252646DA002E057A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F59B5EE252646DA002E057A;
+			remoteInfo = "Mama Bear";
+		};
+		2F59B614252646DB002E057A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F59B5E7252646DA002E057A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F59B5EE252646DA002E057A;
+			remoteInfo = "Mama Bear";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2F59B5EF252646DA002E057A /* Mama Bear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mama Bear.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F59B5F2252646DA002E057A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2F59B5F4252646DA002E057A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2F59B5F6252646DA002E057A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2F59B5F9252646DA002E057A /* Mama_Bear.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mama_Bear.xcdatamodel; sourceTree = "<group>"; };
+		2F59B5FB252646DB002E057A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F59B5FE252646DB002E057A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2F59B601252646DB002E057A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2F59B603252646DB002E057A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F59B608252646DB002E057A /* Mama BearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mama BearTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F59B60C252646DB002E057A /* Mama_BearTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mama_BearTests.swift; sourceTree = "<group>"; };
+		2F59B60E252646DB002E057A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F59B613252646DB002E057A /* Mama BearUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mama BearUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F59B617252646DB002E057A /* Mama_BearUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mama_BearUITests.swift; sourceTree = "<group>"; };
+		2F59B619252646DB002E057A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F59B5EC252646DA002E057A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F59B605252646DB002E057A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F59B610252646DB002E057A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F59B5E6252646DA002E057A = {
+			isa = PBXGroup;
+			children = (
+				2F59B5F1252646DA002E057A /* Mama Bear */,
+				2F59B60B252646DB002E057A /* Mama BearTests */,
+				2F59B616252646DB002E057A /* Mama BearUITests */,
+				2F59B5F0252646DA002E057A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F59B5F0252646DA002E057A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F59B5EF252646DA002E057A /* Mama Bear.app */,
+				2F59B608252646DB002E057A /* Mama BearTests.xctest */,
+				2F59B613252646DB002E057A /* Mama BearUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2F59B5F1252646DA002E057A /* Mama Bear */ = {
+			isa = PBXGroup;
+			children = (
+				2F59B5F2252646DA002E057A /* AppDelegate.swift */,
+				2F59B5F4252646DA002E057A /* SceneDelegate.swift */,
+				2F59B5F6252646DA002E057A /* ContentView.swift */,
+				2F59B5FB252646DB002E057A /* Assets.xcassets */,
+				2F59B600252646DB002E057A /* LaunchScreen.storyboard */,
+				2F59B603252646DB002E057A /* Info.plist */,
+				2F59B5F8252646DA002E057A /* Mama_Bear.xcdatamodeld */,
+				2F59B5FD252646DB002E057A /* Preview Content */,
+			);
+			path = "Mama Bear";
+			sourceTree = "<group>";
+		};
+		2F59B5FD252646DB002E057A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2F59B5FE252646DB002E057A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2F59B60B252646DB002E057A /* Mama BearTests */ = {
+			isa = PBXGroup;
+			children = (
+				2F59B60C252646DB002E057A /* Mama_BearTests.swift */,
+				2F59B60E252646DB002E057A /* Info.plist */,
+			);
+			path = "Mama BearTests";
+			sourceTree = "<group>";
+		};
+		2F59B616252646DB002E057A /* Mama BearUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2F59B617252646DB002E057A /* Mama_BearUITests.swift */,
+				2F59B619252646DB002E057A /* Info.plist */,
+			);
+			path = "Mama BearUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2F59B5EE252646DA002E057A /* Mama Bear */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F59B61C252646DB002E057A /* Build configuration list for PBXNativeTarget "Mama Bear" */;
+			buildPhases = (
+				2F59B5EB252646DA002E057A /* Sources */,
+				2F59B5EC252646DA002E057A /* Frameworks */,
+				2F59B5ED252646DA002E057A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mama Bear";
+			productName = "Mama Bear";
+			productReference = 2F59B5EF252646DA002E057A /* Mama Bear.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2F59B607252646DB002E057A /* Mama BearTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F59B61F252646DB002E057A /* Build configuration list for PBXNativeTarget "Mama BearTests" */;
+			buildPhases = (
+				2F59B604252646DB002E057A /* Sources */,
+				2F59B605252646DB002E057A /* Frameworks */,
+				2F59B606252646DB002E057A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F59B60A252646DB002E057A /* PBXTargetDependency */,
+			);
+			name = "Mama BearTests";
+			productName = "Mama BearTests";
+			productReference = 2F59B608252646DB002E057A /* Mama BearTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2F59B612252646DB002E057A /* Mama BearUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F59B622252646DB002E057A /* Build configuration list for PBXNativeTarget "Mama BearUITests" */;
+			buildPhases = (
+				2F59B60F252646DB002E057A /* Sources */,
+				2F59B610252646DB002E057A /* Frameworks */,
+				2F59B611252646DB002E057A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F59B615252646DB002E057A /* PBXTargetDependency */,
+			);
+			name = "Mama BearUITests";
+			productName = "Mama BearUITests";
+			productReference = 2F59B613252646DB002E057A /* Mama BearUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2F59B5E7252646DA002E057A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					2F59B5EE252646DA002E057A = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					2F59B607252646DB002E057A = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 2F59B5EE252646DA002E057A;
+					};
+					2F59B612252646DB002E057A = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 2F59B5EE252646DA002E057A;
+					};
+				};
+			};
+			buildConfigurationList = 2F59B5EA252646DA002E057A /* Build configuration list for PBXProject "Mama Bear" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2F59B5E6252646DA002E057A;
+			productRefGroup = 2F59B5F0252646DA002E057A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F59B5EE252646DA002E057A /* Mama Bear */,
+				2F59B607252646DB002E057A /* Mama BearTests */,
+				2F59B612252646DB002E057A /* Mama BearUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F59B5ED252646DA002E057A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F59B602252646DB002E057A /* LaunchScreen.storyboard in Resources */,
+				2F59B5FF252646DB002E057A /* Preview Assets.xcassets in Resources */,
+				2F59B5FC252646DB002E057A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F59B606252646DB002E057A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F59B611252646DB002E057A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F59B5EB252646DA002E057A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F59B5F3252646DA002E057A /* AppDelegate.swift in Sources */,
+				2F59B5F5252646DA002E057A /* SceneDelegate.swift in Sources */,
+				2F59B5F7252646DA002E057A /* ContentView.swift in Sources */,
+				2F59B5FA252646DA002E057A /* Mama_Bear.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F59B604252646DB002E057A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F59B60D252646DB002E057A /* Mama_BearTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F59B60F252646DB002E057A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F59B618252646DB002E057A /* Mama_BearUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2F59B60A252646DB002E057A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F59B5EE252646DA002E057A /* Mama Bear */;
+			targetProxy = 2F59B609252646DB002E057A /* PBXContainerItemProxy */;
+		};
+		2F59B615252646DB002E057A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F59B5EE252646DA002E057A /* Mama Bear */;
+			targetProxy = 2F59B614252646DB002E057A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2F59B600252646DB002E057A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F59B601252646DB002E057A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2F59B61A252646DB002E057A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2F59B61B252646DB002E057A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2F59B61D252646DB002E057A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Mama Bear/Preview Content\"";
+				DEVELOPMENT_TEAM = 435YL82FQ2;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Mama Bear/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.Mama-Bear";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2F59B61E252646DB002E057A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Mama Bear/Preview Content\"";
+				DEVELOPMENT_TEAM = 435YL82FQ2;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Mama Bear/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.Mama-Bear";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2F59B620252646DB002E057A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 435YL82FQ2;
+				INFOPLIST_FILE = "Mama BearTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.Mama-BearTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mama Bear.app/Mama Bear";
+			};
+			name = Debug;
+		};
+		2F59B621252646DB002E057A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 435YL82FQ2;
+				INFOPLIST_FILE = "Mama BearTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.Mama-BearTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mama Bear.app/Mama Bear";
+			};
+			name = Release;
+		};
+		2F59B623252646DB002E057A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 435YL82FQ2;
+				INFOPLIST_FILE = "Mama BearUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.Mama-BearUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Mama Bear";
+			};
+			name = Debug;
+		};
+		2F59B624252646DB002E057A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 435YL82FQ2;
+				INFOPLIST_FILE = "Mama BearUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.Mama-BearUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Mama Bear";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F59B5EA252646DA002E057A /* Build configuration list for PBXProject "Mama Bear" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F59B61A252646DB002E057A /* Debug */,
+				2F59B61B252646DB002E057A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F59B61C252646DB002E057A /* Build configuration list for PBXNativeTarget "Mama Bear" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F59B61D252646DB002E057A /* Debug */,
+				2F59B61E252646DB002E057A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F59B61F252646DB002E057A /* Build configuration list for PBXNativeTarget "Mama BearTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F59B620252646DB002E057A /* Debug */,
+				2F59B621252646DB002E057A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F59B622252646DB002E057A /* Build configuration list for PBXNativeTarget "Mama BearUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F59B623252646DB002E057A /* Debug */,
+				2F59B624252646DB002E057A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2F59B5F8252646DA002E057A /* Mama_Bear.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2F59B5F9252646DA002E057A /* Mama_Bear.xcdatamodel */,
+			);
+			currentVersion = 2F59B5F9252646DA002E057A /* Mama_Bear.xcdatamodel */;
+			path = Mama_Bear.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 2F59B5E7252646DA002E057A /* Project object */;
+}
