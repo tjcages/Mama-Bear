@@ -40,7 +40,7 @@
 		2FBD2026252693A0000465D3 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD2025252693A0000465D3 /* CreateAccountView.swift */; };
 		2FBD202B2526A16E000465D3 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD202A2526A16E000465D3 /* RegisterView.swift */; };
 		2FBD203A2526A6E4000465D3 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD20392526A6E4000465D3 /* BackButton.swift */; };
-		2FBD20402526A788000465D3 /* Create_RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD203F2526A788000465D3 /* Create_RegisterView.swift */; };
+		2FBD20402526A788000465D3 /* Name_RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD203F2526A788000465D3 /* Name_RegisterView.swift */; };
 		2FF821DD2526547800BA97C8 /* OnboardingSingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF821DC2526547800BA97C8 /* OnboardingSingleView.swift */; };
 		2FF821E52526554200BA97C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FF821E42526554200BA97C8 /* Assets.xcassets */; };
 		2FF821F1252655F900BA97C8 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF821F0252655F900BA97C8 /* PageControl.swift */; };
@@ -50,6 +50,9 @@
 		2FF8222825265CC600BA97C8 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF8222725265CC600BA97C8 /* Onboarding.swift */; };
 		2FF8222D2526610F00BA97C8 /* SkipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF8222C2526610F00BA97C8 /* SkipButton.swift */; };
 		2FF822322526624300BA97C8 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF822312526624300BA97C8 /* WelcomeView.swift */; };
+		2FF964862527A2D300CCB348 /* Email_RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF964852527A2D300CCB348 /* Email_RegisterView.swift */; };
+		2FF9648B2527B64700CCB348 /* Phone_RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9648A2527B64700CCB348 /* Phone_RegisterView.swift */; };
+		2FF964902527B78100CCB348 /* Verify_RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9648F2527B78100CCB348 /* Verify_RegisterView.swift */; };
 		74182CDC07D40DE7B1740DA6 /* Pods_Mama_BearTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B759078B409C73994A071B3A /* Pods_Mama_BearTests.framework */; };
 		8FB47EEBABB8406368F3C924 /* Pods_Mama_Bear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16460671E7765D45868EAC72 /* Pods_Mama_Bear.framework */; };
 		E36332EBCBEC9A11F5A2F1F4 /* Pods_Mama_Bear_Mama_BearUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F786D9FE237F169B1DEFB479 /* Pods_Mama_Bear_Mama_BearUITests.framework */; };
@@ -114,7 +117,7 @@
 		2FBD2025252693A0000465D3 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		2FBD202A2526A16E000465D3 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		2FBD20392526A6E4000465D3 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
-		2FBD203F2526A788000465D3 /* Create_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create_RegisterView.swift; sourceTree = "<group>"; };
+		2FBD203F2526A788000465D3 /* Name_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name_RegisterView.swift; sourceTree = "<group>"; };
 		2FF821DC2526547800BA97C8 /* OnboardingSingleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSingleView.swift; sourceTree = "<group>"; };
 		2FF821E42526554200BA97C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FF821F0252655F900BA97C8 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
@@ -124,6 +127,9 @@
 		2FF8222725265CC600BA97C8 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		2FF8222C2526610F00BA97C8 /* SkipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipButton.swift; sourceTree = "<group>"; };
 		2FF822312526624300BA97C8 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		2FF964852527A2D300CCB348 /* Email_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_RegisterView.swift; sourceTree = "<group>"; };
+		2FF9648A2527B64700CCB348 /* Phone_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone_RegisterView.swift; sourceTree = "<group>"; };
+		2FF9648F2527B78100CCB348 /* Verify_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verify_RegisterView.swift; sourceTree = "<group>"; };
 		4603B999CEDA3BF134501678 /* Pods-Mama BearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mama BearTests.debug.xcconfig"; path = "Target Support Files/Pods-Mama BearTests/Pods-Mama BearTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B759078B409C73994A071B3A /* Pods_Mama_BearTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mama_BearTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0AB365FFEA4B9F3E7A0EA7 /* Pods-Mama Bear-Mama BearUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mama Bear-Mama BearUITests.release.xcconfig"; path = "Target Support Files/Pods-Mama Bear-Mama BearUITests/Pods-Mama Bear-Mama BearUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -362,7 +368,10 @@
 		2FBD203E2526A77A000465D3 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				2FBD203F2526A788000465D3 /* Create_RegisterView.swift */,
+				2FBD203F2526A788000465D3 /* Name_RegisterView.swift */,
+				2FF964852527A2D300CCB348 /* Email_RegisterView.swift */,
+				2FF9648A2527B64700CCB348 /* Phone_RegisterView.swift */,
+				2FF9648F2527B78100CCB348 /* Verify_RegisterView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -675,7 +684,8 @@
 			files = (
 				2FF8222825265CC600BA97C8 /* Onboarding.swift in Sources */,
 				2F59B66F252647E9002E057A /* AppDelegate+Injection.swift in Sources */,
-				2FBD20402526A788000465D3 /* Create_RegisterView.swift in Sources */,
+				2FF9648B2527B64700CCB348 /* Phone_RegisterView.swift in Sources */,
+				2FBD20402526A788000465D3 /* Name_RegisterView.swift in Sources */,
 				2F59B664252647D6002E057A /* HideNavigationBarModifier.swift in Sources */,
 				2FF821DD2526547800BA97C8 /* OnboardingSingleView.swift in Sources */,
 				2F59B68825264830002E057A /* ContentView.swift in Sources */,
@@ -688,6 +698,7 @@
 				2F59B66D252647E9002E057A /* AppDelegate.swift in Sources */,
 				2FBD20142526816C000465D3 /* WelcomeDetailView.swift in Sources */,
 				2F59B66E252647E9002E057A /* SceneDelegate.swift in Sources */,
+				2FF964902527B78100CCB348 /* Verify_RegisterView.swift in Sources */,
 				2FF821F1252655F900BA97C8 /* PageControl.swift in Sources */,
 				2F59B65C252647CA002E057A /* Extensions.swift in Sources */,
 				2FF822322526624300BA97C8 /* WelcomeView.swift in Sources */,
@@ -697,6 +708,7 @@
 				2F59B5FA252646DA002E057A /* Mama_Bear.xcdatamodeld in Sources */,
 				2F59B6832526481F002E057A /* Task.swift in Sources */,
 				2FBD201A252681DE000465D3 /* BrandTextView.swift in Sources */,
+				2FF964862527A2D300CCB348 /* Email_RegisterView.swift in Sources */,
 				2F59B67D25264811002E057A /* FirestoreTaskRepository.swift in Sources */,
 				2FF82212252658D600BA97C8 /* OnboardingView.swift in Sources */,
 				2F59B677252647FE002E057A /* SignInWithAppleCoordinator.swift in Sources */,

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct WelcomeDetailView: View {
     var registerPressed: () -> () = { }
-    
+
+    @State var startPos: CGPoint = .zero
+    @State var isSwipping = true
+
     var body: some View {
         VStack(alignment: .center, spacing: Sizes.Spacer) {
             BrandTextView(item: .email)
@@ -47,6 +50,7 @@ struct WelcomeDetailView: View {
                 Text("Or login with")
                     .customFont(.medium, category: .small)
                     .foregroundColor(Colors.subheadline)
+                    .fixedSize()
                     .padding(.horizontal, Sizes.Spacer)
 
                 Rectangle()
@@ -60,10 +64,27 @@ struct WelcomeDetailView: View {
 
             Spacer()
         }
-            .padding(.all, Sizes.Large)
+            .padding([.leading, .bottom, .trailing], Sizes.Large)
             .onTapGesture {
                 UIApplication.shared.endEditing()
-        }
+            }
+            .gesture(DragGesture()
+                    .onChanged { gesture in
+                        if self.isSwipping {
+                            self.startPos = gesture.location
+                            self.isSwipping.toggle()
+                        }
+                    }
+                    .onEnded { gesture in
+                        let xDist = abs(gesture.location.x - self.startPos.x)
+                        let yDist = abs(gesture.location.y - self.startPos.y)
+                        if self.startPos.y < gesture.location.y && yDist > xDist {
+                            // End editing if the user swipes the keyboard down
+                            UIApplication.shared.endEditing()
+                        }
+                        self.isSwipping.toggle()
+                }
+            )
     }
 }
 

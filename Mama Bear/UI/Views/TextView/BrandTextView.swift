@@ -12,6 +12,7 @@ enum TextViewCase: Int {
     case password
     case firstName
     case lastName
+    case phone
 }
 
 struct TextViewItems {
@@ -30,6 +31,7 @@ struct BrandTextView: View {
         TextViewItems(title: "Password", image: "lock"),
         TextViewItems(title: "First name", image: ""),
         TextViewItems(title: "Last name", image: ""),
+        TextViewItems(title: "Phone number", image: "phone")
     ]
 
     init(item: TextViewCase) {
@@ -81,7 +83,7 @@ struct BrandTextView: View {
                 .padding(.horizontal, Sizes.Spacer)
                 .background(Colors.background)
                 .padding(.leading, Sizes.Spacer)
-                .offset(x: 0, y: -Sizes.Spacer)
+                .offset(x: 0, y: -Sizes.Spacer - Sizes.Spacer/2)
         }
     }
 }

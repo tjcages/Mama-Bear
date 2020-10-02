@@ -14,6 +14,9 @@ struct WelcomeView: View {
     @State private var showingAccount = false
     @State private var showingRegister = false
 
+    @State var startPos: CGPoint = .zero
+    @State var isSwipping = true
+
     var body: some View {
         ZStack {
             VStack {
@@ -23,11 +26,13 @@ struct WelcomeView: View {
                 Rectangle()
                     .foregroundColor(Color.black.opacity(0.1))
                     .frame(width: size, height: size)
-                    .padding(.vertical, Sizes.Default)
+                    .padding(.top, Sizes.Default)
 
                 Text(!showingAccount ? "Welcome!" : "Create your account")
                     .customFont(.heavy, category: !showingAccount ? .large : .extraLarge)
                     .padding(.horizontal, Sizes.Default)
+
+                Spacer(minLength: Sizes.Default)
 
                 ZStack(alignment: .bottom) {
                     WelcomeDetailView() {
@@ -47,12 +52,34 @@ struct WelcomeView: View {
             }
                 .offset(x: showingRegister ? -UIScreen.main.bounds.width : 0, y: showingRegister ? -UIScreen.main.bounds.height : 0)
 
-            RegisterView() {
-                animateRegistering(forward: false)
+            if !showingWelcome {
+                RegisterView() {
+                    animateRegistering(forward: false)
+                }
+                    .offset(y: showingRegister ? 0 : UIScreen.main.bounds.height)
+                    .opacity(showingRegister ? 1 : 0)
             }
-                .offset(y: showingRegister ? 0 : UIScreen.main.bounds.height)
-                .opacity(showingRegister ? 1 : 0)
         }
+            .onTapGesture {
+                UIApplication.shared.endEditing()
+            }
+            .gesture(DragGesture()
+                    .onChanged { gesture in
+                        if self.isSwipping {
+                            self.startPos = gesture.location
+                            self.isSwipping.toggle()
+                        }
+                    }
+                    .onEnded { gesture in
+                        let xDist = abs(gesture.location.x - self.startPos.x)
+                        let yDist = abs(gesture.location.y - self.startPos.y)
+                        if self.startPos.y < gesture.location.y && yDist > xDist {
+                            // End editing if the user swipes the keyboard down
+                            UIApplication.shared.endEditing()
+                        }
+                        self.isSwipping.toggle()
+                }
+            )
     }
 
     func animateOnboardingComplete(forward: Bool) {
@@ -60,10 +87,18 @@ struct WelcomeView: View {
             switch forward {
             case true:
                 self.showingWelcome = false
-                self.showingAccount = true
             case false:
                 self.showingAccount = false
-                self.showingWelcome = true
+            }
+        }
+        delayWithSeconds(Animation.animationOut) {
+            withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                switch forward {
+                case true:
+                    self.showingAccount = true
+                case false:
+                    self.showingWelcome = true
+                }
             }
         }
     }
