@@ -23,8 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             // Create the SwiftUI view that provides the window contents.
             // Set the window EnvironmentKey to the current window for the contentView's environment.
-            let sheetManager = PartialSheetManager()
-            let contentView = ContentView().environment(\.window, window).environmentObject(sheetManager)
+            let contentView = ContentView().environment(\.window, window)
 
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window

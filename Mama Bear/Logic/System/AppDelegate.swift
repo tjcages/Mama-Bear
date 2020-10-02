@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Firebase
         FirebaseApp.configure()
         // Allow for aunonomous user sign in
-        authenticationService.signIn()
+//        authenticationService.signIn()
         
         return true
     }

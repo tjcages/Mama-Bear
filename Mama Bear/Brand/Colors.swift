@@ -22,8 +22,8 @@ struct Colors {
     static let subheadline = Color("subheadline")
     
     // MARK: -Secondary Colors
-    static let blue = Color("blue")
-    static let lightBlue = Color("lightBlue")
+    static let coral = Color("coral")
+    static let lightCoral = Color("lightCoral")
     
     static let green = Color("green")
     static let lightGreen = Color("lightGreen")
