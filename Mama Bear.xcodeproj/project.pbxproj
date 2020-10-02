@@ -130,6 +130,7 @@
 		2FF964852527A2D300CCB348 /* Email_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_RegisterView.swift; sourceTree = "<group>"; };
 		2FF9648A2527B64700CCB348 /* Phone_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone_RegisterView.swift; sourceTree = "<group>"; };
 		2FF9648F2527B78100CCB348 /* Verify_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verify_RegisterView.swift; sourceTree = "<group>"; };
+		2FF964942527B85C00CCB348 /* Mama Bear.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mama Bear.entitlements"; sourceTree = "<group>"; };
 		4603B999CEDA3BF134501678 /* Pods-Mama BearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mama BearTests.debug.xcconfig"; path = "Target Support Files/Pods-Mama BearTests/Pods-Mama BearTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B759078B409C73994A071B3A /* Pods_Mama_BearTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mama_BearTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0AB365FFEA4B9F3E7A0EA7 /* Pods-Mama Bear-Mama BearUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mama Bear-Mama BearUITests.release.xcconfig"; path = "Target Support Files/Pods-Mama Bear-Mama BearUITests/Pods-Mama Bear-Mama BearUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +193,7 @@
 		2F59B5F1252646DA002E057A /* Mama Bear */ = {
 			isa = PBXGroup;
 			children = (
+				2FF964942527B85C00CCB348 /* Mama Bear.entitlements */,
 				2F59B63925264763002E057A /* Logic */,
 				2F59B6382526475A002E057A /* Brand */,
 				2F59B63725264753002E057A /* UI */,
@@ -891,6 +893,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Mama Bear/Mama Bear.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Mama Bear/Preview Content\"";
 				DEVELOPMENT_TEAM = 435YL82FQ2;
@@ -900,7 +903,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.mama-bear";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tjc.mamabear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -915,6 +918,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Mama Bear/Mama Bear.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Mama Bear/Preview Content\"";
 				DEVELOPMENT_TEAM = 435YL82FQ2;
@@ -924,7 +928,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.mama-bear";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tjc.mamabear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
