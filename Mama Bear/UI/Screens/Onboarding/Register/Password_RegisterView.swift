@@ -1,28 +1,28 @@
 //
-//  Phone_RegisterView.swift
+//  Password_RegisterView.swift
 //  Mama Bear
 //
-//  Created by Tyler Cagle on 10/2/20.
+//  Created by Tyler Cagle on 10/5/20.
 //
 
 import SwiftUI
 
-struct Phone_RegisterView: View {
+struct Password_RegisterView: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Link your \nphone number")
+            Text("Protect your account")
                 .customFont(.heavy, category: .extraLarge)
                 .foregroundColor(Colors.headline)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, Sizes.xSmall)
 
-            Text("By continuing you will receive single SMS for verification purposes. Message and data rates may apply.")
+            BrandTextView(item: .password)
+
+            Text("Password must contain at least, big letter, and at least one special character.")
                 .customFont(.medium, category: .medium)
                 .foregroundColor(Colors.subheadline)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, Sizes.Large)
-
-            BrandTextView(item: .phone)
 
             Rectangle()
                 .foregroundColor(.clear)
@@ -32,8 +32,8 @@ struct Phone_RegisterView: View {
     }
 }
 
-struct Phone_RegisterView_Previews: PreviewProvider {
+struct Password_RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        Phone_RegisterView()
+        Password_RegisterView()
     }
 }

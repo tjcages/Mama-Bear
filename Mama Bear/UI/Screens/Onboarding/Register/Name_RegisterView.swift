@@ -25,7 +25,7 @@ struct Name_RegisterView: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             BrandTextView(item: .firstName)
-                .padding(.bottom, Sizes.Spacer)
+                .padding(.bottom, Sizes.xSmall)
 
             BrandTextView(item: .lastName)
 

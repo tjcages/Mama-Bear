@@ -34,4 +34,9 @@ struct Colors {
     static let sienna = Color("sienna")
     static let lightSienna = Color("lightSienna")
     
+    static let blue = Color("blue")
+    static let lightBlue = Color("lightBlue")
+    
+    static let yellow = Color("yellow")
+    
 }

@@ -9,9 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var taskListVM = TaskListViewModel()
+    @ObservedObject var viewRouter = ViewRouter()
+    @State var userLoggedIn: Bool = true // BUILDING PURPOSES -> SHOULD BE FALSE
 
     var body: some View {
-        OnboardingView()
+        if userLoggedIn {
+            AppView(viewRouter: viewRouter)
+        } else {
+            OnboardingView()
+        }
     }
 }
 
