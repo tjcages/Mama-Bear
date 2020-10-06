@@ -8,7 +8,7 @@
 import SwiftUI
 
 class ViewRouter: ObservableObject {
-    @Published var currentView: TabBarViews = .profile
+    @Published var currentView: TabBarViews = .notification
     @Published var accountType: AccountType = .family
 }
 

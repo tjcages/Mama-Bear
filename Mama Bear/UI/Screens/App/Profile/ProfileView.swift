@@ -22,21 +22,23 @@ struct ProfileView: View {
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            // Profile header
-            Header_ProfileView(viewRouter: viewRouter)
-                .padding(.bottom, Sizes.xSmall)
+            VStack(alignment: .leading) {
+                // Profile header
+                Header_ProfileView(viewRouter: viewRouter)
+                    .padding(.bottom, Sizes.xSmall)
 
-            BrandSegmentedPickerView(selectedIndex: $selectedIndex, titles: ["Manage", "Personal"])
-                .padding(.horizontal, Sizes.Default)
-                .padding(.bottom, Sizes.xSmall)
+                BrandSegmentedPickerView(selectedIndex: $selectedIndex, titles: ["Manage", "Personal"])
+                    .padding(.horizontal, Sizes.Default)
+                    .padding(.bottom, Sizes.xSmall)
 
-            if selectedIndex == 0 {
-                Manage_ProfileView(activeSheet: $activeSheet, showSheet: $showSheet)
-            } else {
-                Personal_ProfileView()
+                if selectedIndex == 0 {
+                    Manage_ProfileView(activeSheet: $activeSheet, showSheet: $showSheet)
+                } else {
+                    Personal_ProfileView()
+                }
+
+                Color.clear.padding(.bottom, Sizes.Big * 2)
             }
-
-            Color.clear.padding(.bottom, Sizes.Big * 2)
         }
             .edgesIgnoringSafeArea(.top)
             .sheet(isPresented: $showSheet) {

@@ -14,6 +14,8 @@
 		2F550C29252CE0CB00DC523F /* WrappedHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F550C28252CE0CB00DC523F /* WrappedHStack.swift */; };
 		2F550C2E252CE78800DC523F /* PetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F550C2D252CE78800DC523F /* PetsView.swift */; };
 		2F550C34252CEBDA00DC523F /* TransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F550C33252CEBDA00DC523F /* TransactionsView.swift */; };
+		2F550C3F252CF9E600DC523F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F550C3E252CF9E600DC523F /* Notification.swift */; };
+		2F550C44252CF9FE00DC523F /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F550C43252CF9FE00DC523F /* NotificationViewModel.swift */; };
 		2F59B5FA252646DA002E057A /* Mama_Bear.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F59B5F8252646DA002E057A /* Mama_Bear.xcdatamodeld */; };
 		2F59B5FF252646DB002E057A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F59B5FE252646DB002E057A /* Preview Assets.xcassets */; };
 		2F59B602252646DB002E057A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F59B600252646DB002E057A /* LaunchScreen.storyboard */; };
@@ -106,6 +108,8 @@
 		2F550C28252CE0CB00DC523F /* WrappedHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedHStack.swift; sourceTree = "<group>"; };
 		2F550C2D252CE78800DC523F /* PetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsView.swift; sourceTree = "<group>"; };
 		2F550C33252CEBDA00DC523F /* TransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsView.swift; sourceTree = "<group>"; };
+		2F550C3E252CF9E600DC523F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		2F550C43252CF9FE00DC523F /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		2F59B5EF252646DA002E057A /* Mama Bear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mama Bear.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F59B5F9252646DA002E057A /* Mama_Bear.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mama_Bear.xcdatamodel; sourceTree = "<group>"; };
 		2F59B5FE252646DB002E057A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -333,6 +337,7 @@
 				2F59B64F252647AB002E057A /* SettingsViewModel.swift */,
 				2F59B650252647AB002E057A /* TaskCellViewModel.swift */,
 				2F59B64E252647AB002E057A /* TaskListViewModel.swift */,
+				2F550C43252CF9FE00DC523F /* NotificationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 			children = (
 				2F59B6822526481F002E057A /* Task.swift */,
 				2FF8222725265CC600BA97C8 /* Onboarding.swift */,
+				2F550C3E252CF9E600DC523F /* Notification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -886,7 +892,9 @@
 				2FBD203A2526A6E4000465D3 /* BackButton.swift in Sources */,
 				2F59B651252647AB002E057A /* TaskListViewModel.swift in Sources */,
 				2FE58E1D252BA1450090CB2F /* Header_ProfileView.swift in Sources */,
+				2F550C44252CF9FE00DC523F /* NotificationViewModel.swift in Sources */,
 				2FF8222325265A5700BA97C8 /* PagerView.swift in Sources */,
+				2F550C3F252CF9E600DC523F /* Notification.swift in Sources */,
 				2F59B652252647AB002E057A /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
