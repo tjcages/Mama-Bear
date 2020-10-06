@@ -10,7 +10,7 @@ import SwiftUI
 struct AddShadowModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .shadow(color: Color.black.opacity(0.1), radius: 10, x: 3, y: 6)
+            .shadow(color: Color.black.opacity(0.1), radius: 30, x: 0, y: 3)
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateAccount {
     let title: String
     let subtitle: String
+    let color: Color
 }
 
 struct CreateAccountView: View {
@@ -17,8 +18,8 @@ struct CreateAccountView: View {
     var accountPressed: () -> () = { }
 
     var accounts: [CreateAccount] = [
-        CreateAccount(title: "Parent account", subtitle: "Find the best babysitter"),
-        CreateAccount(title: "Nanny account", subtitle: "Get jobs near you")
+        CreateAccount(title: "Parent account", subtitle: "Find the best babysitter", color: Colors.lightCoral.opacity(0.5)),
+        CreateAccount(title: "Nanny account", subtitle: "Get jobs near you", color: Colors.lightBlue)
     ]
 
     var body: some View {
@@ -91,7 +92,7 @@ struct AccountSelectionView: View {
         }
             .padding(.all, Sizes.xLarge)
             .frame(maxWidth: .infinity)
-            .background(Colors.lightCoral.opacity(0.3))
+            .background(account.color)
             .cornerRadius(Sizes.xSmall)
             .padding(.horizontal, Sizes.xSmall)
     }

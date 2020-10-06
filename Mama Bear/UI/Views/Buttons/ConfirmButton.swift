@@ -28,7 +28,7 @@ struct ConfirmButton: View {
                     .foregroundColor(fill ? Colors.white : Colors.headline)
                     .padding(.vertical, Sizes.Small)
                     .frame(maxWidth: .infinity)
-                    .background(fill ? Colors.lightCoral : Colors.background)
+                    .background(fill ? Colors.lightCoral : Color.clear)
                     .cornerRadius(Sizes.xSmall)
                     .overlay(
                         RoundedRectangle(cornerRadius: Sizes.xSmall)

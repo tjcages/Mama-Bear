@@ -13,6 +13,11 @@ enum TextViewCase: Int {
     case firstName
     case lastName
     case phone
+    case streetAddress
+    case city
+    case state
+    case zip
+    case country
 }
 
 struct TextViewItems {
@@ -29,9 +34,14 @@ struct BrandTextView: View {
     private var cases: [TextViewItems] = [
         TextViewItems(title: "Your email", image: "person"),
         TextViewItems(title: "Password", image: "lock"),
-        TextViewItems(title: "First name", image: ""),
-        TextViewItems(title: "Last name", image: ""),
-        TextViewItems(title: "Phone number", image: "phone")
+        TextViewItems(title: "First", image: ""),
+        TextViewItems(title: "Last", image: ""),
+        TextViewItems(title: "Phone number", image: "phone"),
+        TextViewItems(title: "Street address", image: ""),
+        TextViewItems(title: "City", image: ""),
+        TextViewItems(title: "State", image: ""),
+        TextViewItems(title: "Zip code", image: ""),
+        TextViewItems(title: "Country", image: "")
     ]
 
     init(item: TextViewCase) {
