@@ -40,7 +40,7 @@ struct Personal_ProfileView: View {
                         .customFont(.heavy, category: .large)
                         .foregroundColor(Colors.headline)
                         .padding(.vertical, Sizes.Spacer)
-                    
+
                     ForEach(addressFields, id: \.rawValue) { field in
                         BrandTextView(item: field)
                     }

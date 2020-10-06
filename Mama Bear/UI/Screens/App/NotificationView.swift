@@ -33,7 +33,7 @@ struct NotificationView: View {
                     }
                 }
 
-                Spacer()
+                Color.clear.padding(.bottom, Sizes.Big * 2)
             }
                 .padding(.horizontal, Sizes.Default)
         }

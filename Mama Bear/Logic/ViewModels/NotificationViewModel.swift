@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotificationViewModel {
+class NotificationViewModel: ObservableObject {
     let sections: [NotificationGroup]
 
     init() {

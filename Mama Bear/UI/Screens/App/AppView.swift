@@ -14,7 +14,8 @@ class ViewRouter: ObservableObject {
 
 struct AppView: View {
     @ObservedObject var viewRouter: ViewRouter
-
+    @ObservedObject var faq = FAQViewModel()
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
@@ -26,7 +27,7 @@ struct AppView: View {
                     } else if viewRouter.currentView == .newListing {
                         NewListingView()
                     } else if viewRouter.currentView == .help {
-                        HelpView()
+                        HelpView(faq: faq)
                     } else if viewRouter.currentView == .profile {
                         ProfileView(viewRouter: viewRouter)
                     }

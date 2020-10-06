@@ -38,6 +38,8 @@ struct ProfileView: View {
                 }
 
                 Color.clear.padding(.bottom, Sizes.Big * 2)
+
+                Spacer()
             }
         }
             .edgesIgnoringSafeArea(.top)
@@ -47,7 +49,8 @@ struct ProfileView: View {
                 } else if activeSheet == .second {
                     TransactionsView(showingTransactions: $showSheet)
                 }
-        }
+            }
+            .responsiveKeyboard()
     }
 }
 
