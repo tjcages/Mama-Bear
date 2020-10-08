@@ -8,7 +8,7 @@
 import SwiftUI
 
 class ViewRouter: ObservableObject {
-    @Published var currentView: TabBarViews = .newListing
+    @Published var currentView: TabBarViews = .home
     @Published var accountType: AccountType = .family
 }
 
@@ -19,19 +19,20 @@ struct AppView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
-                VStack {
-                    if viewRouter.currentView == .home {
-                        HomeView()
-                    } else if viewRouter.currentView == .notification {
-                        NotificationView()
-                    } else if viewRouter.currentView == .newListing {
-                        NewListingView()
-                    } else if viewRouter.currentView == .help {
-                        HelpView(faq: faq)
-                    } else if viewRouter.currentView == .profile {
-                        ProfileView(viewRouter: viewRouter)
-                    }
-                }
+                HomeView()
+                    .opacity(viewRouter.currentView == .home ? 1 : 0)
+                
+                NotificationView()
+                    .opacity(viewRouter.currentView == .notification ? 1 : 0)
+                
+                NewListingView()
+                    .opacity(viewRouter.currentView == .newListing ? 1 : 0)
+                
+                HelpView(faq: faq)
+                    .opacity(viewRouter.currentView == .help ? 1 : 0)
+                
+                ProfileView(viewRouter: viewRouter)
+                    .opacity(viewRouter.currentView == .profile ? 1 : 0)
 
                 TabBarView(viewRouter: viewRouter, geometry: geometry)
             }
