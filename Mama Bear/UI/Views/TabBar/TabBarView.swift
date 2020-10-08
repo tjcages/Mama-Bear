@@ -79,10 +79,10 @@ struct TabBarView: View {
                         .frame(width: Sizes.Default, height: Sizes.Default)
                         .foregroundColor(viewRouter.currentView == .newListing ? Colors.white : Colors.subheadline)
                         .padding(Sizes.Small)
-                        .background(viewRouter.currentView == .newListing ? Colors.coral : Colors.white)
+                        .background(viewRouter.currentView == .newListing ? Colors.coral : Colors.background)
                         .cornerRadius(Sizes.Large)
                         .shadow()
-                        .offset(y: -Sizes.Spacer)
+                        .offset(y: -Sizes.xSmall)
                         .onTapGesture {
                             withAnimation(Animation.easeOut(duration: TabBarView.animationDuration)) {
                                 self.viewRouter.currentView = .newListing
@@ -144,8 +144,8 @@ struct TabBarView: View {
                     .clipShape(
                         TabBarShape(width: geometry.size.width, height: geometry.size.height, hump: viewRouter.accountType == .family)
                     )
-                    .foregroundColor(Colors.white)
-                    .offset(y: -Sizes.Spacer)
+                    .foregroundColor(Colors.cellBackground)
+                    .offset(y: -Sizes.xSmall)
                     .shadow()
             )
             .onTapGesture {

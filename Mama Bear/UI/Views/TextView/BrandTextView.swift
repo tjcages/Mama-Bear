@@ -34,8 +34,8 @@ struct BrandTextView: View {
     private var cases: [TextViewItems] = [
         TextViewItems(title: "Your email", image: "person"),
         TextViewItems(title: "Password", image: "lock"),
-        TextViewItems(title: "First", image: ""),
-        TextViewItems(title: "Last", image: ""),
+        TextViewItems(title: "First name", image: ""),
+        TextViewItems(title: "Last name", image: ""),
         TextViewItems(title: "Phone number", image: "phone"),
         TextViewItems(title: "Street address", image: ""),
         TextViewItems(title: "City", image: ""),
@@ -91,7 +91,7 @@ struct BrandTextView: View {
                 .customFont(.medium, category: .small)
                 .foregroundColor(Colors.subheadline)
                 .padding(.horizontal, Sizes.Spacer)
-                .background(Colors.background)
+                .background(Colors.cellBackground)
                 .padding(.leading, Sizes.Spacer)
                 .offset(x: 0, y: -Sizes.Spacer - Sizes.Spacer/2)
         }

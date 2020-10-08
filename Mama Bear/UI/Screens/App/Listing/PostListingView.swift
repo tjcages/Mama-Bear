@@ -10,6 +10,7 @@ import SwiftUI
 struct PostListingView: View {
     @Binding var showingPostListing: Bool
     @Binding var currentListing: Bool
+    @State var showSheet: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,7 +32,7 @@ struct PostListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    DurationView()
+                    DurationView(newListing: false, activeSheet: .constant(.second))
 
                     Text("Children")
                         .customFont(.medium, category: .large)
@@ -39,7 +40,7 @@ struct PostListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    ChildrenView()
+                    ChildrenView(activeSheet: .constant(.first))
 
                     Text("Pets")
                         .customFont(.medium, category: .large)
@@ -47,7 +48,7 @@ struct PostListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    PetsView()
+                    PetsView(activeSheet: .constant(.second))
 
                     if currentListing {
                         Group {

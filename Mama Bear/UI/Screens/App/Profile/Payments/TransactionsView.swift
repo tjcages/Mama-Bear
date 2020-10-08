@@ -81,7 +81,7 @@ struct TransactionsCell: View {
         }
             .padding(.horizontal, Sizes.xSmall)
             .padding(.vertical, Sizes.Small)
-            .background(Colors.white)
+            .background(Colors.cellBackground)
             .cornerRadius(Sizes.Spacer)
             .shadow()
             .padding(.horizontal, Sizes.Default)
@@ -101,7 +101,8 @@ struct PaymentView: View {
                     .frame(width: Sizes.Default, height: Sizes.Default)
                     .foregroundColor(card ? Colors.darkCoral : Colors.blue)
                     .padding(Sizes.xSmall)
-                    .background(Colors.white)
+                    .background(Colors.cellBackground
+                    )
                     .cornerRadius(Sizes.Spacer)
                     .shadow()
                     .padding(.bottom, Sizes.Default)
@@ -127,7 +128,7 @@ struct PaymentView: View {
                                 .foregroundColor(Colors.headline)
                                 .padding(Sizes.Spacer)
                                 .padding(.horizontal, Sizes.Spacer / 2)
-                                .background(Colors.white)
+                                .background(Colors.cellBackground)
                                 .cornerRadius(Sizes.Spacer)
                         })
                 }

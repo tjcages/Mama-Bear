@@ -10,6 +10,7 @@ import SwiftUI
 enum ActiveSheet {
     case first
     case second
+    case third
 }
 
 struct ProfileView: View {
@@ -32,9 +33,13 @@ struct ProfileView: View {
                     .padding(.bottom, Sizes.xSmall)
 
                 if selectedIndex == 0 {
-                    Manage_ProfileView(activeSheet: $activeSheet, showSheet: $showSheet)
+                    Manage_ProfileView(activeSheet: $activeSheet.didSet { _ in 
+                        showSheet = true
+                    })
                 } else {
-                    Personal_ProfileView()
+                    Personal_ProfileView(activeSheet: $activeSheet.didSet { _ in
+                        showSheet = true
+                    })
                 }
 
                 Color.clear.padding(.bottom, Sizes.Big * 2)
@@ -48,6 +53,8 @@ struct ProfileView: View {
                     Requests_ProfileView(showingRequests: $showSheet)
                 } else if activeSheet == .second {
                     TransactionsView(showingTransactions: $showSheet)
+                } else if activeSheet == .third {
+                    NewAddress_ProfileView(showSheet: $showSheet)
                 }
             }
             .responsiveKeyboard()

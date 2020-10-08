@@ -24,6 +24,12 @@ struct ResponsiveKeyboardModifier: ViewModifier {
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { notif in
                     self.offset = 0
                 }
+            }
+            .gesture(DragGesture().onChanged { _ in
+                    UIApplication.shared.endEditing()
+                })
+            .onTapGesture {
+                UIApplication.shared.endEditing()
         }
     }
 }

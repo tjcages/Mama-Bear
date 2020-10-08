@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct Personal_ProfileView: View {
-    @State var address = false
+    @Binding var activeSheet: ActiveSheet
+
+    @State var address: Bool = true
+
     var nameFields: [TextViewCase] = [.firstName, .lastName]
     var userFields: [TextViewCase] = [.email, .phone]
-    var addressFields: [TextViewCase] = [.streetAddress, .city, .state, .zip, .country]
 
     var body: some View {
         VStack(alignment: .leading, spacing: Sizes.Spacer) {
@@ -35,39 +37,14 @@ struct Personal_ProfileView: View {
                 .padding(.horizontal, Sizes.Default)
 
             if address {
-                Group {
-                    Text("Home address")
-                        .customFont(.heavy, category: .large)
-                        .foregroundColor(Colors.headline)
-                        .padding(.vertical, Sizes.Spacer)
-
-                    ForEach(addressFields, id: \.rawValue) { field in
-                        BrandTextView(item: field)
-                    }
-                }
-                    .padding(.bottom, Sizes.xSmall)
-                    .padding(.horizontal, Sizes.Default)
-
-                Group {
-                    ConfirmButton(title: "Save", style: .fill) {
-                        // Save address
-                    }
-
-                    ConfirmButton(title: "Cancel", style: .lined) {
-                        withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
-                            self.address.toggle()
-                        }
-                    }
-                }
-                    .padding(.bottom, Sizes.Spacer)
-                    .padding(.horizontal, Sizes.Default)
-
+                // NEED TO IMPLEMENT VIEWMODEL
+                Address_ProfileView(activeSheet: $activeSheet.didSet { _ in
+                    activeSheet = .third
+                })
             } else {
                 AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1)))
                     .onTapGesture {
-                        withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
-                            self.address.toggle()
-                        }
+                        activeSheet = .third
                 }
             }
 
@@ -89,11 +66,5 @@ struct Personal_ProfileView: View {
 
             Spacer()
         }
-    }
-}
-
-struct Profile_PersonalView_Previews: PreviewProvider {
-    static var previews: some View {
-        Personal_ProfileView()
     }
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Manage_ProfileView: View {
     @Binding var activeSheet: ActiveSheet
-    @Binding var showSheet: Bool
 
     var accounts: [CreateAccount] = [
         CreateAccount(title: "Your requests", subtitle: "Manage your jobs", color: Colors.subheadline.opacity(0.1)),
@@ -27,7 +26,6 @@ struct Manage_ProfileView: View {
                         } else if account.title == "Payment" {
                             activeSheet = .second
                         }
-                        showSheet.toggle()
                 }
             }
         }

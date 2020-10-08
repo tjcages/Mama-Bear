@@ -53,7 +53,7 @@ struct Header_ProfileView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: Sizes.Small, height: Sizes.Small)
                                 .padding(12)
-                                .background(Colors.white)
+                                .background(Colors.cellBackground)
                                 .cornerRadius((Sizes.Default * 2) / 2)
                                 .shadow()
                                 .offset(x: Sizes.xSmall)
@@ -69,7 +69,7 @@ struct Header_ProfileView: View {
 
                         Text(viewRouter.accountType.rawValue)
                             .customFont(.medium, category: .small)
-                            .foregroundColor(Colors.white)
+                            .foregroundColor(Colors.cellBackground)
                             .padding(.vertical, 6)
                             .padding(.horizontal, Sizes.xSmall)
                             .background(Colors.blue)
@@ -86,7 +86,7 @@ struct Header_ProfileView: View {
             }
         }
             .padding(.bottom, Sizes.xSmall)
-            .background(Colors.white)
+            .background(Colors.cellBackground)
             .cornerRadius(Sizes.Large)
             .shadow()
     }

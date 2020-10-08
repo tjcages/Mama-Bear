@@ -8,14 +8,14 @@
 import SwiftUI
 
 class ViewRouter: ObservableObject {
-    @Published var currentView: TabBarViews = .notification
+    @Published var currentView: TabBarViews = .newListing
     @Published var accountType: AccountType = .family
 }
 
 struct AppView: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var faq = FAQViewModel()
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
@@ -36,9 +36,6 @@ struct AppView: View {
                 TabBarView(viewRouter: viewRouter, geometry: geometry)
             }
                 .edgesIgnoringSafeArea(.bottom)
-                .onTapGesture {
-                    UIApplication.shared.endEditing()
-            }
         }
     }
 }

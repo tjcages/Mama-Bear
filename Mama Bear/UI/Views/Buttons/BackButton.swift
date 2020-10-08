@@ -29,6 +29,10 @@ struct BackButton: View {
                 .onTapGesture {
                     backPressed()
             }
+            
+            Rectangle()
+                .foregroundColor(Colors.subheadline.opacity(0.3))
+                .frame(height: 1)
         }
         .padding(.top, Global.statusBarHeight)
     }
