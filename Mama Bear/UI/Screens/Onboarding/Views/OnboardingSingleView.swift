@@ -13,8 +13,12 @@ struct OnboardingSingleView: View {
     var body: some View {
         VStack {
             // Area for image later
-            Rectangle()
-                .foregroundColor(Color.black.opacity(0.1))
+            Image(content.image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(Sizes.Big)
+                .padding(.top, Sizes.Big)
 
             Group {
                 Group {

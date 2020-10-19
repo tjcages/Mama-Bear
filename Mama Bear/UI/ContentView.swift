@@ -6,24 +6,38 @@
 //
 
 import SwiftUI
+import Resolver
+import Firebase
 
 struct ContentView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+
     @ObservedObject var taskListVM = TaskListViewModel()
+    @ObservedObject var settingsVM = SettingsViewModel()
     @ObservedObject var viewRouter = ViewRouter()
-    
-    @State var userLoggedIn: Bool = true // BUILDING PURPOSES -> SHOULD BE FALSE
+
+    @State private var loadingComplete = false
 
     var body: some View {
-        if userLoggedIn {
-            AppView(viewRouter: viewRouter)
-        } else {
-            OnboardingView()
-        }
-    }
-}
+        ZStack {
+            if authenticationService.userLoggedIn {
+                AppView(authenticationService: authenticationService, viewRouter: viewRouter)
+            } else {
+                OnboardingView(authenticationService: authenticationService, settingsVM: settingsVM)
+            }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+            Rectangle()
+                .foregroundColor(Colors.background)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .edgesIgnoringSafeArea(.all)
+                .opacity(loadingComplete ? 0 : 1)
+        }
+            .onAppear {
+                delayWithSeconds(1) {
+                    withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                        self.loadingComplete = true
+                    }
+                }
+        }
     }
 }

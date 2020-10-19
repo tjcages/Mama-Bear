@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+    @ObservedObject var settingsVM: SettingsViewModel
+    
     @State private var currentPage = 0
     @State private var onboardingComplete = false
     @State private var showingWelcome = false
 
     var onboardingContent: [Onboarding] = [
-        Onboarding(image: "", title: "Get a job next to you", subtitle: "Find interesting offer and manage your schedule right from the app.", id: 0),
-        Onboarding(image: "", title: "Find the best babysitter", subtitle: "Add an advertisement and wait. Then choose the best nanny.", id: 1),
-        Onboarding(image: "", title: "Manage & pay from the app", subtitle: "Pay you babysitter using the app. Manage payments, and chat.", id: 2)
+        Onboarding(image: "onboardingGraphic_1", title: "Get a job next to you", subtitle: "Find interesting offer and manage your schedule right from the app.", id: 0),
+        Onboarding(image: "onboardingGraphic_2", title: "Find the best babysitter", subtitle: "Add an advertisement and wait. Then choose the best nanny.", id: 1),
+        Onboarding(image: "onboardingGraphic_3", title: "Manage & pay from the app", subtitle: "Pay you babysitter using the app. Manage payments, and chat.", id: 2)
     ]
 
     var body: some View {
@@ -61,7 +64,7 @@ struct OnboardingView: View {
                     .opacity(onboardingComplete ? 0 : 1)
 
             } else {
-                WelcomeView()
+                WelcomeView(authenticationService: authenticationService, settingsVM: settingsVM)
                     .opacity(showingWelcome ? 1 : 0)
             }
         }
@@ -74,10 +77,4 @@ struct OnboardingView: View {
         }
     }
 
-}
-
-struct OnboardingView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingView()
-    }
 }

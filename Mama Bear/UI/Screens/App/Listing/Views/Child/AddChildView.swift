@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddChildView: View {
     @Binding var showSheet: Bool
+    @State var childName: String = ""
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,7 +27,7 @@ struct AddChildView: View {
 
                     VStack(spacing: Sizes.Default) {
                         Group {
-                            BrandTextView(item: .firstName)
+                            BrandTextView($childName, item: .firstName)
 
                             AgeView()
 

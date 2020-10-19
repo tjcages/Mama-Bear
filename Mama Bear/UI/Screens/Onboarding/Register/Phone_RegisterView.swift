@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Phone_RegisterView: View {
+    @Binding var phoneNumber: String
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Link your \nphone number")
@@ -22,18 +24,12 @@ struct Phone_RegisterView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, Sizes.Large)
 
-            BrandTextView(item: .phone)
+            BrandTextView($phoneNumber, item: .phone)
 
             Rectangle()
                 .foregroundColor(.clear)
                 .contentShape(Rectangle())
         }
             .padding(.horizontal, Sizes.Default)
-    }
-}
-
-struct Phone_RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        Phone_RegisterView()
     }
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Email_RegisterView: View {
+    @Binding var email: String
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Let's be in touch")
@@ -22,18 +24,12 @@ struct Email_RegisterView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, Sizes.Large)
 
-            BrandTextView(item: .email)
+            BrandTextView($email, item: .email)
 
             Rectangle()
                 .foregroundColor(.clear)
                 .contentShape(Rectangle())
         }
             .padding(.horizontal, Sizes.Default)
-    }
-}
-
-struct Email_RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        Email_RegisterView()
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Header_ProfileView: View {
+    @ObservedObject var authenticationService: AuthenticationService
     @ObservedObject var viewRouter: ViewRouter
 
     var body: some View {
@@ -63,7 +64,7 @@ struct Header_ProfileView: View {
                         .padding(.bottom, Sizes.Spacer)
 
                     HStack(spacing: Sizes.xSmall) {
-                        Text("Julia Black")
+                        Text(authenticationService.user?.displayName ?? "No name")
                             .customFont(.medium, category: .large)
                             .foregroundColor(Colors.headline)
 
@@ -89,11 +90,5 @@ struct Header_ProfileView: View {
             .background(Colors.cellBackground)
             .cornerRadius(Sizes.Large)
             .shadow()
-    }
-}
-
-struct Profile_HeaderView_Previews: PreviewProvider {
-    static var previews: some View {
-        Header_ProfileView(viewRouter: ViewRouter())
     }
 }

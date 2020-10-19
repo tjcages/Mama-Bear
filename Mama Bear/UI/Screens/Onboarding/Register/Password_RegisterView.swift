@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Password_RegisterView: View {
+    @Binding var password: String
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Protect your account")
@@ -16,7 +18,7 @@ struct Password_RegisterView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, Sizes.xSmall)
 
-            BrandTextView(item: .password)
+            BrandTextView($password, item: .password)
 
             Text("Password must contain at least, big letter, and at least one special character.")
                 .customFont(.medium, category: .medium)
@@ -29,11 +31,5 @@ struct Password_RegisterView: View {
                 .contentShape(Rectangle())
         }
             .padding(.horizontal, Sizes.Default)
-    }
-}
-
-struct Password_RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        Password_RegisterView()
     }
 }

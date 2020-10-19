@@ -13,6 +13,8 @@ class ViewRouter: ObservableObject {
 }
 
 struct AppView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+    
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var faq = FAQViewModel()
 
@@ -31,7 +33,7 @@ struct AppView: View {
                 HelpView(faq: faq)
                     .opacity(viewRouter.currentView == .help ? 1 : 0)
                 
-                ProfileView(viewRouter: viewRouter)
+                ProfileView(authenticationService: authenticationService, viewRouter: viewRouter)
                     .opacity(viewRouter.currentView == .profile ? 1 : 0)
 
                 TabBarView(viewRouter: viewRouter, geometry: geometry)

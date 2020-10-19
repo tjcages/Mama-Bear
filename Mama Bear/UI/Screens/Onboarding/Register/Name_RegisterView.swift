@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct Name_RegisterView: View {
-    @State var account: AccountType
+    @Binding var firstName: String
+    @Binding var lastName: String
+    
+    var account: AccountType
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -24,21 +27,15 @@ struct Name_RegisterView: View {
                 .padding(.bottom, Sizes.Large)
                 .fixedSize(horizontal: false, vertical: true)
 
-            BrandTextView(item: .firstName)
+            BrandTextView($firstName, item: .firstName)
                 .padding(.bottom, Sizes.xSmall)
 
-            BrandTextView(item: .lastName)
+            BrandTextView($lastName, item: .lastName)
 
             Rectangle()
                 .foregroundColor(.clear)
                 .contentShape(Rectangle())
         }
             .padding(.horizontal, Sizes.Default)
-    }
-}
-
-struct Create_RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        Name_RegisterView(account: .family)
     }
 }

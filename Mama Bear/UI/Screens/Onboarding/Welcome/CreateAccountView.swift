@@ -7,19 +7,29 @@
 
 import SwiftUI
 
+enum AccountType: String {
+    case nanny = "Nanny"
+    case family = "Family"
+    case unknown = "unknown"
+}
+
 struct CreateAccount {
     let title: String
     let subtitle: String
     let color: Color
+    let image: String
+    let type: AccountType
 }
 
 struct CreateAccountView: View {
+    @Binding var accountType: AccountType
+    
     var backPressed: () -> () = { }
     var accountPressed: () -> () = { }
 
     var accounts: [CreateAccount] = [
-        CreateAccount(title: "Parent account", subtitle: "Find the best babysitter", color: Colors.lightCoral.opacity(0.5)),
-        CreateAccount(title: "Nanny account", subtitle: "Get jobs near you", color: Colors.lightBlue)
+        CreateAccount(title: "Parent account", subtitle: "Find the best babysitter", color: Colors.lightCoral.opacity(0.5), image: "parentGraphic", type: .family),
+        CreateAccount(title: "Nanny account", subtitle: "Get jobs near you", color: Colors.lightBlue, image: "nannyGraphic", type: .nanny)
     ]
 
     var body: some View {
@@ -33,6 +43,7 @@ struct CreateAccountView: View {
             ForEach(accounts, id: \.title) { account in
                 AccountSelectionView(account)
                     .onTapGesture {
+                        accountType = account.type
                         accountPressed()
                 }
             }
@@ -82,24 +93,21 @@ struct AccountSelectionView: View {
                     .customFont(.medium, category: .small)
                     .foregroundColor(Colors.subheadline)
             }
-
+            
             Spacer()
 
             // Account graphic
-            Rectangle()
-                .foregroundColor(Color.black.opacity(0.1))
-                .frame(width: Sizes.Big, height: Sizes.Big)
+            Image(account.image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: Sizes.Big * 2, height: Sizes.Big * 1.5)
+                .padding(.leading, Sizes.xSmall)
         }
-            .padding(.all, Sizes.xLarge)
+            .padding(.vertical, Sizes.Large)
+            .padding(.horizontal, Sizes.Default)
             .frame(maxWidth: .infinity)
             .background(account.color)
             .cornerRadius(Sizes.xSmall)
             .padding(.horizontal, Sizes.xSmall)
-    }
-}
-
-struct CreateAccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateAccountView()
     }
 }

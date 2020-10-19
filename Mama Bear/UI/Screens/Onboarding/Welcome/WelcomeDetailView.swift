@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct WelcomeDetailView: View {
+    @ObservedObject var authenticationService: AuthenticationService
     var registerPressed: () -> () = { }
 
     @State var startPos: CGPoint = .zero
     @State var isSwipping = true
+    
+    @State var email: String = ""
+    @State var password: String = ""
 
     var body: some View {
         VStack(alignment: .center, spacing: Sizes.Spacer) {
-            BrandTextView(item: .email)
+            BrandTextView($email, item: .email)
                 .padding(.bottom, Sizes.Spacer)
 
-            BrandTextView(item: .password)
+            BrandTextView($password, item: .password)
 
             HStack {
                 Spacer()
@@ -30,7 +34,13 @@ struct WelcomeDetailView: View {
                 .padding(.bottom, Sizes.xSmall)
 
             ConfirmButton(title: "Login now", style: .fill) {
-                // Handle login
+                authenticationService.signIn(withEmail: email, password: password) { (result, error) in
+                    if let error = error {
+                        print("Error logging user in with credentials: \(error)")
+                        return
+                    }
+                    // Successfully signed in
+                }
             }
                 .padding(.vertical, Sizes.Spacer)
 
@@ -85,11 +95,5 @@ struct WelcomeDetailView: View {
                         self.isSwipping.toggle()
                 }
             )
-    }
-}
-
-struct WelcomeDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeDetailView()
     }
 }

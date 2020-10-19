@@ -13,6 +13,8 @@ struct Verify_RegisterView: View {
     @State var canResend: Bool = false
     @Binding var canResendCode: Bool
     
+    var resendPressed: () -> () = { }
+    
     @State var timeRemaining: Int = 32
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -49,6 +51,7 @@ struct Verify_RegisterView: View {
                 } else {
                     Button {
                         // Resend code
+                        resendPressed()
                         withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
                             self.canResend.toggle()
                             self.timeRemaining = 32

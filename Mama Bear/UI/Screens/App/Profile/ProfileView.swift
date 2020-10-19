@@ -14,6 +14,7 @@ enum ActiveSheet {
 }
 
 struct ProfileView: View {
+    @ObservedObject var authenticationService: AuthenticationService
     @ObservedObject var viewRouter: ViewRouter
 
     @State var showSheet = false
@@ -25,7 +26,7 @@ struct ProfileView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading) {
                 // Profile header
-                Header_ProfileView(viewRouter: viewRouter)
+                Header_ProfileView(authenticationService: authenticationService, viewRouter: viewRouter)
                     .padding(.bottom, Sizes.xSmall)
 
                 BrandSegmentedPickerView(selectedIndex: $selectedIndex, titles: ["Manage", "Personal"])
@@ -37,7 +38,7 @@ struct ProfileView: View {
                         showSheet = true
                     })
                 } else {
-                    Personal_ProfileView(activeSheet: $activeSheet.didSet { _ in
+                    Personal_ProfileView(authenticationService: authenticationService, activeSheet: $activeSheet.didSet { _ in
                         showSheet = true
                     })
                 }
@@ -58,11 +59,5 @@ struct ProfileView: View {
                 }
             }
             .responsiveKeyboard()
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(viewRouter: ViewRouter())
     }
 }

@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct Personal_ProfileView: View {
+    @ObservedObject var authenticationService: AuthenticationService
     @Binding var activeSheet: ActiveSheet
 
     @State var address: Bool = true
 
-    var nameFields: [TextViewCase] = [.firstName, .lastName]
     var userFields: [TextViewCase] = [.email, .phone]
 
     var body: some View {
@@ -23,14 +24,10 @@ struct Personal_ProfileView: View {
                     .foregroundColor(Colors.headline)
                     .padding(.bottom, Sizes.Spacer)
 
-                HStack(spacing: Sizes.xSmall) {
-                    ForEach(nameFields, id: \.rawValue) { field in
-                        BrandTextView(item: field)
-                    }
-                }
+                BrandTextView(.constant(authenticationService.user?.displayName ?? "No name"), item: .name)
 
                 ForEach(userFields, id: \.rawValue) { field in
-                    BrandTextView(item: field)
+                    BrandTextView(.constant(field == .email ? authenticationService.user?.email ?? "No email": format(with: "+X (XXX) XXX-XXXX", phone: authenticationService.user?.phoneNumber ?? "No phone number")), item: field)
                 }
             }
                 .padding(.bottom, Sizes.xSmall)
@@ -42,11 +39,16 @@ struct Personal_ProfileView: View {
                     activeSheet = .third
                 })
             } else {
-                AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1)))
+                AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1), image: "onboardingGraphic-3", type: .unknown))
                     .onTapGesture {
                         activeSheet = .third
                 }
             }
+
+            ConfirmButton(title: "Logout", style: .lined) {
+                authenticationService.signOut()
+            }
+                .padding([.horizontal, .top], Sizes.Default)
 
             HStack {
                 Spacer()
@@ -66,5 +68,26 @@ struct Personal_ProfileView: View {
 
             Spacer()
         }
+    }
+    
+    func format(with mask: String, phone: String) -> String {
+        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex // numbers iterator
+
+        // iterate over the mask characters until the iterator of numbers ends
+        for ch in mask where index < numbers.endIndex {
+            if ch == "X" {
+                // mask requires a number in this place, so take the next one
+                result.append(numbers[index])
+
+                // move numbers iterator to the next index
+                index = numbers.index(after: index)
+
+            } else {
+                result.append(ch) // just append a mask character
+            }
+        }
+        return result
     }
 }

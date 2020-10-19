@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SocialLoginView: View {
-    let size = Sizes.xLarge - Sizes.Spacer
+    let size = Sizes.xLarge
     let space = Sizes.Spacer
     
     var body: some View {
@@ -19,36 +19,42 @@ struct SocialLoginView: View {
             Button {
                 //
             } label: {
-                Image("")
+                Image("apple")
+                    .renderingMode(.template)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
-                    .background(Color.red)
                     .padding(.horizontal, space)
+                    .foregroundColor(Colors.darkBlue)
+                    .contentShape(Circle())
             }
 
             // Google
             Button {
                 //
             } label: {
-                Image("")
+                Image("google")
+                    .renderingMode(.template)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
-                    .background(Color.red)
                     .padding(.horizontal, space)
+                    .foregroundColor(Colors.darkBlue)
+                    .contentShape(Circle())
             }
             
             // Facebook
             Button {
                 //
             } label: {
-                Image("")
+                Image("facebook")
+                    .renderingMode(.template)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
-                    .background(Color.red)
                     .padding(.horizontal, space)
+                    .foregroundColor(Colors.darkBlue)
+                    .contentShape(Circle())
             }
             
             Spacer()

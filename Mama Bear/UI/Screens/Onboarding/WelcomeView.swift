@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    let size: CGFloat = 132
+    @ObservedObject var authenticationService: AuthenticationService
+    @ObservedObject var settingsVM: SettingsViewModel
 
+    @State var accountType: AccountType = .unknown
+    
     @State private var showingWelcome = true
     @State private var showingAccount = false
     @State private var showingRegister = false
 
     @State var startPos: CGPoint = .zero
     @State var isSwipping = true
+    
+    let size: CGFloat = 132
 
     var body: some View {
         ZStack {
@@ -23,8 +28,9 @@ struct WelcomeView: View {
                 Spacer()
 
                 // Mama Bear logo
-                Rectangle()
-                    .foregroundColor(Color.black.opacity(0.1))
+                Image("mamaBearIcon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
                     .padding(.top, Sizes.Default)
 
@@ -35,13 +41,13 @@ struct WelcomeView: View {
                 Spacer(minLength: Sizes.Default)
 
                 ZStack(alignment: .bottom) {
-                    WelcomeDetailView() {
+                    WelcomeDetailView(authenticationService: authenticationService) {
                         animateOnboardingComplete(forward: true)
                     }
                         .offset(x: showingWelcome ? 0 : -UIScreen.main.bounds.width)
                         .opacity(showingWelcome ? 1 : 0)
 
-                    CreateAccountView(backPressed: {
+                    CreateAccountView(accountType: $accountType, backPressed: {
                         animateOnboardingComplete(forward: false)
                     }, accountPressed: {
                             animateRegistering(forward: true)
@@ -53,7 +59,7 @@ struct WelcomeView: View {
                 .offset(x: showingRegister ? -UIScreen.main.bounds.width : 0, y: showingRegister ? -UIScreen.main.bounds.height : 0)
 
             if !showingWelcome {
-                RegisterView() {
+                RegisterView(authenticationService: authenticationService, settingsVM: settingsVM, accountType: accountType) {
                     animateRegistering(forward: false)
                 }
                     .offset(y: showingRegister ? 0 : UIScreen.main.bounds.height)
@@ -114,11 +120,5 @@ struct WelcomeView: View {
                 self.showingAccount = true
             }
         }
-    }
-}
-
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView()
     }
 }

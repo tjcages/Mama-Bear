@@ -24,7 +24,7 @@ struct HomeView: View {
                     Spacer()
                         
                     VStack {
-                        Image("nannyGraphic")
+                        Image("nannyHomeGraphic")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding(.horizontal, Sizes.Big)

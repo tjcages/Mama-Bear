@@ -81,6 +81,7 @@
 		2FF1CB3E252BB8C100DA418E /* Manage_ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CB3D252BB8C100DA418E /* Manage_ProfileView.swift */; };
 		2FF1CB46252BC1E600DA418E /* TabBarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CB45252BC1E600DA418E /* TabBarShape.swift */; };
 		2FF1CB4B252BC2FE00DA418E /* Personal_ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CB4A252BC2FE00DA418E /* Personal_ProfileView.swift */; };
+		2FF4DFC4253E2F2300C533CE /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4DFC3253E2F2300C533CE /* FirestoreUser.swift */; };
 		2FF821DD2526547800BA97C8 /* OnboardingSingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF821DC2526547800BA97C8 /* OnboardingSingleView.swift */; };
 		2FF821E52526554200BA97C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FF821E42526554200BA97C8 /* Assets.xcassets */; };
 		2FF821F1252655F900BA97C8 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF821F0252655F900BA97C8 /* PageControl.swift */; };
@@ -199,6 +200,7 @@
 		2FF1CB3D252BB8C100DA418E /* Manage_ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manage_ProfileView.swift; sourceTree = "<group>"; };
 		2FF1CB45252BC1E600DA418E /* TabBarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarShape.swift; sourceTree = "<group>"; };
 		2FF1CB4A252BC2FE00DA418E /* Personal_ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personal_ProfileView.swift; sourceTree = "<group>"; };
+		2FF4DFC3253E2F2300C533CE /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
 		2FF821DC2526547800BA97C8 /* OnboardingSingleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSingleView.swift; sourceTree = "<group>"; };
 		2FF821E42526554200BA97C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FF821F0252655F900BA97C8 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 		2F59B68125264814002E057A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2FF4DFC3253E2F2300C533CE /* FirestoreUser.swift */,
 				2F59B6822526481F002E057A /* Task.swift */,
 				2FF8222725265CC600BA97C8 /* Onboarding.swift */,
 				2F550C3E252CF9E600DC523F /* Notification.swift */,
@@ -953,6 +956,7 @@
 				2FF8222D2526610F00BA97C8 /* SkipButton.swift in Sources */,
 				2F59B665252647D6002E057A /* AddShadowModifier.swift in Sources */,
 				2FBD1FFC252677BF000465D3 /* ConfirmButton.swift in Sources */,
+				2FF4DFC4253E2F2300C533CE /* FirestoreUser.swift in Sources */,
 				2FF1CB36252BB76100DA418E /* BrandSegmentedPickerView.swift in Sources */,
 				2FF821FC252657EA00BA97C8 /* NextButton.swift in Sources */,
 				2F5A765A252D291000321BA5 /* ResponsiveKeyboardModifier.swift in Sources */,
@@ -1187,6 +1191,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Mama Bear/Mama Bear.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_ASSET_PATHS = "\"Mama Bear/Preview Content\"";
 				DEVELOPMENT_TEAM = 435YL82FQ2;
 				ENABLE_PREVIEWS = YES;
@@ -1195,6 +1200,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tjc.mamabear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1212,6 +1218,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Mama Bear/Mama Bear.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_ASSET_PATHS = "\"Mama Bear/Preview Content\"";
 				DEVELOPMENT_TEAM = 435YL82FQ2;
 				ENABLE_PREVIEWS = YES;
@@ -1220,6 +1227,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tjc.mamabear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

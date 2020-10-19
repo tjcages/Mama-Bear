@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NewAddress_ProfileView: View {
     @Binding var showSheet: Bool
+    @State var addressText: String = ""
+    
     var addressFields: [TextViewCase] = [.streetAddress, .city, .state, .zip, .country]
 
     var body: some View {
@@ -27,7 +29,7 @@ struct NewAddress_ProfileView: View {
                             .padding(.bottom, Sizes.Large)
 
                         ForEach(addressFields, id: \.rawValue) { field in
-                            BrandTextView(item: field)
+                            BrandTextView($addressText, item: field)
                         }
                     }
                         .padding(.bottom, Sizes.xSmall)

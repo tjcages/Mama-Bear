@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddPetView: View {
     @Binding var showSheet: Bool
+    @State var petName: String = ""
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,7 +27,7 @@ struct AddPetView: View {
 
                     VStack(spacing: Sizes.Default) {
                         Group {
-                            BrandTextView(item: .firstName)
+                            BrandTextView($petName, item: .firstName)
 
                             AnimalView()
 

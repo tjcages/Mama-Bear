@@ -12,6 +12,7 @@ enum TextViewCase: Int {
     case password
     case firstName
     case lastName
+    case name
     case phone
     case streetAddress
     case city
@@ -26,16 +27,17 @@ struct TextViewItems {
 }
 
 struct BrandTextView: View {
+    @Binding var text: String
+    
     var item: TextViewItems
     var itemCase: TextViewCase
-
-    @State private var text: String = ""
 
     private var cases: [TextViewItems] = [
         TextViewItems(title: "Your email", image: "person"),
         TextViewItems(title: "Password", image: "lock"),
         TextViewItems(title: "First name", image: ""),
         TextViewItems(title: "Last name", image: ""),
+        TextViewItems(title: "Name", image: ""),
         TextViewItems(title: "Phone number", image: "phone"),
         TextViewItems(title: "Street address", image: ""),
         TextViewItems(title: "City", image: ""),
@@ -44,7 +46,8 @@ struct BrandTextView: View {
         TextViewItems(title: "Country", image: "")
     ]
 
-    init(item: TextViewCase) {
+    init(_ text: Binding<String>, item: TextViewCase) {
+        self._text = text
         self.itemCase = item
         self.item = cases[item.rawValue]
     }
@@ -60,7 +63,7 @@ struct BrandTextView: View {
                         .foregroundColor(!text.isEmpty ? Colors.headline : Colors.subheadline)
                 }
 
-                CustomTextField(placeholder: Text("Enter \(item.title.lowercased())"), text: $text) { _ in
+                CustomTextField(placeholder: Text("Enter \(item.title.lowercased())"), text: $text, itemCase: itemCase) { _ in
                     // on Changed
                 } commit: {
                     // on Commit
@@ -101,6 +104,7 @@ struct BrandTextView: View {
 struct CustomTextField: View {
     var placeholder: Text
     @Binding var text: String
+    var itemCase: TextViewCase
     var editingChanged: (Bool) -> () = { _ in }
     var commit: () -> () = { }
 
@@ -116,6 +120,8 @@ struct CustomTextField: View {
                 .foregroundColor(Colors.headline)
                 .multilineTextAlignment(.leading)
                 .lineLimit(1)
+                .keyboardType(itemCase == .email ? .emailAddress : (itemCase == .phone ? .phonePad : .default))
+                .autocapitalization(itemCase == .email ? .none : .words)
         }
     }
 }

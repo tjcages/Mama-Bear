@@ -6,11 +6,8 @@
 //
 
 import SwiftUI
-
-enum AccountType: String {
-    case nanny = "Nanny"
-    case family = "Family"
-}
+import Resolver
+import FirebaseAuth
 
 /**
  Creates a shake animation, useful in denoting a failed input attempt.
@@ -32,10 +29,11 @@ struct Shake: GeometryEffect {
 }
 
 struct RegisterView: View {
-    var backPressed: () -> () = { }
-    var account: AccountType = .nanny
+    @ObservedObject var authenticationService: AuthenticationService
+    @ObservedObject var settingsVM: SettingsViewModel
 
-    @State var verifyCode: String?
+    // MARK: -State variables
+    @State var verifyCode: String = ""
     @State var verifyItems = VerifyModel(rows: [.init(), .init(), .init(), .init(), .init(), .init()])
 
     @State var startPos: CGPoint = .zero
@@ -49,6 +47,19 @@ struct RegisterView: View {
 
     @State private var attempts = 2
     @State private var canResendCode = false
+    
+    var accountType: AccountType
+    
+    @State var firstName = ""
+    @State var lastName = ""
+    @State var email = ""
+    @State var phoneNumber = ""
+    @State var verificationId: String?
+    @State var password = ""
+    @State var userPhoneCredential: PhoneAuthCredential?
+    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", accountType: "unknown")
+    
+    var backPressed: () -> () = { }
 
     var body: some View {
         VStack {
@@ -59,24 +70,26 @@ struct RegisterView: View {
 
             // Content to animate in
             ZStack {
-                Name_RegisterView(account: .nanny)
+                Name_RegisterView(firstName: $firstName, lastName: $lastName, account: accountType)
                     .offset(x: showingName ? 0 : -UIScreen.main.bounds.width)
                     .opacity(showingName ? 1 : 0)
 
-                Email_RegisterView()
+                Email_RegisterView(email: $email)
                     .offset(x: showingEmail ? 0 : (showingPhone ? -UIScreen.main.bounds.width : UIScreen.main.bounds.width))
                     .opacity(showingEmail ? 1 : 0)
 
-                Phone_RegisterView()
+                Phone_RegisterView(phoneNumber: $phoneNumber)
                     .offset(x: showingPhone ? 0 : (showingVerify ? -UIScreen.main.bounds.width : UIScreen.main.bounds.width))
                     .opacity(showingPhone ? 1 : 0)
 
-                Verify_RegisterView(model: $verifyItems, canResendCode: $canResendCode)
+                Verify_RegisterView(model: $verifyItems, canResendCode: $canResendCode) {
+                    sendPhoneCode(next: false)
+                }
                     .offset(x: showingVerify ? 0 : (showingPassword ? -UIScreen.main.bounds.width : UIScreen.main.bounds.width))
                     .opacity(showingVerify ? 1 : 0)
                     .modifier(Shake(animatableData: CGFloat(attempts)))
                 
-                Password_RegisterView()
+                Password_RegisterView(password: $password)
                     .offset(x: showingPassword ? 0 : UIScreen.main.bounds.width)
                     .opacity(showingPassword ? 1 : 0)
             }
@@ -103,9 +116,10 @@ struct RegisterView: View {
             // Next button
             Group {
                 ConfirmButton(title: showingPassword ? "Get started" : "Next", style: .fill) {
-                    animateNextStep(forward: true)
-
-                    if showingVerify { validateCode() }
+                    if showingPhone { sendPhoneCode(next: true) }
+                    else if showingVerify { validateCode() }
+                    else if showingPassword { checkPassword() }
+                    else { animateNextStep(forward: true) }
                 }
 
                 if showingName {
@@ -174,24 +188,74 @@ struct RegisterView: View {
             }
         }
     }
+    
+    func sendPhoneCode(next: Bool) {
+        // SHOW LOADING
+        let formattedPhoneNumber = format(with: "+1 (XXX) XXX-XXXX", phone: phoneNumber)
+        PhoneAuthProvider.provider().verifyPhoneNumber(formattedPhoneNumber, uiDelegate: nil) { (verificationId, error) in
+            if let error = error {
+                // SHOW ERROR POPUP MESSAGE
+                print("Error sending phone verification code: \(error)")
+                return 
+            }
+            // END LOADING – ADVANCE PAGE
+            newUser.phoneNumber = formattedPhoneNumber
+            if next { animateNextStep(forward: true) }
+            self.verificationId = verificationId
+        }
+    }
 
     func validateCode() {
+        // SHOW LOADING
         var text = ""
         for row in verifyItems.rows {
             text += row.textContent
         }
         verifyCode = text
-
-        // Incorrect password attempt
-        withAnimation(.default) {
-            self.attempts += 1
+        if let verificationId = self.verificationId {
+            // END LOADING – ADVANCE PAGE
+            let credential: PhoneAuthCredential? = PhoneAuthProvider.provider().credential(withVerificationID: verificationId, verificationCode: verifyCode)
+            self.userPhoneCredential = credential
+            animateNextStep(forward: true)
+        } else {
+            // Incorrect password attempt
+            withAnimation(.default) {
+                self.attempts += 1
+            }
         }
-        //
     }
-}
+    
+    func checkPassword() {
+        // Check
+        let name = "\(firstName) \(lastName)"
+        newUser.accountType = accountType.rawValue
+        newUser.name = name
+        newUser.email = email
+        if let phoneCredential = self.userPhoneCredential {
+            authenticationService.registerUser(newUser: newUser, phoneNumberCredential: phoneCredential, password: password) { (result, error) in
+                // Attempted login
+            }
+        }
+    }
+    
+    func format(with mask: String, phone: String) -> String {
+        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex // numbers iterator
 
-struct RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegisterView()
+        // iterate over the mask characters until the iterator of numbers ends
+        for ch in mask where index < numbers.endIndex {
+            if ch == "X" {
+                // mask requires a number in this place, so take the next one
+                result.append(numbers[index])
+
+                // move numbers iterator to the next index
+                index = numbers.index(after: index)
+
+            } else {
+                result.append(ch) // just append a mask character
+            }
+        }
+        return result
     }
 }

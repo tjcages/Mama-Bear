@@ -20,10 +20,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-
+            
+            let authenticationService = AuthenticationService()
+                
             // Create the SwiftUI view that provides the window contents.
             // Set the window EnvironmentKey to the current window for the contentView's environment.
-            let contentView = ContentView().environment(\.window, window)
+            let contentView = ContentView(authenticationService: authenticationService).environment(\.window, window)
 
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window

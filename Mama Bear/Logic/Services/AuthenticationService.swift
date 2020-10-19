@@ -9,6 +9,9 @@ import Foundation
 import FirebaseAuth
 import Resolver
 
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+
 enum SignInState: String {
     case signIn
     case link
@@ -17,23 +20,58 @@ enum SignInState: String {
 
 class AuthenticationService: ObservableObject {
     @Published var user: User?
+    @Published var userLoggedIn: Bool = false
     
     @LazyInjected private var taskRepository: TaskRepository
     private var handle: AuthStateDidChangeListenerHandle?
+    
+    private var database = Firestore.firestore()
+    private var usersPath: String = "users"
 
     init() {
         registerStateListener()
     }
+    
+    func registerUser(newUser user: FirestoreUser, phoneNumberCredential: PhoneAuthCredential, password: String, completion: @escaping AuthDataResultCallback) {
+        Auth.auth().createUser(withEmail: user.email, password: password) { (result, error) in
+            if let error = error {
+                print("Error signing user in with credentials: \(error.localizedDescription)")
+            }
+            Auth.auth().currentUser?.updatePhoneNumber(phoneNumberCredential, completion: { (err) in
+                if let error = err {
+                    print("Error updating user phone credential: \(error.localizedDescription)")
+                }
+            })
+            self.updateDisplayName(displayName: user.name) { (result) in
+                if case .failure(let err) = result {
+                    print("Error updating user display name: \(err.localizedDescription)")
+                }
+            }
+            
+            print("Successfully registered new user: \(String(describing: result?.user.uid))")
+            // Add user data to Firestore
+            do {
+                var newUser = user
+                newUser.id = result?.user.uid
+                let _ = try self.database.collection(self.usersPath).addDocument(from: newUser)
+            }
+            catch {
+                print("Error saving user information to Firestore")
+            }
+        }
+    }
 
-    func signIn() {
+    func signIn(withEmail: String, password: String, completion: @escaping AuthDataResultCallback) {
         if Auth.auth().currentUser == nil {
-            Auth.auth().signInAnonymously()
+//            Auth.auth().signin()
+            Auth.auth().signIn(withEmail: withEmail, password: password, completion: completion)
         }
     }
 
     func signOut() {
         do {
             try Auth.auth().signOut()
+            userLoggedIn = false
         }
         catch {
             print("Error when trying to sign out: \(error.localizedDescription).")
@@ -51,10 +89,11 @@ class AuthenticationService: ObservableObject {
             if let user = user {
                 let anonymous = user.isAnonymous ? "anonymously " : ""
                 print("User signed in \(anonymous)with user ID \(user.uid). Email: \(user.email ?? "(empty)"), display name: [\(user.displayName ?? "(empty)")]")
-            }
-            else {
+                
+                self.userLoggedIn = true
+            } else {
                 print("User signed out.")
-                self.signIn()
+//                self.signIn()
             }
         }
     }
