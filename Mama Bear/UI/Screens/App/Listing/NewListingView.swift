@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NewListingView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+
     @State var activeSheet: ActiveSheet = .first
     @State var showSheet: Bool = false
 
@@ -31,9 +33,19 @@ struct NewListingView: View {
                 })
 
                 // Address view
-                Address_ProfileView(activeSheet: $activeSheet.didSet { _ in
-                    showSheet.toggle()
-                })
+                if authenticationService.userAddress != nil {
+                    Address_ProfileView(authenticationService: authenticationService, activeSheet: $activeSheet.didSet { _ in
+                        showSheet.toggle()
+                    })
+                } else {
+                    AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.cellBackground, image: "onboardingGraphic_3", type: .unknown))
+                        .shadow()
+                        .onTapGesture {
+                            activeSheet = .third
+                            showSheet.toggle()
+                        }
+                        .padding(Sizes.Spacer)
+                }
 
                 Spacer()
 
@@ -48,16 +60,10 @@ struct NewListingView: View {
         }
             .sheet(isPresented: $showSheet) {
                 if activeSheet == .first {
-                    Details_NewListingView(showSheet: $showSheet)
+                    Details_NewListingView(authenticationService: authenticationService, showSheet: $showSheet)
                 } else if activeSheet == .third {
-                    NewAddress_ProfileView(showSheet: $showSheet)
+                    NewAddress_ProfileView(authenticationService: authenticationService, showSheet: $showSheet)
                 }
         }
-    }
-}
-
-struct NewListingView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewListingView()
     }
 }

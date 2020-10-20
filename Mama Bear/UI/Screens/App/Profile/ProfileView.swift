@@ -51,11 +51,11 @@ struct ProfileView: View {
             .edgesIgnoringSafeArea(.top)
             .sheet(isPresented: $showSheet) {
                 if activeSheet == .first {
-                    Requests_ProfileView(showingRequests: $showSheet)
+                    Requests_ProfileView(authenticationService: authenticationService, showingRequests: $showSheet)
                 } else if activeSheet == .second {
                     TransactionsView(showingTransactions: $showSheet)
                 } else if activeSheet == .third {
-                    NewAddress_ProfileView(showSheet: $showSheet)
+                    NewAddress_ProfileView(authenticationService: authenticationService, showSheet: $showSheet)
                 }
             }
             .responsiveKeyboard()

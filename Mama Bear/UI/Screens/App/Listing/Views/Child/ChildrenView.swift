@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct ChildrenView: View {
-    @Binding var activeSheet: ActiveSheet
+    @ObservedObject var authenticationService: AuthenticationService
+    
+    @Binding var selectedChild: Child
     
     var body: some View {
         VStack {
-            Child_WrappedHStack(children: [
-                Child(name: "Mark", age: .baby, gender: .male),
-                Child(name: "Sally", age: .teenager, gender: .female),
-                Child(name: "Jewbear", age: .toddler, gender: .unknown),
-                Child()
-            ], activeSheet: $activeSheet
-            )
+            Child_WrappedHStack(authenticationService: authenticationService, selectedChild: $selectedChild)
         }
             .padding([.leading, .top, .trailing], Sizes.Default)
             .padding(.bottom, Sizes.xSmall)
@@ -31,7 +27,7 @@ struct ChildrenView: View {
 
 struct ChildAgeView: View {
     var child: Child
-    @Binding var activeSheet: ActiveSheet
+    @Binding var selectedChild: Child
 
     var body: some View {
         let addNew = child.name == ""
@@ -52,10 +48,91 @@ struct ChildAgeView: View {
             .cornerRadius(Sizes.Spacer)
             .padding([.bottom, .trailing], Sizes.Spacer)
             .onTapGesture {
-                if addNew {
-                    // Add child sheet
-                    activeSheet = .first
-                }
+                // Add child sheet
+                selectedChild = child
+        }
+    }
+}
+
+struct Child_WrappedHStack: View {
+    @ObservedObject var authenticationService: AuthenticationService
+
+    @Binding var selectedChild: Child
+
+    private var children: [Child] {
+        if let children = authenticationService.userChildren {
+            return children
+        }
+        return []
+    }
+
+    @State private var totalHeight
+        = CGFloat.zero // << variant for ScrollView/List
+    //    = CGFloat.infinity   // << variant for VStack
+
+    var body: some View {
+        VStack {
+            GeometryReader { geometry in
+                self.generateContent(in: geometry)
+            }
+        }
+            .frame(height: totalHeight)// << variant for ScrollView/List
+        //.frame(maxHeight: totalHeight) // << variant for VStack
+    }
+
+    private func generateContent(in g: GeometryProxy) -> some View {
+        var width = CGFloat.zero
+        var height = CGFloat.zero
+
+        return ZStack(alignment: .topLeading) {
+            ForEach(children) { child in
+                self.item(for: child)
+                .alignmentGuide(.leading, computeValue: { d in
+                    if (abs(width - d.width) > g.size.width)
+                    {
+                        width = 0
+                        height -= d.height
+                    }
+                    let result = width
+                    width -= d.width
+                    return result
+                })
+                    .alignmentGuide(.top, computeValue: { d in
+                        let result = height
+                        return result
+                    })
+            }
+            self.item(for: Child())
+                .alignmentGuide(.leading, computeValue: { d in
+                    if (abs(width - d.width) > g.size.width)
+                    {
+                        width = 0
+                        height -= d.height
+                    }
+                    let result = width
+                    width = 0 // Last item
+                    return result
+                })
+                .alignmentGuide(.top, computeValue: { d in
+                    let result = height
+                    height = 0 // Last item
+                    return result
+                })
+        }
+            .background(viewHeightReader($totalHeight))
+    }
+
+    private func item(for child: Child) -> some View {
+        return ChildAgeView(child: child, selectedChild: $selectedChild)
+    }
+
+    private func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {
+        return GeometryReader { geometry -> Color in
+            let rect = geometry.frame(in: .local)
+            DispatchQueue.main.async {
+                binding.wrappedValue = rect.size.height
+            }
+            return .clear
         }
     }
 }

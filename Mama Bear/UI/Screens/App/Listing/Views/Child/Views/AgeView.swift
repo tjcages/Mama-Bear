@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct AgeView: View {
-    let size: CGFloat = 12
+    @Binding var age: Int
     @State var showingMultiple: Bool = false
-    @State var age: Int = 8
+    
+    let size: CGFloat = 12
 
     var ageRange: [Int] = {
         var array: [Int] = []
@@ -33,11 +34,6 @@ struct AgeView: View {
                     }
                         .modifier(ColorInvert())
                         .frame(width: UIScreen.main.bounds.width - Sizes.Big * 2, height: Sizes.Big * 3)
-                        .onTapGesture {
-                            withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
-                                self.showingMultiple.toggle()
-                            }
-                    }
                 } else {
                     Text("\(age)")
                         .customFont(.medium, category: .medium)
@@ -101,11 +97,5 @@ struct AgeView: View {
                     self.showingMultiple.toggle()
                 }
         }
-    }
-}
-
-struct AgeView_Previews: PreviewProvider {
-    static var previews: some View {
-        AgeView()
     }
 }

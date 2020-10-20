@@ -27,10 +27,10 @@ struct Name_RegisterView: View {
                 .padding(.bottom, Sizes.Large)
                 .fixedSize(horizontal: false, vertical: true)
 
-            BrandTextView($firstName, item: .firstName)
+            BrandTextView(item: .firstName, $firstName)
                 .padding(.bottom, Sizes.xSmall)
 
-            BrandTextView($lastName, item: .lastName)
+            BrandTextView(item: .lastName, $lastName)
 
             Rectangle()
                 .foregroundColor(.clear)

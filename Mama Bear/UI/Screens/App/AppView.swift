@@ -16,7 +16,7 @@ struct AppView: View {
     @ObservedObject var authenticationService: AuthenticationService
     
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var faq = FAQViewModel()
+    @ObservedObject var faqVM = FAQViewModel()
 
     var body: some View {
         GeometryReader { geometry in
@@ -27,10 +27,10 @@ struct AppView: View {
                 NotificationView()
                     .opacity(viewRouter.currentView == .notification ? 1 : 0)
                 
-                NewListingView()
+                NewListingView(authenticationService: authenticationService)
                     .opacity(viewRouter.currentView == .newListing ? 1 : 0)
                 
-                HelpView(faq: faq)
+                HelpView(faqVM: faqVM)
                     .opacity(viewRouter.currentView == .help ? 1 : 0)
                 
                 ProfileView(authenticationService: authenticationService, viewRouter: viewRouter)

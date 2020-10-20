@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct AnimalView: View {
-    let size: CGFloat = 12
+    @Binding var animal: Animal
     @State var showingMultiple: Bool = false
-    @State var animal: Animal = .dog
+    
+    let size: CGFloat = 12
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -83,11 +84,5 @@ struct AnimalView: View {
                     self.showingMultiple.toggle()
                 }
         }
-    }
-}
-
-struct AnimalView_Previews: PreviewProvider {
-    static var previews: some View {
-        AnimalView()
     }
 }

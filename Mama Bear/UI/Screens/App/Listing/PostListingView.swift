@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PostListingView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+    
     @Binding var showingPostListing: Bool
     @Binding var currentListing: Bool
     @State var showSheet: Bool = false
@@ -40,7 +42,7 @@ struct PostListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    ChildrenView(activeSheet: .constant(.first))
+                    ChildrenView(authenticationService: authenticationService, selectedChild: .constant(Child()))
 
                     Text("Pets")
                         .customFont(.medium, category: .large)
@@ -48,7 +50,7 @@ struct PostListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    PetsView(activeSheet: .constant(.second))
+                    PetsView(authenticationService: authenticationService, selectedPet: .constant(Pet()))
 
                     if currentListing {
                         Group {
@@ -69,11 +71,5 @@ struct PostListingView: View {
                 }
             }
         }
-    }
-}
-
-struct PostListingView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostListingView(showingPostListing: .constant(true), currentListing: .constant(true))
     }
 }

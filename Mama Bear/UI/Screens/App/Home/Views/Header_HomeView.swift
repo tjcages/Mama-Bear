@@ -25,7 +25,7 @@ struct Header_HomeView: View {
                         .cornerRadius(Sizes.xLarge / 2)
                 } else if let imageUrl = authenticationService.firestoreUser?.photoURL {
                     AsyncImage(url: URL(string: imageUrl)!) {
-                        Text("loading..")
+                        Text("•")
                     }
                         .aspectRatio(contentMode: .fit)
                         .frame(width: Sizes.xLarge, height: Sizes.xLarge)
@@ -57,11 +57,17 @@ struct Header_HomeView: View {
 
             Spacer()
 
-            Image(systemName: "gear")
+            Image(systemName: "plus")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: Sizes.Default, height: Sizes.Default)
+                .frame(width: Sizes.xSmall, height: Sizes.xSmall)
                 .foregroundColor(Colors.headline)
+                .padding(Sizes.xSmall)
+                .background(
+                    Colors.subheadline
+                        .opacity(0.1)
+                        .cornerRadius(Sizes.xLarge / 2)
+                )
         }
             .padding(Sizes.Default)
             .background(Colors.cellBackground)

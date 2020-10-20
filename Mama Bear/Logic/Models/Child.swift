@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 enum Gender: String {
     case male = "Male"
@@ -13,27 +15,31 @@ enum Gender: String {
     case unknown = "Other"
 }
 
-enum Age {
-    case baby
-    case toddler
-    case teenager
+enum Age: Int {
+    case baby = 0
+    case toddler = 1
+    case teenager = 2
 }
 
-struct Child: Equatable, Identifiable {
-    let id = UUID()
+struct Child: Identifiable, Codable, Equatable {
+    @DocumentID var id: String?
     let name: String
-    let age: Age
-    let gender: Gender
+    let age: Int
+    let gender: Gender.RawValue
     
-    init(name: String, age: Age, gender: Gender) {
+    @ServerTimestamp var createdTime: Timestamp?
+    @ServerTimestamp var updatedTime = Timestamp.init(date: Date())
+    var userId: String?
+    
+    init(name: String, age: Int, gender: Gender) {
         self.name = name
         self.age = age
-        self.gender = gender
+        self.gender = gender.rawValue
     }
     
     init() {
         self.name = ""
-        self.age = .baby
-        self.gender = .female
+        self.age = 8
+        self.gender = "Female"
     }
 }

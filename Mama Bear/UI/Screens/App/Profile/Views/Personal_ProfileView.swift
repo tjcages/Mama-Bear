@@ -12,9 +12,9 @@ struct Personal_ProfileView: View {
     @ObservedObject var authenticationService: AuthenticationService
     @Binding var activeSheet: ActiveSheet
 
-    @State var address: Bool = true
-
-    var userFields: [TextViewCase] = [.email, .phone]
+    @State private var nameText: String = ""
+    @State private var emailText: String = ""
+    @State private var phoneNumberText: String = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: Sizes.Spacer) {
@@ -24,22 +24,36 @@ struct Personal_ProfileView: View {
                     .foregroundColor(Colors.headline)
                     .padding(.bottom, Sizes.Spacer)
 
-                BrandTextView(.constant(authenticationService.firestoreUser?.name ?? "No name"), item: .name)
+                BrandTextView(item: .name, $nameText.didSet(execute: { update in
+                    if var user = authenticationService.firestoreUser {
+                        user.name = update
+                        authenticationService.addUserToFirestore(user: user)
+                    }
+                }))
 
-                ForEach(userFields, id: \.rawValue) { field in
-                    BrandTextView(.constant(field == .email ? authenticationService.firestoreUser?.email ?? "No email": format(with: "+X (XXX) XXX-XXXX", phone: authenticationService.firestoreUser?.phoneNumber ?? "No phone number")), item: field)
-                }
+                BrandTextView(item: .email, $emailText.didSet(execute: { update in
+                    if var user = authenticationService.firestoreUser {
+                        user.email = update
+                        authenticationService.addUserToFirestore(user: user)
+                    }
+                }))
+
+                BrandTextView(item: .phone, $phoneNumberText.didSet(execute: { update in
+                    if var user = authenticationService.firestoreUser {
+                        user.phoneNumber = update
+                        authenticationService.addUserToFirestore(user: user)
+                    }
+                }))
             }
                 .padding(.bottom, Sizes.xSmall)
                 .padding(.horizontal, Sizes.Default)
 
-            if address {
-                // NEED TO IMPLEMENT VIEWMODEL
-                Address_ProfileView(activeSheet: $activeSheet.didSet { _ in
+            if authenticationService.userAddress != nil {
+                Address_ProfileView(authenticationService: authenticationService, activeSheet: $activeSheet.didSet { _ in
                     activeSheet = .third
                 })
             } else {
-                AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1), image: "onboardingGraphic-3", type: .unknown))
+                AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1), image: "onboardingGraphic_3", type: .unknown))
                     .onTapGesture {
                         activeSheet = .third
                 }
@@ -68,8 +82,13 @@ struct Personal_ProfileView: View {
 
             Spacer()
         }
+            .onAppear {
+                nameText = authenticationService.firestoreUser?.name ?? "No name"
+                emailText = authenticationService.firestoreUser?.email ?? "No email"
+                phoneNumberText = format(with: "+X (XXX) XXX-XXXX", phone: authenticationService.firestoreUser?.phoneNumber ?? "No phone number")
+        }
     }
-    
+
     func format(with mask: String, phone: String) -> String {
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""

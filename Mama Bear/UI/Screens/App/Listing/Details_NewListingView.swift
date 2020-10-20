@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct Details_NewListingView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+    
     @Binding var showSheet: Bool
     @State var presentPartialSheet: Bool = false
     
     @State var activeSheet: ActiveSheet = .first
+    
+    @State var child = Child()
+    @State var pet = Pet()
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -33,7 +38,8 @@ struct Details_NewListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    ChildrenView(activeSheet: $activeSheet.didSet { _ in
+                    ChildrenView(authenticationService: authenticationService, selectedChild: $child.didSet { _ in
+                        activeSheet = .first
                         presentPartialSheet.toggle()
                     })
 
@@ -43,7 +49,8 @@ struct Details_NewListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    PetsView(activeSheet: $activeSheet.didSet { _ in
+                    PetsView(authenticationService: authenticationService, selectedPet: $pet.didSet { _ in
+                        activeSheet = .second
                         presentPartialSheet.toggle()
                     })
 
@@ -77,16 +84,10 @@ struct Details_NewListingView: View {
         }
             .sheet(isPresented: $presentPartialSheet) {
                 if activeSheet == .first {
-                    AddChildView(showSheet: $presentPartialSheet)
+                    AddChildView(authenticationService: authenticationService, showSheet: $presentPartialSheet, child: child)
                 } else if activeSheet == .second {
-                    AddPetView(showSheet: $presentPartialSheet)
+                    AddPetView(authenticationService: authenticationService, showSheet: $presentPartialSheet, pet: pet)
                 }
         }
-    }
-}
-
-struct Details_NewListingView_Previews: PreviewProvider {
-    static var previews: some View {
-        Details_NewListingView(showSheet: .constant(true))
     }
 }

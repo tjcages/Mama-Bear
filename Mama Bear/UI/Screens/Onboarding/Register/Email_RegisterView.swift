@@ -24,7 +24,7 @@ struct Email_RegisterView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, Sizes.Large)
 
-            BrandTextView($email, item: .email)
+            BrandTextView(item: .email, $email)
 
             Rectangle()
                 .foregroundColor(.clear)

@@ -24,7 +24,7 @@ struct Phone_RegisterView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, Sizes.Large)
 
-            BrandTextView($phoneNumber, item: .phone)
+            BrandTextView(item: .phone, $phoneNumber)
 
             Rectangle()
                 .foregroundColor(.clear)

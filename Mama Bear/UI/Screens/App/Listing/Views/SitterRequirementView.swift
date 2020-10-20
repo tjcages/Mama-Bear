@@ -9,7 +9,8 @@ import SwiftUI
 
 enum SitterRequirement: String {
     case highSchool = "High school"
-    case middleSchool = "Middle school"
+    case college = "College"
+    case postGrad = "Post Grad"
 }
 
 struct SitterRequirementView: View {
@@ -33,12 +34,22 @@ struct SitterRequirementView: View {
                     }
 
                     if showingMultiple {
-                        Text(sitterRequirement == .highSchool ? "Middle school" : "High school")
+                        Text(sitterRequirement == .highSchool ? "College" : "High School")
                             .customFont(.medium, category: .medium)
                             .foregroundColor(showingMultiple ? Colors.coral : Colors.headline)
                             .onTapGesture {
                                 withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
-                                    if self.sitterRequirement == .highSchool { self.sitterRequirement = .middleSchool } else { self.sitterRequirement = .highSchool }
+                                    if self.sitterRequirement == .highSchool { self.sitterRequirement = .college } else { self.sitterRequirement = .highSchool }
+                                    self.showingMultiple.toggle()
+                                }
+                        }
+
+                        Text((sitterRequirement == .highSchool || sitterRequirement == .college) ? "Post Grad" : "College")
+                            .customFont(.medium, category: .medium)
+                            .foregroundColor(showingMultiple ? Colors.coral : Colors.headline)
+                            .onTapGesture {
+                                withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                                    if self.sitterRequirement == .postGrad { self.sitterRequirement = .college } else { self.sitterRequirement = .postGrad }
                                     self.showingMultiple.toggle()
                                 }
                         }

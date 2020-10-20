@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct AddPetView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+
     @Binding var showSheet: Bool
+
+    var pet: Pet
+
     @State var petName: String = ""
+    @State var animal: Animal = .dog
+    @State var gender: Gender = .male
 
     var body: some View {
+        let newPet = self.pet.name == ""
+
         VStack(alignment: .leading) {
             BackButton() {
                 showSheet.toggle()
@@ -27,11 +36,11 @@ struct AddPetView: View {
 
                     VStack(spacing: Sizes.Default) {
                         Group {
-                            BrandTextView($petName, item: .firstName)
+                            BrandTextView(item: .firstName, $petName)
 
-                            AnimalView()
+                            AnimalView(animal: $animal)
 
-                            GenderView()
+                            GenderView(gender: $gender)
                         }
                             .padding(.top, Sizes.Default)
 
@@ -39,10 +48,18 @@ struct AddPetView: View {
 
                         Group {
                             ConfirmButton(title: "Save", style: .fill) {
-                                // Save address
-                            }
+                                // Save pet
+                                var pet = Pet(name: petName, type: animal, gender: gender)
+                                if !newPet { pet.id = self.pet.id }
+                                authenticationService.addPetToFirestore(pet: pet)
 
-                            ConfirmButton(title: "Cancel", style: .lined) {
+                                showSheet.toggle()
+                            }
+                            
+                            ConfirmButton(title: newPet ? "Cancel" : "Delete", style: .lined) {
+                                if !newPet {
+                                    authenticationService.removePet(pet)
+                                }
                                 showSheet.toggle()
                             }
                         }
@@ -55,12 +72,11 @@ struct AddPetView: View {
             .background(Colors.cellBackground.edgesIgnoringSafeArea(.all))
             .onTapGesture {
                 UIApplication.shared.endEditing()
+            }
+            .onAppear {
+                petName = pet.name
+                animal = Animal(rawValue: pet.type) ?? .dog
+                gender = Gender(rawValue: pet.gender) ?? .unknown
         }
-    }
-}
-
-struct AddPetView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPetView(showSheet: .constant(true))
     }
 }

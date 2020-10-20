@@ -47,7 +47,7 @@ struct Header_ProfileView: View {
                                 .cornerRadius(60)
                         } else if let imageUrl = authenticationService.firestoreUser?.photoURL {
                             AsyncImage(url: URL(string: imageUrl)!) {
-                                Text("loading..")
+                                Text("•")
                             }
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 120, height: 120)

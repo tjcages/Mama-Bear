@@ -56,7 +56,7 @@ struct BrandTextView: View {
         TextViewItems(title: "Country", image: "")
     ]
 
-    init(_ text: Binding<String>, item: TextViewCase) {
+    init(item: TextViewCase, _ text: Binding<String>) {
         self._text = text
         self.itemCase = item
         self.item = cases[item.rawValue]

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Address_ProfileView: View {
+    @ObservedObject var authenticationService: AuthenticationService
     @Binding var activeSheet: ActiveSheet
 
     var body: some View {
@@ -33,11 +34,11 @@ struct Address_ProfileView: View {
 
             HStack {
                 VStack(alignment: .leading) {
-                    Text("9670 Red Oakes Pl.")
+                    Text(authenticationService.userAddress?.street ?? "")
                         .customFont(.medium, category: .medium)
                         .foregroundColor(Colors.headline)
 
-                    Text("Denver, Colorado 80126")
+                    Text("\(authenticationService.userAddress?.city ?? ""), \(authenticationService.userAddress?.state ?? "") \(authenticationService.userAddress?.zip ?? "")")
                         .customFont(.medium, category: .small)
                         .foregroundColor(Colors.subheadline)
 

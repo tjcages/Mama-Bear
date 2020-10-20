@@ -18,7 +18,7 @@ struct Password_RegisterView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, Sizes.xSmall)
 
-            BrandTextView($password, item: .password)
+            BrandTextView(item: .password, $password)
 
             Text("Password must contain at least, big letter, and at least one special character.")
                 .customFont(.medium, category: .medium)

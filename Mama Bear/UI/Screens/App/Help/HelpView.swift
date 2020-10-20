@@ -9,7 +9,7 @@ import SwiftUI
 import MessageUI
 
 struct HelpView: View {
-    @ObservedObject var faq: FAQViewModel
+    @ObservedObject var faqVM: FAQViewModel
     @State var userFeedback: String = ""
 
     @State var result: Result<MFMailComposeResult, Error>? = nil
@@ -41,11 +41,11 @@ struct HelpView: View {
                 }
                     .padding(.bottom, Sizes.xSmall)
 
-                ForEach(faq.questions, id: \.title) { question in
+                ForEach(faqVM.faq, id: \.title) { question in
                     HelpRow(question: question)
                         .onTapGesture {
                             withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
-                                faq.updateOpen(question: question)
+                                faqVM.updateOpen(question: question)
                             }
                     }
                 }
@@ -140,11 +140,5 @@ struct HelpRow: View {
                     .padding(.vertical, Sizes.Default)
             }
         }
-    }
-}
-
-struct HelpView_Previews: PreviewProvider {
-    static var previews: some View {
-        HelpView(faq: FAQViewModel())
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FAQ: Equatable {
+struct FAQ: Equatable, Decodable {
     let title: String
     let description: String
     var open: Bool = false

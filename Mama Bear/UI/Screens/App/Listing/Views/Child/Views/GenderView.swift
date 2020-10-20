@@ -10,7 +10,7 @@ import SwiftUI
 struct GenderView: View {
     let size: CGFloat = 12
     @State var showingMultiple: Bool = false
-    @State var gender: Gender = .male
+    @Binding var gender: Gender
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -96,11 +96,5 @@ struct GenderView: View {
                 }
             }
             .responsiveKeyboard()
-    }
-}
-
-struct GenderView_Previews: PreviewProvider {
-    static var previews: some View {
-        GenderView()
     }
 }

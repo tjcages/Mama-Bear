@@ -13,6 +13,8 @@ struct DurationView: View {
     @State private var listingDate = Date()
     @State private var endingTime = Date().addingTimeInterval(28800)
     @State private var showingDate = false
+    @State private var showingStartTime = false
+    @State private var showingEndTime = false
 
     var newListing: Bool
 
@@ -100,47 +102,61 @@ struct DurationView: View {
                 .frame(height: 1)
                 .padding(.vertical, Sizes.xSmall)
 
-            // Duration
             HStack {
-                // Start
-                VStack(alignment: .leading) {
-                    Text("Start time")
-                        .customFont(.medium, category: .small)
-                        .foregroundColor(Colors.subheadline)
-
-                    HStack {
-                        Image(systemName: "clock")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: Sizes.Small, height: Sizes.Small)
-                            .foregroundColor(Colors.coral)
-
-                        DatePicker("", selection: $listingDate, displayedComponents: .hourAndMinute)
-                            .colorInvert().colorMultiply(Colors.coral)
-                            .offset(x: newListing ? -Sizes.xSmall : -Sizes.Default)
-                            .disabled(!newListing)
-
-                        Spacer()
-                    }
-                }
-
-                Spacer()
-
-                Image(systemName: "arrow.right")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: Sizes.xSmall, height: Sizes.xSmall)
+                Text("Start time")
+                    .customFont(.medium, category: .small)
                     .foregroundColor(Colors.subheadline)
-                    .offset(y: Sizes.xSmall)
+                    .opacity(showingEndTime ? 0 : 1)
 
                 Spacer()
 
-                // Start
-                VStack(alignment: .leading) {
-                    Text("End time")
-                        .customFont(.medium, category: .small)
+                Text("End time")
+                    .customFont(.medium, category: .small)
+                    .foregroundColor(Colors.subheadline)
+                    .opacity(showingStartTime ? 0 : 1)
+            }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                        self.showingStartTime = false
+                        self.showingEndTime = false
+                    }
+            }
+
+            // Duration
+            if !showingStartTime && !showingEndTime {
+                HStack(alignment: .center) {
+                    // Start
+                    HStack {
+                        Image(systemName: "clock")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: Sizes.Small, height: Sizes.Small)
+                            .foregroundColor(Colors.coral)
+
+                        Text("\(listingDate, formatter: timeFormatter)")
+                            .customFont(.medium, category: .medium)
+                            .foregroundColor(Colors.headline)
+
+                        Spacer()
+                    }
+                        .onTapGesture {
+                            withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                                self.showingStartTime.toggle()
+                            }
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "arrow.right")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: Sizes.xSmall, height: Sizes.xSmall)
                         .foregroundColor(Colors.subheadline)
 
+                    Spacer()
+
+                    // End
                     HStack {
                         Spacer()
 
@@ -150,13 +166,48 @@ struct DurationView: View {
                             .frame(width: Sizes.Small, height: Sizes.Small)
                             .foregroundColor(Colors.coral)
 
-                        DatePicker("", selection: $endingTime, displayedComponents: .hourAndMinute)
-                            .colorInvert().colorMultiply(Colors.coral)
-                            .offset(x: newListing ? -Sizes.xSmall : -Sizes.Default)
-                            .disabled(!newListing)
+                        Text("\(endingTime, formatter: timeFormatter)")
+                            .customFont(.medium, category: .medium)
+                            .foregroundColor(Colors.headline)
+                    }
+                        .onTapGesture {
+                            withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                                self.showingEndTime.toggle()
+                            }
                     }
                 }
-                    .offset(x: newListing ? Sizes.xSmall : Sizes.Default)
+            } else {
+                VStack(spacing: 0) {
+                    DatePicker(selection: showingStartTime ? $listingDate.didSet { _ in
+                        //
+                    }: $endingTime.didSet { _ in
+                            //
+                        }, in: Date()..., displayedComponents: .hourAndMinute) {
+                        Rectangle()
+                            .frame(width: Sizes.Default, height: Sizes.Default)
+                            .foregroundColor(.clear)
+                    }
+                        .datePickerStyle(WheelDatePickerStyle())
+                        .frame(maxWidth: UIScreen.main.bounds.width - Sizes.Big * 2)
+                        .offset(y: -Sizes.Spacer)
+
+                    Button(action: {
+                        // Save time
+                        withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                            self.showingStartTime = false
+                            self.showingEndTime = false
+                        }
+                    }, label: {
+                            Text("Set time")
+                                .customFont(.heavy, category: .small)
+                                .foregroundColor(Colors.white)
+                                .padding(.vertical, Sizes.Spacer)
+                                .padding(.horizontal, Sizes.Big)
+                                .background(Colors.lightCoral)
+                                .cornerRadius(Sizes.Spacer)
+                        })
+                        .offset(x: Sizes.Default / 2)
+                }
             }
         }
             .padding(Sizes.Default)

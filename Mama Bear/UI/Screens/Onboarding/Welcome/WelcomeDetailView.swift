@@ -22,10 +22,10 @@ struct WelcomeDetailView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: Sizes.Spacer) {
-            BrandTextView($email, item: .email)
+            BrandTextView(item: .email, $email)
                 .padding(.bottom, Sizes.Spacer)
 
-            BrandTextView($password, item: .password)
+            BrandTextView(item: .password, $password)
 
             HStack {
                 Spacer()
@@ -33,6 +33,7 @@ struct WelcomeDetailView: View {
                 Text("Forgot password?")
                     .customFont(.medium, category: .small)
                     .foregroundColor(Colors.subheadline)
+                    .opacity(0) // Have not implemented
             }
                 .padding(.bottom, Sizes.xSmall)
 

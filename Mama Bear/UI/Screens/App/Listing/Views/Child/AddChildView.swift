@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct AddChildView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+    
     @Binding var showSheet: Bool
+
+    var child: Child
+
     @State var childName: String = ""
+    @State var gender: Gender = .male
+    @State var age: Int = 8
 
     var body: some View {
+        let newChild = self.child.name == ""
+
         VStack(alignment: .leading) {
             BackButton() {
                 showSheet.toggle()
@@ -27,22 +36,33 @@ struct AddChildView: View {
 
                     VStack(spacing: Sizes.Default) {
                         Group {
-                            BrandTextView($childName, item: .firstName)
+                            BrandTextView(item: .firstName, $childName)
 
-                            AgeView()
+                            AgeView(age: $age)
 
-                            GenderView()
+                            GenderView(gender: $gender)
                         }
                             .padding(.top, Sizes.Default)
+                            .onTapGesture {
+                                UIApplication.shared.endEditing()
+                        }
 
                         Spacer()
 
                         Group {
                             ConfirmButton(title: "Save", style: .fill) {
-                                // Save address
+                                // Save child
+                                var child = Child(name: childName, age: age, gender: gender)
+                                if !newChild { child.id = self.child.id }
+                                authenticationService.addChildToFirestore(child: child)
+
+                                showSheet.toggle()
                             }
 
-                            ConfirmButton(title: "Cancel", style: .lined) {
+                            ConfirmButton(title: newChild ? "Cancel" : "Delete", style: .lined) {
+                                if !newChild {
+                                    authenticationService.removeChild(child)
+                                }
                                 showSheet.toggle()
                             }
                         }
@@ -55,12 +75,11 @@ struct AddChildView: View {
             .background(Colors.cellBackground.edgesIgnoringSafeArea(.all))
             .onTapGesture {
                 UIApplication.shared.endEditing()
+            }
+            .onAppear {
+                childName = child.name
+                age = child.age
+                gender = Gender(rawValue: child.gender) ?? .unknown
         }
-    }
-}
-
-struct AddChildView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddChildView(showSheet: .constant(true))
     }
 }

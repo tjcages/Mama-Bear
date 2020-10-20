@@ -6,24 +6,26 @@
 //
 
 import SwiftUI
+import Combine
+import Resolver
 
 class FAQViewModel: ObservableObject {
-    @Published var questions: [FAQ]
-    let description = "Vestibulum at vestibulum augue. Mauris pharetra orci ut suscipit bibendum. Suspendisse vehicula pellentesque gravida. Nunc eu accumsan felis. Fusce ultricies nibh eu ex lobortis, eu tincidun. faucibus. A pellentesque gravida."
+    @Published var faqRepository: BaseFAQRepository = Resolver.resolve()
+    @Published var faq: [FAQ] = []
+    
+    private var cancellables = Set<AnyCancellable>()
 
     init() {
-        // Create some test events
-        self.questions = [
-            FAQ(title: "How can I rate a nanny?", description: self.description),
-            FAQ(title: "Why is my account deactivated?", description: self.description),
-            FAQ(title: "How to add a payment method", description: self.description),
-            FAQ(title: "How do I book a listing?", description: self.description),
-        ]
+        faqRepository.$faq.map { faq in
+            faq
+        }
+            .assign(to: \.faq, on: self)
+            .store(in: &cancellables)
     }
     
     func updateOpen(question: FAQ) {
-        if let index = self.questions.firstIndex(of: question) {
-            self.questions[index].open.toggle()
+        if let index = self.faq.firstIndex(of: question) {
+            self.faq[index].open.toggle()
         }
     }
 }
