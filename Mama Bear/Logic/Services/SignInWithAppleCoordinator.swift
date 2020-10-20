@@ -94,6 +94,11 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
                         return
                     }
                     if let user = result?.user {
+                        if result?.additionalUserInfo?.isNewUser ?? false {
+                            let user = FirestoreUser(id: user.uid, name: user.displayName ?? "", email: user.email ?? "", phoneNumber: user.phoneNumber, photoURL: "", accountType: "Unknown")
+                            self.authenticationService.addUserToFirestore(user: user)
+                        }
+                        
                         if let onSignedInHandler = self.onSignedInHandler {
                             onSignedInHandler(user)
                         }

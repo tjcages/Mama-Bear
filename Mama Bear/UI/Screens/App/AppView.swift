@@ -21,7 +21,7 @@ struct AppView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
-                HomeView()
+                HomeView(authenticationService: authenticationService)
                     .opacity(viewRouter.currentView == .home ? 1 : 0)
                 
                 NotificationView()

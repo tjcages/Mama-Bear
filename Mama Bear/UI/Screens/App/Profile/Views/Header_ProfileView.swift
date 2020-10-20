@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct Header_ProfileView: View {
     @ObservedObject var authenticationService: AuthenticationService
     @ObservedObject var viewRouter: ViewRouter
+
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM.dd.yyyy"
+        return formatter
+    }()
 
     var body: some View {
         VStack {
@@ -18,7 +25,7 @@ struct Header_ProfileView: View {
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(height: Global.statusBarHeight)
-            
+
             Text("Profile")
                 .customFont(.heavy, category: .extraLarge)
                 .foregroundColor(Colors.headline)
@@ -30,12 +37,22 @@ struct Header_ProfileView: View {
                 VStack(spacing: Sizes.Spacer) {
                     ZStack(alignment: .top) {
                         // Profile picture
-                        Image("")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 120, height: 120)
-                            .background(Color.red) // DELETE JUST FOR TESTING
-                        .cornerRadius(60)
+                        if authenticationService.firestoreUser?.photoURL == nil || authenticationService.firestoreUser?.photoURL == "" {
+                            Image(systemName: "person")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: Sizes.Large, height: Sizes.Large)
+                                .padding((120 - Sizes.Large) / 2)
+                                .background(Colors.subheadline.opacity(0.3))
+                                .cornerRadius(60)
+                        } else if let imageUrl = authenticationService.firestoreUser?.photoURL {
+                            AsyncImage(url: URL(string: imageUrl)!) {
+                                Text("loading..")
+                            }
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 120, height: 120)
+                                .cornerRadius(60)
+                        }
 
                         HStack {
                             // Status symbol
@@ -64,22 +81,24 @@ struct Header_ProfileView: View {
                         .padding(.bottom, Sizes.Spacer)
 
                     HStack(spacing: Sizes.xSmall) {
-                        Text(authenticationService.user?.displayName ?? "No name")
+                        Text(authenticationService.firestoreUser?.name ?? "No name")
                             .customFont(.medium, category: .large)
                             .foregroundColor(Colors.headline)
 
-                        Text(viewRouter.accountType.rawValue)
+                        Text(authenticationService.firestoreUser?.accountType ?? "Unknown")
                             .customFont(.medium, category: .small)
                             .foregroundColor(Colors.cellBackground)
+                            .fixedSize(horizontal: true, vertical: false)
                             .padding(.vertical, 6)
                             .padding(.horizontal, Sizes.xSmall)
                             .background(Colors.blue)
                             .cornerRadius(Sizes.Spacer)
                     }
-
-                    Text("Since 06.02.2019")
-                        .customFont(.medium, category: .small)
-                        .foregroundColor(Colors.subheadline)
+                    if let createdDate = authenticationService.firestoreUser?.createdTime?.dateValue() {
+                        Text("Since \(createdDate, formatter: Self.dateFormatter)")
+                            .customFont(.medium, category: .small)
+                            .foregroundColor(Colors.subheadline)
+                    }
                 }
                     .padding(Sizes.Default)
 

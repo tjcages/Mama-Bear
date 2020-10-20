@@ -24,10 +24,10 @@ struct Personal_ProfileView: View {
                     .foregroundColor(Colors.headline)
                     .padding(.bottom, Sizes.Spacer)
 
-                BrandTextView(.constant(authenticationService.user?.displayName ?? "No name"), item: .name)
+                BrandTextView(.constant(authenticationService.firestoreUser?.name ?? "No name"), item: .name)
 
                 ForEach(userFields, id: \.rawValue) { field in
-                    BrandTextView(.constant(field == .email ? authenticationService.user?.email ?? "No email": format(with: "+X (XXX) XXX-XXXX", phone: authenticationService.user?.phoneNumber ?? "No phone number")), item: field)
+                    BrandTextView(.constant(field == .email ? authenticationService.firestoreUser?.email ?? "No email": format(with: "+X (XXX) XXX-XXXX", phone: authenticationService.firestoreUser?.phoneNumber ?? "No phone number")), item: field)
                 }
             }
                 .padding(.bottom, Sizes.xSmall)

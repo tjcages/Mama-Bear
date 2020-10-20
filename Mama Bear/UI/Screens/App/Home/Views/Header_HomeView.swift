@@ -8,17 +8,29 @@
 import SwiftUI
 
 struct Header_HomeView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+    
     var body: some View {
         HStack {
             // Profile image
             ZStack(alignment: .topTrailing) {
                 // Profile picture
-                Image("")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: Sizes.xLarge, height: Sizes.xLarge)
-                    .background(Color.red) // DELETE JUST FOR TESTING
-                    .cornerRadius(Sizes.xLarge / 2)
+                if authenticationService.firestoreUser?.photoURL == nil || authenticationService.firestoreUser?.photoURL == "" {
+                    Image(systemName: "person")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: Sizes.Small, height: Sizes.Small)
+                        .padding((Sizes.xLarge - Sizes.Small) / 2)
+                        .background(Colors.subheadline.opacity(0.3))
+                        .cornerRadius(Sizes.xLarge / 2)
+                } else if let imageUrl = authenticationService.firestoreUser?.photoURL {
+                    AsyncImage(url: URL(string: imageUrl)!) {
+                        Text("loading..")
+                    }
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: Sizes.xLarge, height: Sizes.xLarge)
+                        .cornerRadius(Sizes.xLarge / 2)
+                }
 
                 // Status symbol
                 Circle()
@@ -28,39 +40,33 @@ struct Header_HomeView: View {
                         RoundedRectangle(cornerRadius: Sizes.Spacer)
                             .stroke(Colors.white, lineWidth: 1)
                     )
-                    .padding([.top, .trailing], Sizes.Spacer/2)
+                    .padding([.top, .trailing], Sizes.Spacer / 2)
             }
-            
+
             // Name
             VStack(alignment: .leading) {
-                Text("Julia Black")
+                Text(authenticationService.firestoreUser?.name ?? "")
                     .customFont(.medium, category: .medium)
                     .foregroundColor(Colors.headline)
 
-                Text("Parent")
+                Text(authenticationService.firestoreUser?.accountType ?? "Unknown")
                     .customFont(.medium, category: .small)
                     .foregroundColor(Colors.subheadline)
             }
-            .padding(.leading, Sizes.Spacer)
-            
+                .padding(.leading, Sizes.Spacer)
+
             Spacer()
-            
+
             Image(systemName: "gear")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: Sizes.Default, height: Sizes.Default)
                 .foregroundColor(Colors.headline)
         }
-        .padding(Sizes.Default)
-        .background(Colors.cellBackground)
-        .cornerRadius(Sizes.Spacer)
-        .shadow()
-        .padding(.horizontal, Sizes.Default)
-    }
-}
-
-struct Header_HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        Header_HomeView()
+            .padding(Sizes.Default)
+            .background(Colors.cellBackground)
+            .cornerRadius(Sizes.Spacer)
+            .shadow()
+            .padding(.horizontal, Sizes.Default)
     }
 }

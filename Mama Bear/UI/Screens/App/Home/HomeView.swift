@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject var authenticationService: AuthenticationService
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: Sizes.xSmall) {
@@ -17,7 +19,7 @@ struct HomeView: View {
                     .padding(.top, Sizes.Large)
                     .padding([.bottom, .horizontal], Sizes.Default)
                 
-                Header_HomeView()
+                Header_HomeView(authenticationService: authenticationService)
                     .padding(.bottom, Sizes.Big)
                 
                 HStack {
@@ -39,11 +41,5 @@ struct HomeView: View {
                 }
             }
         }
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
     }
 }

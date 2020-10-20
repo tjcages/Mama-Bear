@@ -9,11 +9,14 @@ import SwiftUI
 
 struct WelcomeDetailView: View {
     @ObservedObject var authenticationService: AuthenticationService
+    @State var accountType: AccountType
+    
     var registerPressed: () -> () = { }
 
+    @State private var showingAlert = false
     @State var startPos: CGPoint = .zero
     @State var isSwipping = true
-    
+
     @State var email: String = ""
     @State var password: String = ""
 
@@ -37,6 +40,7 @@ struct WelcomeDetailView: View {
                 authenticationService.signIn(withEmail: email, password: password) { (result, error) in
                     if let error = error {
                         print("Error logging user in with credentials: \(error)")
+                        showingAlert = true
                         return
                     }
                     // Successfully signed in
@@ -69,7 +73,7 @@ struct WelcomeDetailView: View {
             }
                 .padding(.top, Sizes.xSmall)
 
-            SocialLoginView()
+            SocialLoginView(authenticationService: authenticationService, accountType: accountType)
                 .padding(.top, Sizes.xSmall)
 
             Spacer()
@@ -95,5 +99,8 @@ struct WelcomeDetailView: View {
                         self.isSwipping.toggle()
                 }
             )
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Error logging in"), message: Text("The password is invalid or the user does not exist."), dismissButton: .default(Text("Okay")))
+        }
     }
 }

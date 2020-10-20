@@ -39,6 +39,8 @@ struct RegisterView: View {
     @State var startPos: CGPoint = .zero
     @State var isSwipping = true
 
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
     @State private var showingName = true
     @State private var showingEmail = false
     @State private var showingPhone = false
@@ -47,9 +49,9 @@ struct RegisterView: View {
 
     @State private var attempts = 2
     @State private var canResendCode = false
-    
+
     var accountType: AccountType
-    
+
     @State var firstName = ""
     @State var lastName = ""
     @State var email = ""
@@ -57,8 +59,8 @@ struct RegisterView: View {
     @State var verificationId: String?
     @State var password = ""
     @State var userPhoneCredential: PhoneAuthCredential?
-    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", accountType: "unknown")
-    
+    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", accountType: "Unknown")
+
     var backPressed: () -> () = { }
 
     var body: some View {
@@ -88,7 +90,7 @@ struct RegisterView: View {
                     .offset(x: showingVerify ? 0 : (showingPassword ? -UIScreen.main.bounds.width : UIScreen.main.bounds.width))
                     .opacity(showingVerify ? 1 : 0)
                     .modifier(Shake(animatableData: CGFloat(attempts)))
-                
+
                 Password_RegisterView(password: $password)
                     .offset(x: showingPassword ? 0 : UIScreen.main.bounds.width)
                     .opacity(showingPassword ? 1 : 0)
@@ -115,7 +117,7 @@ struct RegisterView: View {
 
             // Next button
             Group {
-                ConfirmButton(title: showingPassword ? "Get started" : "Next", style: .fill) {
+                ConfirmButton(title: showingPassword ? "Register account" : "Next", style: .fill) {
                     if showingPhone { sendPhoneCode(next: true) }
                     else if showingVerify { validateCode() }
                     else if showingPassword { checkPassword() }
@@ -140,7 +142,7 @@ struct RegisterView: View {
                     }
                         .padding(.top, Sizes.xSmall)
 
-                    SocialLoginView()
+                    SocialLoginView(authenticationService: authenticationService, accountType: accountType)
                         .padding(.top, Sizes.xSmall)
                         .padding(.bottom, Sizes.Big)
                 } else {
@@ -148,6 +150,9 @@ struct RegisterView: View {
                 }
             }
                 .padding(.horizontal, Sizes.Default)
+        }
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Error registering new user"), message: Text(alertMessage), dismissButton: .default(Text("Okay")))
         }
     }
 
@@ -188,7 +193,7 @@ struct RegisterView: View {
             }
         }
     }
-    
+
     func sendPhoneCode(next: Bool) {
         // SHOW LOADING
         let formattedPhoneNumber = format(with: "+1 (XXX) XXX-XXXX", phone: phoneNumber)
@@ -196,7 +201,7 @@ struct RegisterView: View {
             if let error = error {
                 // SHOW ERROR POPUP MESSAGE
                 print("Error sending phone verification code: \(error)")
-                return 
+                return
             }
             // END LOADING – ADVANCE PAGE
             newUser.phoneNumber = formattedPhoneNumber
@@ -224,7 +229,7 @@ struct RegisterView: View {
             }
         }
     }
-    
+
     func checkPassword() {
         // Check
         let name = "\(firstName) \(lastName)"
@@ -234,10 +239,15 @@ struct RegisterView: View {
         if let phoneCredential = self.userPhoneCredential {
             authenticationService.registerUser(newUser: newUser, phoneNumberCredential: phoneCredential, password: password) { (result, error) in
                 // Attempted login
+                if let error = error {
+                    alertMessage = error.localizedDescription
+                    showingAlert = true
+                    return
+                }
             }
         }
     }
-    
+
     func format(with mask: String, phone: String) -> String {
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""

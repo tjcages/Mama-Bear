@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 import FirebaseAuth
 import Resolver
 
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FBSDKLoginKit
 
 enum SignInState: String {
     case signIn
@@ -20,44 +22,53 @@ enum SignInState: String {
 
 class AuthenticationService: ObservableObject {
     @Published var user: User?
+    @Published var firestoreUser: FirestoreUser?
     @Published var userLoggedIn: Bool = false
-    
-    @LazyInjected private var taskRepository: TaskRepository
+
+    private var listenerRegistration: ListenerRegistration?
     private var handle: AuthStateDidChangeListenerHandle?
-    
+
     private var database = Firestore.firestore()
     private var usersPath: String = "users"
 
     init() {
         registerStateListener()
     }
-    
+
     func registerUser(newUser user: FirestoreUser, phoneNumberCredential: PhoneAuthCredential, password: String, completion: @escaping AuthDataResultCallback) {
         Auth.auth().createUser(withEmail: user.email, password: password) { (result, error) in
             if let error = error {
                 print("Error signing user in with credentials: \(error.localizedDescription)")
+                completion(result, error)
             }
             Auth.auth().currentUser?.updatePhoneNumber(phoneNumberCredential, completion: { (err) in
                 if let error = err {
                     print("Error updating user phone credential: \(error.localizedDescription)")
+                    completion(result, error)
                 }
             })
-            self.updateDisplayName(displayName: user.name) { (result) in
-                if case .failure(let err) = result {
+            self.updateDisplayName(displayName: user.name) { (res) in
+                if case .failure(let err) = res {
                     print("Error updating user display name: \(err.localizedDescription)")
+                    completion(result, error)
                 }
             }
-            
-            print("Successfully registered new user: \(String(describing: result?.user.uid))")
+
+            print("Successfully registered new user")
             // Add user data to Firestore
-            do {
-                var newUser = user
-                newUser.id = result?.user.uid
-                let _ = try self.database.collection(self.usersPath).addDocument(from: newUser)
-            }
-            catch {
-                print("Error saving user information to Firestore")
-            }
+            var newUser = user
+            newUser.id = result?.user.uid
+            self.addUserToFirestore(user: newUser)
+        }
+    }
+
+    func addUserToFirestore(user: FirestoreUser) {
+        do {
+            guard let uid = user.id else { return }
+            let _ = try self.database.collection(self.usersPath).document(uid).setData(from: user)
+        }
+        catch {
+            print("Error saving user information to Firestore")
         }
     }
 
@@ -71,7 +82,9 @@ class AuthenticationService: ObservableObject {
     func signOut() {
         do {
             try Auth.auth().signOut()
-            userLoggedIn = false
+            withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                self.userLoggedIn = false
+            }
         }
         catch {
             print("Error when trying to sign out: \(error.localizedDescription).")
@@ -88,12 +101,32 @@ class AuthenticationService: ObservableObject {
 
             if let user = user {
                 let anonymous = user.isAnonymous ? "anonymously " : ""
-                print("User signed in \(anonymous)with user ID \(user.uid). Email: \(user.email ?? "(empty)"), display name: [\(user.displayName ?? "(empty)")]")
-                
-                self.userLoggedIn = true
+                print("User signed in \(anonymous)")
+
+                // Now get FirestoreUser
+                self.loadUserData(id: user.uid)
+
+                withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                    self.userLoggedIn = true
+                }
             } else {
                 print("User signed out.")
 //                self.signIn()
+            }
+        }
+    }
+
+    private func loadUserData(id: String) {
+        // Pull data from Firestore
+        if listenerRegistration != nil {
+            listenerRegistration?.remove()
+        }
+        listenerRegistration = database.collection(usersPath).document(id).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error listening to Firestore user at document id: \(error)")
+            }
+            if let snapshot = snapshot {
+                self.firestoreUser = try? snapshot.data(as: FirestoreUser.self)
             }
         }
     }

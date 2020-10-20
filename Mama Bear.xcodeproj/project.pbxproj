@@ -82,6 +82,11 @@
 		2FF1CB46252BC1E600DA418E /* TabBarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CB45252BC1E600DA418E /* TabBarShape.swift */; };
 		2FF1CB4B252BC2FE00DA418E /* Personal_ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CB4A252BC2FE00DA418E /* Personal_ProfileView.swift */; };
 		2FF4DFC4253E2F2300C533CE /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4DFC3253E2F2300C533CE /* FirestoreUser.swift */; };
+		2FF4DFCF253E4B2400C533CE /* SecureTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4DFCE253E4B2400C533CE /* SecureTextView.swift */; };
+		2FF4E042253F488A00C533CE /* SignInWithGoogleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4E041253F488A00C533CE /* SignInWithGoogleCoordinator.swift */; };
+		2FF4E047253F4D9A00C533CE /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4E046253F4D9A00C533CE /* AsyncImage.swift */; };
+		2FF4E050253F4DD000C533CE /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4E04F253F4DD000C533CE /* ImageCache.swift */; };
+		2FF4E05B253F4DF300C533CE /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4E05A253F4DF300C533CE /* ImageLoader.swift */; };
 		2FF821DD2526547800BA97C8 /* OnboardingSingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF821DC2526547800BA97C8 /* OnboardingSingleView.swift */; };
 		2FF821E52526554200BA97C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FF821E42526554200BA97C8 /* Assets.xcassets */; };
 		2FF821F1252655F900BA97C8 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF821F0252655F900BA97C8 /* PageControl.swift */; };
@@ -201,6 +206,11 @@
 		2FF1CB45252BC1E600DA418E /* TabBarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarShape.swift; sourceTree = "<group>"; };
 		2FF1CB4A252BC2FE00DA418E /* Personal_ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personal_ProfileView.swift; sourceTree = "<group>"; };
 		2FF4DFC3253E2F2300C533CE /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
+		2FF4DFCE253E4B2400C533CE /* SecureTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextView.swift; sourceTree = "<group>"; };
+		2FF4E041253F488A00C533CE /* SignInWithGoogleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogleCoordinator.swift; sourceTree = "<group>"; };
+		2FF4E046253F4D9A00C533CE /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		2FF4E04F253F4DD000C533CE /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		2FF4E05A253F4DF300C533CE /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		2FF821DC2526547800BA97C8 /* OnboardingSingleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSingleView.swift; sourceTree = "<group>"; };
 		2FF821E42526554200BA97C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FF821F0252655F900BA97C8 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
@@ -388,6 +398,7 @@
 				2F59B65A252647CA002E057A /* EnvironmentKey.swift */,
 				2F59B659252647CA002E057A /* Extensions.swift */,
 				2F59B65B252647CA002E057A /* Publisher+Assign.swift */,
+				2FF4E04B253F4DA600C533CE /* Image Cache */,
 				2F59B658252647B6002E057A /* Modifiers */,
 			);
 			path = Utilities;
@@ -419,6 +430,7 @@
 			children = (
 				2F59B674252647FE002E057A /* AuthenticationService.swift */,
 				2F59B675252647FE002E057A /* SignInWithAppleCoordinator.swift */,
+				2FF4E041253F488A00C533CE /* SignInWithGoogleCoordinator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -524,6 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				2FBD2019252681DE000465D3 /* BrandTextView.swift */,
+				2FF4DFCE253E4B2400C533CE /* SecureTextView.swift */,
 				2FF9649E2527C28200CCB348 /* VerifyTextView.swift */,
 				2F550C52252D1A1A00DC523F /* ResizableTextView.swift */,
 			);
@@ -629,6 +642,16 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		2FF4E04B253F4DA600C533CE /* Image Cache */ = {
+			isa = PBXGroup;
+			children = (
+				2FF4E046253F4D9A00C533CE /* AsyncImage.swift */,
+				2FF4E04F253F4DD000C533CE /* ImageCache.swift */,
+				2FF4E05A253F4DF300C533CE /* ImageLoader.swift */,
+			);
+			path = "Image Cache";
+			sourceTree = "<group>";
+		};
 		2FF821DB2526546F00BA97C8 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,6 +733,7 @@
 				2F59B5EC252646DA002E057A /* Frameworks */,
 				2F59B5ED252646DA002E057A /* Resources */,
 				B13ADCBC6DA34A9D145899FB /* [CP] Embed Pods Frameworks */,
+				7B0FC2F0C59F57A43184CBDE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -748,6 +772,7 @@
 				2F59B610252646DB002E057A /* Frameworks */,
 				2F59B611252646DB002E057A /* Resources */,
 				A7FFBA7980BBCEFF213E08DD /* [CP] Embed Pods Frameworks */,
+				91FD821CA60D2029F70F5514 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -875,6 +900,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7B0FC2F0C59F57A43184CBDE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mama Bear/Pods-Mama Bear-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mama Bear/Pods-Mama Bear-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mama Bear/Pods-Mama Bear-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91FD821CA60D2029F70F5514 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mama Bear-Mama BearUITests/Pods-Mama Bear-Mama BearUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mama Bear-Mama BearUITests/Pods-Mama Bear-Mama BearUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mama Bear-Mama BearUITests/Pods-Mama Bear-Mama BearUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A7FFBA7980BBCEFF213E08DD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -943,11 +1002,13 @@
 				2F5A767F252E9FAD00321BA5 /* Child.swift in Sources */,
 				2F59B66F252647E9002E057A /* AppDelegate+Injection.swift in Sources */,
 				2FF9648B2527B64700CCB348 /* Phone_RegisterView.swift in Sources */,
+				2FF4E050253F4DD000C533CE /* ImageCache.swift in Sources */,
 				2FBD20402526A788000465D3 /* Name_RegisterView.swift in Sources */,
 				2F59B664252647D6002E057A /* HideNavigationBarModifier.swift in Sources */,
 				2F8D0FD9252F6669002CEAD2 /* Header_HomeView.swift in Sources */,
 				2FF1CB46252BC1E600DA418E /* TabBarShape.swift in Sources */,
 				2FF821DD2526547800BA97C8 /* OnboardingSingleView.swift in Sources */,
+				2FF4DFCF253E4B2400C533CE /* SecureTextView.swift in Sources */,
 				2F5A7684252EA00F00321BA5 /* Pet.swift in Sources */,
 				2FE866A3252B8420007EADA6 /* Password_RegisterView.swift in Sources */,
 				2F59B68825264830002E057A /* ContentView.swift in Sources */,
@@ -957,6 +1018,7 @@
 				2F59B665252647D6002E057A /* AddShadowModifier.swift in Sources */,
 				2FBD1FFC252677BF000465D3 /* ConfirmButton.swift in Sources */,
 				2FF4DFC4253E2F2300C533CE /* FirestoreUser.swift in Sources */,
+				2FF4E047253F4D9A00C533CE /* AsyncImage.swift in Sources */,
 				2FF1CB36252BB76100DA418E /* BrandSegmentedPickerView.swift in Sources */,
 				2FF821FC252657EA00BA97C8 /* NextButton.swift in Sources */,
 				2F5A765A252D291000321BA5 /* ResponsiveKeyboardModifier.swift in Sources */,
@@ -967,6 +1029,7 @@
 				2F5A76B5252EB23A00321BA5 /* GenderView.swift in Sources */,
 				2FBD20142526816C000465D3 /* WelcomeDetailView.swift in Sources */,
 				2F550C29252CE0CB00DC523F /* Child_WrappedHStack.swift in Sources */,
+				2FF4E05B253F4DF300C533CE /* ImageLoader.swift in Sources */,
 				2FF9649F2527C28200CCB348 /* VerifyTextView.swift in Sources */,
 				2F59B66E252647E9002E057A /* SceneDelegate.swift in Sources */,
 				2F550C4E252D097B00DC523F /* FAQViewModel.swift in Sources */,
@@ -1008,6 +1071,7 @@
 				2F5A76C3252EC39800321BA5 /* ColorInvert.swift in Sources */,
 				2FBD200425267F39000465D3 /* SocialLoginView.swift in Sources */,
 				2FE866A8252B85CD007EADA6 /* AppView.swift in Sources */,
+				2FF4E042253F488A00C533CE /* SignInWithGoogleCoordinator.swift in Sources */,
 				2F550C2E252CE78800DC523F /* PetsView.swift in Sources */,
 				2FBD2026252693A0000465D3 /* CreateAccountView.swift in Sources */,
 				2FBD202B2526A16E000465D3 /* RegisterView.swift in Sources */,

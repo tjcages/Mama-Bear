@@ -29,6 +29,16 @@ struct TextViewItems {
 struct BrandTextView: View {
     @Binding var text: String
     
+    private var verified: Bool {
+        if text.contains("@") && text.contains(".") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    @State private var secured = true
+    
     var item: TextViewItems
     var itemCase: TextViewCase
 
@@ -63,24 +73,27 @@ struct BrandTextView: View {
                         .foregroundColor(!text.isEmpty ? Colors.headline : Colors.subheadline)
                 }
 
-                CustomTextField(placeholder: Text("Enter \(item.title.lowercased())"), text: $text, itemCase: itemCase) { _ in
-                    // on Changed
+                CustomTextField(placeholder: Text("Enter \(item.title.lowercased())"), text: $text, itemCase: itemCase, secured: secured) { _ in
+                    // onChanged
                 } commit: {
                     // on Commit
                 }
 
-                if itemCase == .email {
+                if itemCase == .email && verified {
                     Image(systemName: "checkmark")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: Sizes.Small, height: Sizes.Small)
                         .foregroundColor(Colors.green)
                 } else if itemCase == .password {
-                    Image(systemName: "eye.slash")
+                    Image(systemName: !secured ? "eye" : "eye.slash")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: Sizes.Small, height: Sizes.Small)
                         .foregroundColor(Colors.subheadline)
+                        .onTapGesture {
+                            secured.toggle()
+                        }
                 }
             }
                 .padding(Sizes.xSmall)
@@ -105,6 +118,7 @@ struct CustomTextField: View {
     var placeholder: Text
     @Binding var text: String
     var itemCase: TextViewCase
+    var secured: Bool
     var editingChanged: (Bool) -> () = { _ in }
     var commit: () -> () = { }
 
@@ -115,7 +129,13 @@ struct CustomTextField: View {
                     .customFont(.medium, category: .medium)
                     .foregroundColor(Colors.subheadline)
             }
-            TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+            Group {
+                if itemCase == .password && secured {
+                    SecureField("", text: $text, onCommit: commit)
+                } else {
+                    TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+                }
+            }
                 .customFont(.medium, category: .medium)
                 .foregroundColor(Colors.headline)
                 .multilineTextAlignment(.leading)

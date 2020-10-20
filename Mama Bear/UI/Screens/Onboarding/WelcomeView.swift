@@ -41,7 +41,7 @@ struct WelcomeView: View {
                 Spacer(minLength: Sizes.Default)
 
                 ZStack(alignment: .bottom) {
-                    WelcomeDetailView(authenticationService: authenticationService) {
+                    WelcomeDetailView(authenticationService: authenticationService, accountType: accountType) {
                         animateOnboardingComplete(forward: true)
                     }
                         .offset(x: showingWelcome ? 0 : -UIScreen.main.bounds.width)
