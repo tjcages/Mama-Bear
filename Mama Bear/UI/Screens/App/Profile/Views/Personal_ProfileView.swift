@@ -56,7 +56,8 @@ struct Personal_ProfileView: View {
                 AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1), image: "onboardingGraphic_3", type: .unknown))
                     .onTapGesture {
                         activeSheet = .third
-                }
+                    }
+                    .padding(.horizontal, Sizes.Spacer)
             }
 
             ConfirmButton(title: "Logout", style: .lined) {

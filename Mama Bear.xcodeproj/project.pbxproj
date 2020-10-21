@@ -61,6 +61,7 @@
 		2F8D0FD9252F6669002CEAD2 /* Header_HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8D0FD8252F6669002CEAD2 /* Header_HomeView.swift */; };
 		2FBB9B07253F561600B9E820 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB9B06253F561600B9E820 /* Address.swift */; };
 		2FBB9B0F253F904600B9E820 /* FirestoreFAQRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB9B0E253F904600B9E820 /* FirestoreFAQRepository.swift */; };
+		2FBB9B3A253FB46C00B9E820 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB9B39253FB46C00B9E820 /* ImagePicker.swift */; };
 		2FBD1FFC252677BF000465D3 /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD1FFB252677BF000465D3 /* ConfirmButton.swift */; };
 		2FBD200425267F39000465D3 /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD200325267F39000465D3 /* SocialLoginView.swift */; };
 		2FBD20142526816C000465D3 /* WelcomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD20132526816C000465D3 /* WelcomeDetailView.swift */; };
@@ -186,6 +187,7 @@
 		2F8D0FD8252F6669002CEAD2 /* Header_HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header_HomeView.swift; sourceTree = "<group>"; };
 		2FBB9B06253F561600B9E820 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		2FBB9B0E253F904600B9E820 /* FirestoreFAQRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreFAQRepository.swift; sourceTree = "<group>"; };
+		2FBB9B39253FB46C00B9E820 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		2FBD1FFB252677BF000465D3 /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		2FBD200325267F39000465D3 /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 		2FBD20132526816C000465D3 /* WelcomeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeDetailView.swift; sourceTree = "<group>"; };
@@ -697,6 +699,7 @@
 				2FF821F0252655F900BA97C8 /* PageControl.swift */,
 				2FF8222225265A5700BA97C8 /* PagerView.swift */,
 				2FF1CB35252BB76100DA418E /* BrandSegmentedPickerView.swift */,
+				2FBB9B39253FB46C00B9E820 /* ImagePicker.swift */,
 			);
 			path = Extra;
 			sourceTree = "<group>";
@@ -1027,6 +1030,7 @@
 				2F5A765A252D291000321BA5 /* ResponsiveKeyboardModifier.swift in Sources */,
 				2F5A76BB252EBAE000321BA5 /* AgeView.swift in Sources */,
 				2FE58E13252B9E180090CB2F /* HelpView.swift in Sources */,
+				2FBB9B3A253FB46C00B9E820 /* ImagePicker.swift in Sources */,
 				2F59B65D252647CA002E057A /* EnvironmentKey.swift in Sources */,
 				2F59B66D252647E9002E057A /* AppDelegate.swift in Sources */,
 				2F5A76B5252EB23A00321BA5 /* GenderView.swift in Sources */,

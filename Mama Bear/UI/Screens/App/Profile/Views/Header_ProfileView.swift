@@ -11,6 +11,8 @@ import Firebase
 struct Header_ProfileView: View {
     @ObservedObject var authenticationService: AuthenticationService
     @ObservedObject var viewRouter: ViewRouter
+    
+    @Binding var activeSheet: ActiveSheet
 
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -49,7 +51,7 @@ struct Header_ProfileView: View {
                             AsyncImage(url: URL(string: imageUrl)!) {
                                 Text("•")
                             }
-                                .aspectRatio(contentMode: .fit)
+                                .aspectRatio(contentMode: .fill)
                                 .frame(width: 120, height: 120)
                                 .cornerRadius(60)
                         }
@@ -75,6 +77,9 @@ struct Header_ProfileView: View {
                                 .cornerRadius((Sizes.Default * 2) / 2)
                                 .shadow()
                                 .offset(x: Sizes.xSmall)
+                                .onTapGesture {
+                                    self.activeSheet = .fourth
+                            }
                         }
                     }
                         .frame(maxWidth: 120)

@@ -50,7 +50,6 @@ class FirestoreFAQRepository: BaseFAQRepository, ObservableObject {
                     self.faq = querySnapshot.documents.compactMap { document -> FAQ? in
                         try? document.data(as: FAQ.self)
                     }
-                    print(self.faq)
                 }
         }
     }

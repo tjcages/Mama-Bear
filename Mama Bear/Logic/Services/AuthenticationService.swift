@@ -250,6 +250,7 @@ class AuthenticationService: ObservableObject {
         }
     }
 
+    // MARK: - Update Data
     func updateDisplayName(displayName: String, completionHandler: @escaping (Result<User, Error>) -> Void) {
         if let user = Auth.auth().currentUser {
             let changeRequest = user.createProfileChangeRequest()
@@ -260,10 +261,32 @@ class AuthenticationService: ObservableObject {
                 }
                 else {
                     if let updatedUser = Auth.auth().currentUser {
-                        print("Successfully updated display name for user [\(user.uid)] to [\(updatedUser.displayName ?? "(empty)")].")
+                        print("Successfully updated display name for user")
 
                         // Force update the local user to trigger the publisher
                         self.user = updatedUser
+                        completionHandler(.success(updatedUser))
+                    }
+                }
+            }
+        }
+    }
+    
+    func updatePhotoURL(url: URL?, completionHandler: @escaping (Result<User, Error>) -> Void) {
+        if let user = Auth.auth().currentUser, let url = url {
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.photoURL = url
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    completionHandler(.failure(error))
+                }
+                else {
+                    if let updatedUser = Auth.auth().currentUser {
+                        print("Successfully updated photoUrl for user")
+
+                        // Force update the local user to trigger the publisher
+                        self.user = updatedUser
+                        self.firestoreUser?.photoURL = url.absoluteString
                         completionHandler(.success(updatedUser))
                     }
                 }

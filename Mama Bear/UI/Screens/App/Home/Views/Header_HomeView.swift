@@ -27,7 +27,7 @@ struct Header_HomeView: View {
                     AsyncImage(url: URL(string: imageUrl)!) {
                         Text("•")
                     }
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: Sizes.xLarge, height: Sizes.xLarge)
                         .cornerRadius(Sizes.xLarge / 2)
                 }
