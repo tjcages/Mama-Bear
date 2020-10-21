@@ -27,12 +27,7 @@ struct Header_ProfileView: View {
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(height: Global.statusBarHeight)
-
-            Text("Profile")
-                .customFont(.heavy, category: .extraLarge)
-                .foregroundColor(Colors.headline)
-                .padding(.top, Sizes.xSmall)
-
+            
             HStack {
                 Spacer()
 
@@ -49,7 +44,10 @@ struct Header_ProfileView: View {
                                 .cornerRadius(60)
                         } else if let imageUrl = authenticationService.firestoreUser?.photoURL {
                             AsyncImage(url: URL(string: imageUrl)!) {
-                                Text("•")
+                                Rectangle()
+                                    .frame(width: 120, height: 120)
+                                    .foregroundColor(Colors.subheadline.opacity(0.3))
+                                    .cornerRadius(60)
                             }
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 120, height: 120)

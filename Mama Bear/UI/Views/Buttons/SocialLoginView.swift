@@ -88,10 +88,10 @@ extension SocialLoginView {
     func signInWithGoogleButtonTapped() {
         googlePresented = true
     }
-    
+
     func authenticateWithGoogle(result: AuthDataResult) {
         if result.additionalUserInfo?.isNewUser ?? false {
-            let user = FirestoreUser(id: result.user.uid, name: result.user.displayName ?? "", email: result.user.email ?? "", phoneNumber: result.user.phoneNumber, accountType: accountType.rawValue)
+            let user = FirestoreUser(id: result.user.uid, name: result.user.displayName ?? "", email: result.user.email ?? "", phoneNumber: result.user.phoneNumber ?? "", photoURL: "", accountType: accountType.rawValue)
             authenticationService.addUserToFirestore(user: user)
             authenticationService.updatePhotoURL(url: result.user.photoURL) { _ in
                 //
@@ -108,7 +108,7 @@ extension SocialLoginView {
             // Successful sign in
             if let result = authResult {
                 if result.additionalUserInfo?.isNewUser ?? false {
-                    let user = FirestoreUser(id: result.user.uid, name: result.user.displayName ?? "", email: result.user.email ?? "", phoneNumber: result.user.phoneNumber, accountType: accountType.rawValue)
+                    let user = FirestoreUser(id: result.user.uid, name: result.user.displayName ?? "", email: result.user.email ?? "", phoneNumber: result.user.phoneNumber ?? "", photoURL: "", accountType: accountType.rawValue)
                     authenticationService.addUserToFirestore(user: user)
                     authenticationService.updatePhotoURL(url: result.user.photoURL) { _ in
                         //

@@ -21,13 +21,16 @@ struct Address_ProfileView: View {
 
                 Spacer()
 
-                Button(action: {
-                    activeSheet = .third
-                }, label: {
-                        Text("Edit")
-                            .customFont(.heavy, category: .small)
-                            .foregroundColor(Colors.coral)
-                    })
+                if activeSheet != .none {
+                    Button(action: {
+                        activeSheet = .third
+                    }, label: {
+                            Text("Edit")
+                                .customFont(.heavy, category: .small)
+                                .foregroundColor(Colors.coral)
+                        }
+                    )
+                }
             }
                 .padding(.horizontal, Sizes.Default)
                 .padding(.bottom, Sizes.Spacer)

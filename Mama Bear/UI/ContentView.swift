@@ -12,8 +12,7 @@ import Firebase
 struct ContentView: View {
     @ObservedObject var authenticationService: AuthenticationService
 
-    @ObservedObject var taskListVM = TaskListViewModel()
-    @ObservedObject var settingsVM = SettingsViewModel()
+    @ObservedObject var listingListVM = ListingListViewModel()
     @ObservedObject var viewRouter = ViewRouter()
 
     @State private var loadingComplete = false
@@ -21,9 +20,9 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if authenticationService.userLoggedIn {
-                AppView(authenticationService: authenticationService, viewRouter: viewRouter)
+                AppView(authenticationService: authenticationService, viewRouter: viewRouter, listingListVM: listingListVM)
             } else {
-                OnboardingView(authenticationService: authenticationService, settingsVM: settingsVM)
+                OnboardingView(authenticationService: authenticationService)
             }
 
             Rectangle()

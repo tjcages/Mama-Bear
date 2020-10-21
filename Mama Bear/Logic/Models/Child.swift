@@ -31,6 +31,16 @@ struct Child: Identifiable, Codable, Equatable {
     @ServerTimestamp var updatedTime = Timestamp.init(date: Date())
     var userId: String?
     
+    var ageCategory: Age {
+        if age <= 2 {
+            return .baby
+        } else if age < 13 {
+            return .toddler
+        } else {
+            return .teenager
+        }
+    }
+    
     init(name: String, age: Int, gender: Gender) {
         self.name = name
         self.age = age

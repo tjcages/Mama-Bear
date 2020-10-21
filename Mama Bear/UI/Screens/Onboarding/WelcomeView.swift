@@ -9,7 +9,6 @@ import SwiftUI
 
 struct WelcomeView: View {
     @ObservedObject var authenticationService: AuthenticationService
-    @ObservedObject var settingsVM: SettingsViewModel
 
     @State var accountType: AccountType = .unknown
     
@@ -59,10 +58,10 @@ struct WelcomeView: View {
                 .offset(x: showingRegister ? -UIScreen.main.bounds.width : 0, y: showingRegister ? -UIScreen.main.bounds.height : 0)
 
             if !showingWelcome {
-                RegisterView(authenticationService: authenticationService, settingsVM: settingsVM, accountType: accountType) {
+                RegisterView(authenticationService: authenticationService, accountType: accountType) {
                     animateRegistering(forward: false)
                 }
-                    .offset(y: showingRegister ? 0 : UIScreen.main.bounds.height)
+                .offset(y: showingRegister ? CGFloat(0) : UIScreen.main.bounds.height)
                     .opacity(showingRegister ? 1 : 0)
             }
         }

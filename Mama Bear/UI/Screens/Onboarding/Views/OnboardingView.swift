@@ -9,7 +9,6 @@ import SwiftUI
 
 struct OnboardingView: View {
     @ObservedObject var authenticationService: AuthenticationService
-    @ObservedObject var settingsVM: SettingsViewModel
     
     @State private var currentPage = 0
     @State private var onboardingComplete = false
@@ -64,7 +63,7 @@ struct OnboardingView: View {
                     .opacity(onboardingComplete ? 0 : 1)
 
             } else {
-                WelcomeView(authenticationService: authenticationService, settingsVM: settingsVM)
+                WelcomeView(authenticationService: authenticationService)
                     .opacity(showingWelcome ? 1 : 0)
             }
         }

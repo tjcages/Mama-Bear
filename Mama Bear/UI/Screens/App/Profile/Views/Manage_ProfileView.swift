@@ -11,7 +11,7 @@ struct Manage_ProfileView: View {
     @Binding var activeSheet: ActiveSheet
 
     var accounts: [CreateAccount] = [
-        CreateAccount(title: "Your requests", subtitle: "Manage your jobs", color: Colors.subheadline.opacity(0.1), image: "jobsGraphic", type: .unknown),
+        CreateAccount(title: "Your listings", subtitle: "Manage your jobs", color: Colors.subheadline.opacity(0.1), image: "jobsGraphic", type: .unknown),
         CreateAccount(title: "Payment", subtitle: "Your recent transactions", color: Colors.subheadline.opacity(0.1), image: "paymentsGraphic", type: .unknown)
     ]
 
@@ -21,7 +21,7 @@ struct Manage_ProfileView: View {
                 AccountSelectionView(account)
                     .onTapGesture {
                         // Handle tap gesture
-                        if account.title == "Your requests" {
+                        if account.title == "Your listings" {
                             activeSheet = .first
                         } else if account.title == "Payment" {
                             activeSheet = .second

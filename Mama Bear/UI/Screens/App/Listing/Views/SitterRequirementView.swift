@@ -16,7 +16,7 @@ enum SitterRequirement: String {
 struct SitterRequirementView: View {
     let size: CGFloat = 12
     @State var showingMultiple: Bool = false
-    @State var sitterRequirement: SitterRequirement = .highSchool
+    @Binding var sitterRequirement: SitterRequirement
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -105,11 +105,5 @@ struct SitterRequirementView: View {
                     self.showingMultiple.toggle()
                 }
         }
-    }
-}
-
-struct SitterRequirementView_Previews: PreviewProvider {
-    static var previews: some View {
-        SitterRequirementView()
     }
 }

@@ -32,19 +32,20 @@ struct IndividualPetView: View {
     var body: some View {
         let addNew = pet.name == ""
         HStack {
-            Image(systemName: addNew ? "plus.circle" : "person.fill")
+            Image(addNew ? "plus.circle" : (pet.type == Animal.dog.rawValue ? "dogIcon" : "catIcon"))
+                .renderingMode(.template)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: Sizes.Small, height: Sizes.Small)
-                .foregroundColor(Colors.coral)
+                .foregroundColor(Colors.sienna)
 
             Text(addNew ? "Add a pet" : pet.name)
                 .customFont(.medium, category: .small)
-                .foregroundColor(addNew ? Colors.subheadline : Colors.coral)
+                .foregroundColor(Colors.sienna)
         }
             .padding(.vertical, 12)
             .padding(.horizontal, Sizes.xSmall)
-            .background(addNew ? Colors.subheadline.opacity(0.1) : Colors.extraLightCoral)
+            .background(addNew ? Colors.subheadline.opacity(0.1) : Colors.sienna.opacity(0.2))
             .cornerRadius(Sizes.Spacer)
             .padding([.bottom, .trailing], Sizes.Spacer)
             .onTapGesture {

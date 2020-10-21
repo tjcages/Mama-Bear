@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct DurationView: View {
-    @Binding var activeSheet: ActiveSheet
+    @Binding var listingDate: Date
+    @Binding var endingTime: Date
 
-    @State private var listingDate = Date()
-    @State private var endingTime = Date().addingTimeInterval(28800)
     @State private var showingDate = false
     @State private var showingStartTime = false
     @State private var showingEndTime = false
@@ -30,9 +29,10 @@ struct DurationView: View {
         return formatter
     }
 
-    init(newListing: Bool, activeSheet: Binding<ActiveSheet>) {
+    init(newListing: Bool, startDate: Binding<Date>, endDate: Binding<Date>) {
         self.newListing = newListing
-        self._activeSheet = activeSheet
+        self._listingDate = startDate
+        self._endingTime = endDate
     }
 
     var body: some View {
@@ -40,6 +40,7 @@ struct DurationView: View {
             // Date selection
             if showingDate {
                 DatePicker(selection: $listingDate.didSet { _ in
+                    endingTime = listingDate.addingTimeInterval(28800)
                     withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
                         self.showingDate.toggle()
                     }
@@ -141,8 +142,10 @@ struct DurationView: View {
                         Spacer()
                     }
                         .onTapGesture {
-                            withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
-                                self.showingStartTime.toggle()
+                            if newListing {
+                                withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                                    self.showingStartTime.toggle()
+                                }
                             }
                     }
 
@@ -171,8 +174,10 @@ struct DurationView: View {
                             .foregroundColor(Colors.headline)
                     }
                         .onTapGesture {
-                            withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
-                                self.showingEndTime.toggle()
+                            if newListing {
+                                withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
+                                    self.showingEndTime.toggle()
+                                }
                             }
                     }
                 }

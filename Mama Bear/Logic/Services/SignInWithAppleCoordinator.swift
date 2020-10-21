@@ -12,45 +12,45 @@ import CryptoKit
 import Resolver
 
 class SignInWithAppleCoordinator: NSObject {
-    @LazyInjected private var taskRepository: TaskRepository
+    @LazyInjected private var listingRepository: ListingRepository
     @LazyInjected private var authenticationService: AuthenticationService
-    
+
     private weak var window: UIWindow!
     private var onSignedInHandler: ((User) -> Void)?
-    
+
     private var currentNonce: String?
-    
+
     init(window: UIWindow?) {
         self.window = window
     }
-    
+
     private func appleIDRequest(withState: SignInState) -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
         request.state = withState.rawValue
-        
+
         let nonce = randomNonceString()
         currentNonce = nonce
         request.nonce = sha256(nonce)
-        
+
         return request
     }
-    
+
     func signIn(onSignedInHandler: @escaping (User) -> Void) {
         self.onSignedInHandler = onSignedInHandler
-        
+
         let request = appleIDRequest(withState: .signIn)
-        
+
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-    
+
     func link(onSignedInHandler: @escaping (User) -> Void) {
         self.onSignedInHandler = onSignedInHandler
-        
+
         let request = appleIDRequest(withState: .link)
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
@@ -61,7 +61,7 @@ class SignInWithAppleCoordinator: NSObject {
 }
 
 extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
@@ -79,13 +79,13 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
                 print("Invalid state: request must be started with one of the SignInStates.")
                 return
             }
-            
+
             // Request Firebase's OAuthProvider to mint a credential based on the authentication provider (apple.com)
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                      idToken: idTokenString,
-                                                      rawNonce: nonce
+                idToken: idTokenString,
+                rawNonce: nonce
             )
-            
+
             switch state {
             case .signIn:
                 Auth.auth().signIn(with: credential) { (result, error) in
@@ -95,10 +95,10 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
                     }
                     if let user = result?.user {
                         if result?.additionalUserInfo?.isNewUser ?? false {
-                            let user = FirestoreUser(id: user.uid, name: user.displayName ?? "", email: user.email ?? "", phoneNumber: user.phoneNumber, accountType: "Unknown")
+                            let user = FirestoreUser(id: user.uid, name: user.displayName ?? "", email: user.email ?? "", phoneNumber: user.phoneNumber ?? "", photoURL: "", accountType: "Unknown")
                             self.authenticationService.addUserToFirestore(user: user)
                         }
-                        
+
                         if let onSignedInHandler = self.onSignedInHandler {
                             onSignedInHandler(user)
                         }
@@ -110,14 +110,14 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
                     currentUser.link(with: credential) { (result, error) in
                         if let error = error, (error as NSError).code == AuthErrorCode.credentialAlreadyInUse.rawValue {
                             print("The user you're signing in with has already been linked, signing in to the new user and migrating the anonymous user's [\(currentUser.uid)] tasks.")
-                            
+
                             if let updatedCredential = (error as NSError).userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? OAuthCredential {
                                 print("Signing in using the updated credentials.")
-                                
+
                                 Auth.auth().signIn(with: updatedCredential) { (result, error) in
                                     if let user = result?.user {
                                         // FUTURE FEATURE: Migrate the anonymous user's tasks to the permanent account
-                                        
+
                                         self.doSignIn(appleIDCredential: appleIDCredential, user: user)
                                     }
                                 }
@@ -144,7 +144,7 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
             }
         }
     }
-    
+
     private func doSignIn(appleIDCredential: ASAuthorizationAppleIDCredential, user: User) {
         if let fullName = appleIDCredential.fullName {
             if let givenName = fullName.givenName, let familyName = fullName.familyName {
@@ -163,25 +163,25 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
             }
         }
     }
-    
+
     private func callSignInHandler(user: User) {
         if let onSignedInHandler = self.onSignedInHandler {
             onSignedInHandler(user)
         }
     }
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("Sign in with Apple error: \(error.localizedDescription).")
     }
-    
+
 }
 
 extension SignInWithAppleCoordinator: ASAuthorizationControllerPresentationContextProviding {
-    
-  func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-    return self.window
-  }
-    
+
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.window
+    }
+
 }
 
 //MARK: -Nonce Authorization Functions
@@ -192,7 +192,7 @@ private func randomNonceString(length: Int = 32) -> String {
     let charset: Array<Character> = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
     var result = ""
     var remainingLength = length
-    
+
     while remainingLength > 0 {
         let randoms: [UInt8] = (0..<16).map { _ in
             var random: UInt8 = 0
@@ -202,19 +202,19 @@ private func randomNonceString(length: Int = 32) -> String {
             }
             return random
         }
-        
+
         randoms.forEach { random in
             if remainingLength == 0 {
                 return
             }
-            
+
             if random < charset.count {
                 result.append(charset[Int(random)])
                 remainingLength -= 1
             }
         }
     }
-    
+
     return result
 }
 
@@ -225,6 +225,6 @@ private func sha256(_ input: String) -> String {
     let hashString = hashedData.compactMap {
         return String(format: "%02x", $0)
     }.joined()
-    
+
     return hashString
 }

@@ -14,10 +14,12 @@ enum ActiveSheet {
     case second
     case third
     case fourth
+    case none
 }
 
 struct ProfileView: View {
     @ObservedObject var authenticationService: AuthenticationService
+    @ObservedObject var listingListVM: ListingListViewModel
     @ObservedObject var viewRouter: ViewRouter
 
     @State var showSheet = false
@@ -58,7 +60,7 @@ struct ProfileView: View {
             .edgesIgnoringSafeArea(.top)
             .sheet(isPresented: $showSheet, onDismiss: loadImageToFirebase) {
                 if activeSheet == .first {
-                    Requests_ProfileView(authenticationService: authenticationService, showingRequests: $showSheet)
+                    Requests_ProfileView(authenticationService: authenticationService, listingListVM: listingListVM, showingRequests: $showSheet)
                 } else if activeSheet == .second {
                     TransactionsView(showingTransactions: $showSheet)
                 } else if activeSheet == .third {
@@ -84,7 +86,7 @@ struct ProfileView: View {
                     return
                 }
                 if var user = authenticationService.firestoreUser {
-                    user.photoURL = url?.absoluteString
+                    user.photoURL = url?.absoluteString ?? ""
                     authenticationService.addUserToFirestore(user: user)
                 }
                 authenticationService.updatePhotoURL(url: url) { _ in

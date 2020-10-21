@@ -29,7 +29,7 @@ struct TabBarView: View {
     var body: some View {
         VStack {
             HStack {
-                // Main feed
+                // Home
                 Image(systemName: "list.bullet.below.rectangle")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

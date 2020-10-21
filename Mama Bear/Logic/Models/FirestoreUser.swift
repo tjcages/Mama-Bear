@@ -13,9 +13,9 @@ struct FirestoreUser: Identifiable, Codable {
     var id: String?
     var name: String
     var email: String
-    var phoneNumber: String?
+    var phoneNumber: String
     
-    var photoURL: String?
+    var photoURL: String
     var accountType: AccountType.RawValue
     
     @ServerTimestamp var createdTime: Timestamp?

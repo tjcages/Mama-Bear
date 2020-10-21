@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ChildrenView: View {
     @ObservedObject var authenticationService: AuthenticationService
-    
+
     @Binding var selectedChild: Child
-    
+
     var body: some View {
         VStack {
             Child_WrappedHStack(authenticationService: authenticationService, selectedChild: $selectedChild)
@@ -32,7 +32,8 @@ struct ChildAgeView: View {
     var body: some View {
         let addNew = child.name == ""
         HStack {
-            Image(systemName: addNew ? "plus.circle" : "person.fill")
+            Image(addNew ? "plus.circle" : (child.gender == Gender.male.rawValue ? (child.ageCategory == .baby ? "babyIcon" : (child.ageCategory == .toddler ? "toddlerIcon" : "teenagerIcon")) : (child.ageCategory == .baby ? "babyIcon" : (child.ageCategory == .toddler ? "toddlerFemaleIcon" : "teenagerFemaleIcon"))))
+                .renderingMode(.template)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: Sizes.Small, height: Sizes.Small)
@@ -44,7 +45,7 @@ struct ChildAgeView: View {
         }
             .padding(.vertical, 12)
             .padding(.horizontal, Sizes.xSmall)
-            .background(addNew ? Colors.subheadline.opacity(0.1) : Colors.lightBlue)
+            .background(addNew ? Colors.subheadline.opacity(0.1) : Colors.blue.opacity(0.2))
             .cornerRadius(Sizes.Spacer)
             .padding([.bottom, .trailing], Sizes.Spacer)
             .onTapGesture {
@@ -87,16 +88,16 @@ struct Child_WrappedHStack: View {
         return ZStack(alignment: .topLeading) {
             ForEach(children) { child in
                 self.item(for: child)
-                .alignmentGuide(.leading, computeValue: { d in
-                    if (abs(width - d.width) > g.size.width)
-                    {
-                        width = 0
-                        height -= d.height
-                    }
-                    let result = width
-                    width -= d.width
-                    return result
-                })
+                    .alignmentGuide(.leading, computeValue: { d in
+                        if (abs(width - d.width) > g.size.width)
+                        {
+                            width = 0
+                            height -= d.height
+                        }
+                        let result = width
+                        width -= d.width
+                        return result
+                    })
                     .alignmentGuide(.top, computeValue: { d in
                         let result = height
                         return result

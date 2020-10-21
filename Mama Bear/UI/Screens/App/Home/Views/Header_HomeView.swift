@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct Header_HomeView: View {
-    @ObservedObject var authenticationService: AuthenticationService
-    
+    @State var firestoreUser: FirestoreUser
+    @ObservedObject var viewRouter: ViewRouter
+
     var body: some View {
         HStack {
             // Profile image
             ZStack(alignment: .topTrailing) {
                 // Profile picture
-                if authenticationService.firestoreUser?.photoURL == nil || authenticationService.firestoreUser?.photoURL == "" {
+                if firestoreUser.photoURL == "" {
                     Image(systemName: "person")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -23,9 +24,12 @@ struct Header_HomeView: View {
                         .padding((Sizes.xLarge - Sizes.Small) / 2)
                         .background(Colors.subheadline.opacity(0.3))
                         .cornerRadius(Sizes.xLarge / 2)
-                } else if let imageUrl = authenticationService.firestoreUser?.photoURL {
+                } else if let imageUrl = firestoreUser.photoURL {
                     AsyncImage(url: URL(string: imageUrl)!) {
-                        Text("•")
+                        Rectangle()
+                            .frame(width: Sizes.xLarge, height: Sizes.xLarge)
+                            .foregroundColor(Colors.subheadline.opacity(0.3))
+                            .cornerRadius(Sizes.xLarge / 2)
                     }
                         .aspectRatio(contentMode: .fill)
                         .frame(width: Sizes.xLarge, height: Sizes.xLarge)
@@ -45,11 +49,11 @@ struct Header_HomeView: View {
 
             // Name
             VStack(alignment: .leading) {
-                Text(authenticationService.firestoreUser?.name ?? "")
+                Text(firestoreUser.name)
                     .customFont(.medium, category: .medium)
                     .foregroundColor(Colors.headline)
 
-                Text(authenticationService.firestoreUser?.accountType ?? "Unknown")
+                Text(firestoreUser.accountType == "Family" ? "Family" : firestoreUser.phoneNumber)
                     .customFont(.medium, category: .small)
                     .foregroundColor(Colors.subheadline)
             }
@@ -57,17 +61,24 @@ struct Header_HomeView: View {
 
             Spacer()
 
-            Image(systemName: "plus")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: Sizes.xSmall, height: Sizes.xSmall)
-                .foregroundColor(Colors.headline)
-                .padding(Sizes.xSmall)
-                .background(
-                    Colors.subheadline
-                        .opacity(0.1)
-                        .cornerRadius(Sizes.xLarge / 2)
-                )
+            if firestoreUser.accountType == "Family" {
+                Image(systemName: "plus")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: Sizes.xSmall, height: Sizes.xSmall)
+                    .foregroundColor(Colors.headline)
+                    .padding(Sizes.xSmall)
+                    .background(
+                        Colors.subheadline
+                            .opacity(0.1)
+                            .cornerRadius(Sizes.xLarge / 2)
+                    )
+                    .onTapGesture {
+                        withAnimation(Animation.easeOut(duration: TabBarView.animationDuration)) {
+                            self.viewRouter.currentView = .newListing
+                        }
+                }
+            }
         }
             .padding(Sizes.Default)
             .background(Colors.cellBackground)

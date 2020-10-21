@@ -30,7 +30,6 @@ struct Shake: GeometryEffect {
 
 struct RegisterView: View {
     @ObservedObject var authenticationService: AuthenticationService
-    @ObservedObject var settingsVM: SettingsViewModel
 
     // MARK: -State variables
     @State var verifyCode: String = ""
@@ -59,7 +58,7 @@ struct RegisterView: View {
     @State var verificationId: String?
     @State var password = ""
     @State var userPhoneCredential: PhoneAuthCredential?
-    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", accountType: "Unknown")
+    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", photoURL: "", accountType: "Unknown")
 
     var backPressed: () -> () = { }
 
