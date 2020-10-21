@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F4770432540F761005D73EE /* SignInWithFacebookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4770422540F761005D73EE /* SignInWithFacebookCoordinator.swift */; };
 		2F4E5BA2252BC9F400E1C4FB /* Requests_ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E5BA1252BC9F400E1C4FB /* Requests_ProfileView.swift */; };
 		2F550C0E252CDC6100DC523F /* PostListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F550C0D252CDC6100DC523F /* PostListingView.swift */; };
 		2F550C14252CDCD800DC523F /* DurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F550C13252CDCD800DC523F /* DurationView.swift */; };
@@ -129,6 +130,7 @@
 /* Begin PBXFileReference section */
 		16460671E7765D45868EAC72 /* Pods_Mama_Bear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mama_Bear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E820029FA1AD842C16DD00D /* Pods-Mama BearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mama BearTests.release.xcconfig"; path = "Target Support Files/Pods-Mama BearTests/Pods-Mama BearTests.release.xcconfig"; sourceTree = "<group>"; };
+		2F4770422540F761005D73EE /* SignInWithFacebookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithFacebookCoordinator.swift; sourceTree = "<group>"; };
 		2F4E5BA1252BC9F400E1C4FB /* Requests_ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests_ProfileView.swift; sourceTree = "<group>"; };
 		2F550C0D252CDC6100DC523F /* PostListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListingView.swift; sourceTree = "<group>"; };
 		2F550C13252CDCD800DC523F /* DurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationView.swift; sourceTree = "<group>"; };
@@ -270,6 +272,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F4770472540F973005D73EE /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				2F59B675252647FE002E057A /* SignInWithAppleCoordinator.swift */,
+				2F4770422540F761005D73EE /* SignInWithFacebookCoordinator.swift */,
+				2FF4E041253F488A00C533CE /* SignInWithGoogleCoordinator.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
 		2F550C12252CDCCD00DC523F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,8 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				2F59B674252647FE002E057A /* AuthenticationService.swift */,
-				2F59B675252647FE002E057A /* SignInWithAppleCoordinator.swift */,
-				2FF4E041253F488A00C533CE /* SignInWithGoogleCoordinator.swift */,
+				2F4770472540F973005D73EE /* Social */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1017,6 +1028,7 @@
 				2FF4E050253F4DD000C533CE /* ImageCache.swift in Sources */,
 				2FBD20402526A788000465D3 /* Name_RegisterView.swift in Sources */,
 				2F59B664252647D6002E057A /* HideNavigationBarModifier.swift in Sources */,
+				2F4770432540F761005D73EE /* SignInWithFacebookCoordinator.swift in Sources */,
 				2F8D0FD9252F6669002CEAD2 /* Header_HomeView.swift in Sources */,
 				2FF1CB46252BC1E600DA418E /* TabBarShape.swift in Sources */,
 				2FF821DD2526547800BA97C8 /* OnboardingSingleView.swift in Sources */,

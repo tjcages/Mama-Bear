@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 import FirebaseAuth
-import FBSDKLoginKit
 
 struct SocialLoginView: View {
     @Environment(\.window) var window: UIWindow?
     @ObservedObject var authenticationService: AuthenticationService
 
-    @State var signInHandler: SignInWithAppleCoordinator?
+    @State var signInAppleHandler: SignInWithAppleCoordinator?
+    @State var signInFacebookHandler: SignInWithFacebookCoordinator?
     @State var accountType: AccountType
     @State private var googlePresented = false
 
@@ -79,8 +80,8 @@ struct SocialLoginView: View {
 // MARK: -Login functions
 extension SocialLoginView {
     func signInWithAppleButtonTapped() {
-        signInHandler = SignInWithAppleCoordinator(window: self.window)
-        signInHandler?.signIn { user in
+        signInAppleHandler = SignInWithAppleCoordinator(window: self.window)
+        signInAppleHandler?.signIn { user in
             print("Successfully signed in with Apple")
         }
     }
@@ -100,21 +101,9 @@ extension SocialLoginView {
     }
 
     func signInWithFacebookButtonTapped() {
-        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-        Auth.auth().signIn(with: credential) { (authResult, error) in
-            if let error = error {
-                print("Error logging into Facebook: \(error)")
-            }
-            // Successful sign in
-            if let result = authResult {
-                if result.additionalUserInfo?.isNewUser ?? false {
-                    let user = FirestoreUser(id: result.user.uid, name: result.user.displayName ?? "", email: result.user.email ?? "", phoneNumber: result.user.phoneNumber ?? "", photoURL: "", accountType: accountType.rawValue)
-                    authenticationService.addUserToFirestore(user: user)
-                    authenticationService.updatePhotoURL(url: result.user.photoURL) { _ in
-                        //
-                    }
-                }
-            }
+        signInFacebookHandler = SignInWithFacebookCoordinator(accountType: accountType)
+        signInFacebookHandler?.signIn { user in
+            print("Successfully signed in with Facebook")
         }
     }
 }
