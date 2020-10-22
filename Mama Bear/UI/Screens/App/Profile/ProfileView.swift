@@ -60,7 +60,7 @@ struct ProfileView: View {
             .edgesIgnoringSafeArea(.top)
             .sheet(isPresented: $showSheet, onDismiss: loadImageToFirebase) {
                 if activeSheet == .first {
-                    Requests_ProfileView(authenticationService: authenticationService, listingListVM: listingListVM, showingRequests: $showSheet)
+                    Requests_ProfileView(authenticationService: authenticationService, listingListVM: listingListVM, viewRouter: viewRouter, showingRequests: $showSheet)
                 } else if activeSheet == .second {
                     TransactionsView(showingTransactions: $showSheet)
                 } else if activeSheet == .third {

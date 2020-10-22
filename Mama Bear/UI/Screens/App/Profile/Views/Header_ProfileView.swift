@@ -88,7 +88,7 @@ struct Header_ProfileView: View {
                             .customFont(.medium, category: .large)
                             .foregroundColor(Colors.headline)
 
-                        Text(authenticationService.firestoreUser?.accountType ?? "Unknown")
+                        Text(authenticationService.firestoreUser?.accountType ?? "Nanny")
                             .customFont(.medium, category: .small)
                             .foregroundColor(Colors.cellBackground)
                             .fixedSize(horizontal: true, vertical: false)

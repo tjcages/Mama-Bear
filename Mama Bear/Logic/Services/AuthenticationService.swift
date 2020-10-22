@@ -36,11 +36,12 @@ class AuthenticationService: ObservableObject {
     private var addressPath: String = "addresses"
     private var childrenPath: String = "children"
     private var petsPath: String = "pets"
+    private var listingsPath: String = "listings"
 
     init() {
         registerStateListener()
     }
-    
+
     private func registerStateListener() {
         if let handle = handle {
             Auth.auth().removeStateDidChangeListener(handle)
@@ -74,7 +75,7 @@ class AuthenticationService: ObservableObject {
         }
         catch { print("Error saving user data to Firestore") }
     }
-    
+
     func addAddressToFirestore(address: Address) {
         do {
             guard let uid = address.userId else { return }
@@ -82,7 +83,7 @@ class AuthenticationService: ObservableObject {
         }
         catch { print("Error saving user address data to Firestore") }
     }
-    
+
     func removeAddress(_ address: Address) {
         if let id = address.id {
             database.collection(addressPath).document(id).delete { (error) in
@@ -92,7 +93,7 @@ class AuthenticationService: ObservableObject {
             }
         }
     }
-    
+
     func addChildToFirestore(child: Child) {
         do {
             guard let uid = user?.uid else { return }
@@ -109,7 +110,7 @@ class AuthenticationService: ObservableObject {
         }
         catch { print("Error saving user address data to Firestore") }
     }
-    
+
     func removeChild(_ child: Child) {
         if let childId = child.id {
             database.collection(childrenPath).document(childId).delete { (error) in
@@ -119,7 +120,7 @@ class AuthenticationService: ObservableObject {
             }
         }
     }
-    
+
     func addPetToFirestore(pet: Pet) {
         do {
             guard let uid = user?.uid else { return }
@@ -136,7 +137,7 @@ class AuthenticationService: ObservableObject {
         }
         catch { print("Error saving user address data to Firestore") }
     }
-    
+
     func removePet(_ pet: Pet) {
         if let petId = pet.id {
             database.collection(petsPath).document(petId).delete { (error) in
@@ -146,7 +147,43 @@ class AuthenticationService: ObservableObject {
             }
         }
     }
+
+    func bookListing(listing: Listing) {
+        do {
+            guard let uid = user?.uid, let id = listing.id, var user = firestoreUser else { return }
+            if user.jobs == nil { user.jobs = [] }
+            user.jobs?.append(id)
+            
+            // Add job to user jobs
+            let _ = try database.collection(usersPath).document(uid).setData(from: user)
+            
+            var listing = listing
+            listing.sitterId = uid
+            
+            // Add sitter to listing
+            let _ = try database.collection(listingsPath).document(id).setData(from: listing)
+        }
+        catch { print("Error saving booked job to Firestore") }
+    }
     
+    func removeBookedListing(_ listing: Listing) {
+        do {
+            // Remove sitter from listing
+            if let listingId = listing.id {
+                var listing = listing
+                listing.sitterId = ""
+                let _ = try database.collection(listingsPath).document(listingId).setData(from: listing)
+            }
+            
+            // Remove job from user
+            if let uid = user?.uid, let id = listing.id, var user = firestoreUser, let jobs = user.jobs {
+                user.jobs = jobs.filter { $0 != id }
+                let _ = try database.collection(usersPath).document(uid).setData(from: user)
+            }
+        }
+        catch { print("Error removing booked job to Firestore") }
+    }
+
     // MARK: - Register New User to Firebase
     func registerUser(newUser user: FirestoreUser, phoneNumberCredential: PhoneAuthCredential, password: String, completion: @escaping AuthDataResultCallback) {
         Auth.auth().createUser(withEmail: user.email, password: password) { (result, error) in
@@ -204,7 +241,7 @@ class AuthenticationService: ObservableObject {
         // Firestore user data
         loadUserData(id: id)
     }
-    
+
     private func loadUserData(id: String) {
         // User data
         listenerRegistration = database.collection(usersPath).document(id).addSnapshotListener { (snapshot, error) in
@@ -215,7 +252,7 @@ class AuthenticationService: ObservableObject {
                 self.firestoreUser = try? snapshot.data(as: FirestoreUser.self)
             }
         }
-        
+
         // Address data
         listenerRegistration = database.collection(addressPath).document(id).addSnapshotListener { (snapshot, error) in
             if let error = error {
@@ -225,7 +262,7 @@ class AuthenticationService: ObservableObject {
                 self.userAddress = try? snapshot.data(as: Address.self)
             }
         }
-        
+
         // Children data
         listenerRegistration = database.collection(childrenPath)
             .whereField("userId", isEqualTo: id)
@@ -237,7 +274,7 @@ class AuthenticationService: ObservableObject {
                     }
                 }
         }
-        
+
         // Pet data
         listenerRegistration = database.collection(petsPath)
             .whereField("userId", isEqualTo: id)
@@ -271,7 +308,7 @@ class AuthenticationService: ObservableObject {
             }
         }
     }
-    
+
     func updatePhotoURL(url: URL?, completionHandler: @escaping (Result<User, Error>) -> Void) {
         if let user = Auth.auth().currentUser, let url = url {
             let changeRequest = user.createProfileChangeRequest()

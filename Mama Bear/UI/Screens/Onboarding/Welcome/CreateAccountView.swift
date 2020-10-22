@@ -10,7 +10,6 @@ import SwiftUI
 enum AccountType: String {
     case nanny = "Nanny"
     case family = "Family"
-    case unknown = "Unknown"
 }
 
 struct CreateAccount {

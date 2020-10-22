@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ChildrenView: View {
     @ObservedObject var authenticationService: AuthenticationService
-
+    @ObservedObject var listingCellVM: ListingCellViewModel
+    
+    @State var addNew: Bool
     @Binding var selectedChild: Child
 
     var body: some View {
         VStack {
-            Child_WrappedHStack(authenticationService: authenticationService, selectedChild: $selectedChild)
+            Child_WrappedHStack(authenticationService: authenticationService, listingCellVM: listingCellVM, addNew: addNew, selectedChild: $selectedChild)
         }
             .padding([.leading, .top, .trailing], Sizes.Default)
             .padding(.bottom, Sizes.xSmall)
@@ -57,12 +60,20 @@ struct ChildAgeView: View {
 
 struct Child_WrappedHStack: View {
     @ObservedObject var authenticationService: AuthenticationService
-
+    @ObservedObject var listingCellVM: ListingCellViewModel
+    
+    @State var addNew: Bool
     @Binding var selectedChild: Child
 
     private var children: [Child] {
-        if let children = authenticationService.userChildren {
-            return children
+        if addNew {
+            if let child = authenticationService.userChildren {
+                return child
+            }
+        } else {
+            if let child = listingCellVM.userChildren {
+                return child
+            }
         }
         return []
     }
@@ -96,29 +107,37 @@ struct Child_WrappedHStack: View {
                         }
                         let result = width
                         width -= d.width
+                        if !addNew && child == children.last {
+                            width = 0
+                        }
                         return result
                     })
                     .alignmentGuide(.top, computeValue: { d in
                         let result = height
+                        if !addNew && child == children.last {
+                            height = 0
+                        }
                         return result
                     })
             }
-            self.item(for: Child())
-                .alignmentGuide(.leading, computeValue: { d in
-                    if (abs(width - d.width) > g.size.width)
-                    {
-                        width = 0
-                        height -= d.height
-                    }
-                    let result = width
-                    width = 0 // Last item
-                    return result
-                })
-                .alignmentGuide(.top, computeValue: { d in
-                    let result = height
-                    height = 0 // Last item
-                    return result
-                })
+            if addNew {
+                self.item(for: Child())
+                    .alignmentGuide(.leading, computeValue: { d in
+                        if (abs(width - d.width) > g.size.width)
+                        {
+                            width = 0
+                            height -= d.height
+                        }
+                        let result = width
+                        width = 0 // Last item
+                        return result
+                    })
+                    .alignmentGuide(.top, computeValue: { d in
+                        let result = height
+                        height = 0 // Last item
+                        return result
+                    })
+            }
         }
             .background(viewHeightReader($totalHeight))
     }

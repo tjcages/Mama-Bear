@@ -42,7 +42,7 @@ struct Details_NewListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    ChildrenView(authenticationService: authenticationService, selectedChild: $child.didSet { _ in
+                    ChildrenView(authenticationService: authenticationService, listingCellVM: listingCellVM, addNew: true, selectedChild: $child.didSet { _ in
                         activeSheet = .first
                         presentPartialSheet.toggle()
                     })
@@ -53,7 +53,7 @@ struct Details_NewListingView: View {
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
 
-                    PetsView(authenticationService: authenticationService, selectedPet: $pet.didSet { _ in
+                    PetsView(authenticationService: authenticationService, listingCellVM: listingCellVM, addNew: true, selectedPet: $pet.didSet { _ in
                         activeSheet = .second
                         presentPartialSheet.toggle()
                     })

@@ -53,9 +53,15 @@ struct Header_HomeView: View {
                     .customFont(.medium, category: .medium)
                     .foregroundColor(Colors.headline)
 
-                Text(firestoreUser.accountType == "Family" ? "Family" : firestoreUser.phoneNumber)
-                    .customFont(.medium, category: .small)
-                    .foregroundColor(Colors.subheadline)
+                if firestoreUser.accountType == "Family" {
+                    Text(firestoreUser.accountType == "Family" ? "Family" : firestoreUser.phoneNumber)
+                        .customFont(.medium, category: .small)
+                        .foregroundColor(Colors.subheadline)
+                } else {
+                    Text("Babysitter")
+                        .customFont(.medium, category: .small)
+                        .foregroundColor(Colors.subheadline)
+                }
             }
                 .padding(.leading, Sizes.Spacer)
 

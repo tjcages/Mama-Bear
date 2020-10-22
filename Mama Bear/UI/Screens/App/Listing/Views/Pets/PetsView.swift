@@ -9,12 +9,14 @@ import SwiftUI
 
 struct PetsView: View {
     @ObservedObject var authenticationService: AuthenticationService
-
+    @ObservedObject var listingCellVM: ListingCellViewModel
+    
+    @State var addNew: Bool
     @Binding var selectedPet: Pet
 
     var body: some View {
         VStack {
-            Pet_WrappedHStack(authenticationService: authenticationService, selectedPet: $selectedPet)
+            Pet_WrappedHStack(authenticationService: authenticationService, listingCellVM: listingCellVM, addNew: addNew, selectedPet: $selectedPet)
         }
             .padding([.leading, .top, .trailing], Sizes.Default)
             .padding(.bottom, Sizes.xSmall)
@@ -57,12 +59,20 @@ struct IndividualPetView: View {
 
 struct Pet_WrappedHStack: View {
     @ObservedObject var authenticationService: AuthenticationService
-
+    @ObservedObject var listingCellVM: ListingCellViewModel
+    
+    @State var addNew: Bool
     @Binding var selectedPet: Pet
 
     private var pets: [Pet] {
-        if let pets = authenticationService.userPets {
-            return pets
+        if addNew {
+            if let pets = authenticationService.userPets {
+                return pets
+            }
+        } else {
+            if let pets = listingCellVM.userPets {
+                return pets
+            }
         }
         return []
     }
@@ -97,29 +107,37 @@ struct Pet_WrappedHStack: View {
                     }
                     let result = width
                     width -= d.width
+                    if !addNew && pet == pets.last {
+                        width = 0
+                    }
                     return result
                 })
                     .alignmentGuide(.top, computeValue: { d in
                         let result = height
+                        if !addNew && pet == pets.last {
+                            height = 0
+                        }
                         return result
                     })
             }
-            self.item(for: Pet())
-                .alignmentGuide(.leading, computeValue: { d in
-                    if (abs(width - d.width) > g.size.width)
-                    {
-                        width = 0
-                        height -= d.height
-                    }
-                    let result = width
-                    width = 0 // Last item
-                    return result
-                })
-                .alignmentGuide(.top, computeValue: { d in
-                    let result = height
-                    height = 0 // Last item
-                    return result
-                })
+            if addNew {
+                self.item(for: Pet())
+                    .alignmentGuide(.leading, computeValue: { d in
+                        if (abs(width - d.width) > g.size.width)
+                        {
+                            width = 0
+                            height -= d.height
+                        }
+                        let result = width
+                        width = 0 // Last item
+                        return result
+                    })
+                    .alignmentGuide(.top, computeValue: { d in
+                        let result = height
+                        height = 0 // Last item
+                        return result
+                    })
+            }
         }.background(viewHeightReader($totalHeight))
     }
 

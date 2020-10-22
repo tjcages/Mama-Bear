@@ -18,6 +18,7 @@ enum TabBarViews {
 }
 
 struct TabBarView: View {
+    @ObservedObject var authenticationService: AuthenticationService
     @ObservedObject var viewRouter: ViewRouter
     @State var geometry: GeometryProxy
 
@@ -27,6 +28,8 @@ struct TabBarView: View {
     var padding: CGFloat = 12
 
     var body: some View {
+        let family = authenticationService.firestoreUser?.accountType == "Family"
+        
         VStack {
             HStack {
                 // Home
@@ -71,7 +74,7 @@ struct TabBarView: View {
 
                 Spacer()
 
-                if viewRouter.accountType == .family {
+                if family {
                     // Add new listing
                     Image(systemName: "plus")
                         .resizable()
@@ -132,7 +135,7 @@ struct TabBarView: View {
                         }
                 }
             }
-                .padding(.horizontal, viewRouter.accountType == .family ? Sizes.Default : Sizes.xLarge)
+                .padding(.horizontal, family ? Sizes.Default : Sizes.xLarge)
                 .frame(width: geometry.size.width, height: geometry.size.height / 10)
 
             Rectangle()
@@ -142,7 +145,7 @@ struct TabBarView: View {
             .background(
                 Rectangle()
                     .clipShape(
-                        TabBarShape(width: geometry.size.width, height: geometry.size.height, hump: viewRouter.accountType == .family)
+                        TabBarShape(width: geometry.size.width, height: geometry.size.height, hump: family)
                     )
                     .foregroundColor(Colors.cellBackground)
                     .offset(y: -Sizes.xSmall)

@@ -53,7 +53,7 @@ struct Personal_ProfileView: View {
                     activeSheet = .third
                 })
             } else {
-                AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1), image: "onboardingGraphic_3", type: .unknown))
+                AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1), image: "onboardingGraphic_3", type: .nanny))
                     .onTapGesture {
                         activeSheet = .third
                     }
@@ -84,9 +84,9 @@ struct Personal_ProfileView: View {
             Spacer()
         }
             .onAppear {
-                nameText = authenticationService.firestoreUser?.name ?? "No name"
-                emailText = authenticationService.firestoreUser?.email ?? "No email"
-                phoneNumberText = format(with: "+X (XXX) XXX-XXXX", phone: authenticationService.firestoreUser?.phoneNumber ?? "No phone number")
+                nameText = authenticationService.firestoreUser?.name ?? ""
+                emailText = authenticationService.firestoreUser?.email ?? ""
+                phoneNumberText = format(with: "+X (XXX) XXX-XXXX", phone: authenticationService.firestoreUser?.phoneNumber ?? "")
         }
     }
 

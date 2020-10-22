@@ -58,29 +58,14 @@ class FirestoreListingRepository: BaseListingRepository, ListingRepository, Obse
         if listenerRegistration != nil {
             listenerRegistration?.remove()
         }
-        if authenticationService.firestoreUser?.accountType == "Family" {
-            // Family can only see Listings they made
-            listenerRegistration = database.collection(listingsPath)
-                .whereField("userId", isEqualTo: self.userId)
-                .order(by: "createdTime")
-                .addSnapshotListener { (querySnapshot, error) in
-                    if let querySnapshot = querySnapshot {
-                        self.listings = querySnapshot.documents.compactMap { document -> Listing? in
-                            try? document.data(as: Listing.self)
-                        }
+        listenerRegistration = database.collection(listingsPath)
+            .order(by: "createdTime")
+            .addSnapshotListener { (querySnapshot, error) in
+                if let querySnapshot = querySnapshot {
+                    self.listings = querySnapshot.documents.compactMap { document -> Listing? in
+                        try? document.data(as: Listing.self)
                     }
-            }
-        } else {
-            listenerRegistration = database.collection(listingsPath)
-                // Nannies can see all listings
-                .order(by: "createdTime")
-                .addSnapshotListener { (querySnapshot, error) in
-                    if let querySnapshot = querySnapshot {
-                        self.listings = querySnapshot.documents.compactMap { document -> Listing? in
-                            try? document.data(as: Listing.self)
-                        }
-                    }
-            }
+                }
         }
     }
 
@@ -107,7 +92,7 @@ class FirestoreListingRepository: BaseListingRepository, ListingRepository, Obse
     }
 
     func updateListing(_ listing: Listing) {
-        if let listingId = listing.id {
+        if let listingId = listing.id, authenticationService.user?.uid ==  listing.userId || authenticationService.user?.uid == listing.sitterId {
             do {
                 var updatedListing = listing
                 updatedListing.updatedTime = nil

@@ -38,19 +38,10 @@ struct NewListingView: View {
                 DurationView(newListing: true, startDate: $listingDate, endDate: $endingTime)
 
                 // Address view
-                if authenticationService.userAddress != nil {
-                    Address_ProfileView(authenticationService: authenticationService, activeSheet: $activeSheet.didSet { _ in
+                Address_NewListingView(authenticationService: authenticationService, activeSheet: $activeSheet.didSet { _ in
                         showSheet.toggle()
-                    })
-                } else {
-                    AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.cellBackground, image: "onboardingGraphic_3", type: .unknown))
-                        .shadow()
-                        .onTapGesture {
-                            activeSheet = .third
-                            showSheet.toggle()
-                        }
-                        .padding(Sizes.Spacer)
-                }
+                    }
+                )
 
                 Spacer()
 

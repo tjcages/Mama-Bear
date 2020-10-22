@@ -21,7 +21,7 @@ struct AddChildView: View {
     var body: some View {
         let newChild = self.child.name == ""
 
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             BackButton() {
                 showSheet.toggle()
             }

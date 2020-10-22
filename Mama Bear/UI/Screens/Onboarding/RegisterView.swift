@@ -58,12 +58,12 @@ struct RegisterView: View {
     @State var verificationId: String?
     @State var password = ""
     @State var userPhoneCredential: PhoneAuthCredential?
-    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", photoURL: "", accountType: "Unknown")
+    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", photoURL: "", accountType: "Nanny")
 
     var backPressed: () -> () = { }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             BackButton() {
                 animateNextStep(forward: false)
             }

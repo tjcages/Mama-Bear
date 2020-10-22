@@ -10,7 +10,7 @@ import SwiftUI
 struct WelcomeView: View {
     @ObservedObject var authenticationService: AuthenticationService
 
-    @State var accountType: AccountType = .unknown
+    @State var accountType: AccountType = .nanny
     
     @State private var showingWelcome = true
     @State private var showingAccount = false

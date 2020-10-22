@@ -11,7 +11,6 @@ import Firebase
 
 struct ContentView: View {
     @ObservedObject var authenticationService: AuthenticationService
-
     @ObservedObject var listingListVM = ListingListViewModel()
     @ObservedObject var viewRouter = ViewRouter()
 

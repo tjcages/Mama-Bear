@@ -21,7 +21,7 @@ struct AddPetView: View {
     var body: some View {
         let newPet = self.pet.name == ""
 
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             BackButton() {
                 showSheet.toggle()
             }

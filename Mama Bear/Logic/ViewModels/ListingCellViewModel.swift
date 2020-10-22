@@ -18,6 +18,7 @@ class ListingCellViewModel: ObservableObject, Identifiable {
     @Injected var listingRepository: ListingRepository
 
     @Published var listing: Listing
+    @Published var firestoreUser: FirestoreUser?
     @Published var firestoreSitter: FirestoreUser?
     @Published var userAddress: Address?
     @Published var userChildren: [Child]?
@@ -36,7 +37,7 @@ class ListingCellViewModel: ObservableObject, Identifiable {
     private var petsPath: String = "pets"
 
     static func newListing() -> ListingCellViewModel {
-        ListingCellViewModel(listing: Listing(startDate: Timestamp.init(date: Date()), endDate: Timestamp.init(date: Date().addingTimeInterval(28800)), childrenId: [], sitterRequirement: SitterRequirement.college.rawValue, completed: false))
+        ListingCellViewModel(listing: Listing(startDate: Timestamp.init(date: Date()), endDate: Timestamp.init(date: Date().addingTimeInterval(28800)), childrenId: [], sitterRequirement: SitterRequirement.college.rawValue, distanceText: ""))
     }
 
     init(listing: Listing) {
@@ -72,6 +73,18 @@ class ListingCellViewModel: ObservableObject, Identifiable {
     }
     
     private func loadUserData(id: String) {
+        // Family data
+        if let userId = listing.userId {
+            listenerRegistration = database.collection(usersPath).document(userId).addSnapshotListener { (snapshot, error) in
+                if let error = error {
+                    print("Error listening to Firestore user at document id: \(error)")
+                }
+                if let snapshot = snapshot {
+                    self.firestoreUser = try? snapshot.data(as: FirestoreUser.self)
+                }
+            }
+        }
+        
         // Sitter data
         if listing.sitterId != "" {
             listenerRegistration = database.collection(usersPath).document(listing.sitterId).addSnapshotListener { (snapshot, error) in

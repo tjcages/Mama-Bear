@@ -11,7 +11,7 @@ struct TransactionsView: View {
     @Binding var showingTransactions: Bool
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             BackButton() {
                 showingTransactions.toggle()
             }

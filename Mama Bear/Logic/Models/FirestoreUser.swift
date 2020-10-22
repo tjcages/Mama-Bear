@@ -18,6 +18,8 @@ struct FirestoreUser: Identifiable, Codable {
     var photoURL: String
     var accountType: AccountType.RawValue
     
+    var jobs: [String]?
+    
     @ServerTimestamp var createdTime: Timestamp?
     @ServerTimestamp var updatedTime = Timestamp.init(date: Date())
 }

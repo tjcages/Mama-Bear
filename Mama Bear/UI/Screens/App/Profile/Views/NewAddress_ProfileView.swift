@@ -22,7 +22,7 @@ struct NewAddress_ProfileView: View {
     var body: some View {
         let newAddress = authenticationService.userAddress == nil
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             BackButton() {
                 showSheet.toggle()
             }

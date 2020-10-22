@@ -22,5 +22,7 @@ struct Listing: Identifiable, Codable {
     var petsId: [String]?
     var sitterRequirement: SitterRequirement.RawValue
     
-    var completed: Bool
+    var distanceText: String = ""
+    var addressLat: Double = 0.0
+    var addressLong: Double = 0.0
 }
