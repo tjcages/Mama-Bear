@@ -11,8 +11,8 @@ struct Manage_ProfileView: View {
     @Binding var activeSheet: ActiveSheet
 
     var accounts: [CreateAccount] = [
-        CreateAccount(title: "Your listings", subtitle: "Manage your jobs", color: Colors.subheadline.opacity(0.1), image: "jobsGraphic", type: .nanny),
-        CreateAccount(title: "Payment", subtitle: "Your recent transactions", color: Colors.subheadline.opacity(0.1), image: "paymentsGraphic", type: .nanny)
+        CreateAccount(title: "Your listings", subtitle: "Manage your jobs", color: Colors.subheadline.opacity(0.1), image: "jobsGraphic", type: .sitter),
+        CreateAccount(title: "Payment", subtitle: "Your recent transactions", color: Colors.subheadline.opacity(0.1), image: "paymentsGraphic", type: .sitter)
     ]
 
     var body: some View {

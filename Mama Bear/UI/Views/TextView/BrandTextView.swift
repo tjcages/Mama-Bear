@@ -10,6 +10,7 @@ import SwiftUI
 enum TextViewCase: Int {
     case email
     case password
+    case verifyPassword
     case firstName
     case lastName
     case name
@@ -43,12 +44,13 @@ struct BrandTextView: View {
     var itemCase: TextViewCase
 
     private var cases: [TextViewItems] = [
-        TextViewItems(title: "Your email", image: "person"),
-        TextViewItems(title: "Password", image: "lock"),
+        TextViewItems(title: "Your email", image: "PersonIcon"),
+        TextViewItems(title: "Password", image: "LockIcon"),
+        TextViewItems(title: "Verify Password", image: "LockIcon"),
         TextViewItems(title: "First name", image: ""),
         TextViewItems(title: "Last name", image: ""),
         TextViewItems(title: "Name", image: ""),
-        TextViewItems(title: "Phone number", image: "phone"),
+        TextViewItems(title: "Phone number", image: "PhoneIcon"),
         TextViewItems(title: "Street address", image: ""),
         TextViewItems(title: "City", image: ""),
         TextViewItems(title: "State", image: ""),
@@ -66,14 +68,16 @@ struct BrandTextView: View {
         ZStack(alignment: .topLeading) {
             HStack(spacing: Sizes.xSmall) {
                 if item.image != "" {
-                    Image(systemName: item.image)
+                    Image(item.image)
                         .resizable()
+                        .renderingMode(.template)
                         .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Colors.subheadline)
                         .frame(width: Sizes.Small, height: Sizes.Small)
                         .foregroundColor(!text.isEmpty ? Colors.headline : Colors.subheadline)
                 }
 
-                CustomTextField(placeholder: Text("Enter \(item.title.lowercased())"), text: $text, itemCase: itemCase, secured: secured) { _ in
+                CustomTextField(placeholder: Text("Enter \(item.title.lowercased())"), text: $text, itemCase: itemCase, secured: secured) { text in
                     // onChanged
                 } commit: {
                     // on Commit
@@ -86,9 +90,11 @@ struct BrandTextView: View {
                         .frame(width: Sizes.Small, height: Sizes.Small)
                         .foregroundColor(Colors.green)
                 } else if itemCase == .password {
-                    Image(systemName: !secured ? "eye" : "eye.slash")
+                    Image(!secured ? "EyeIcon" : "EyeIconSlash")
                         .resizable()
+                        .renderingMode(.template)
                         .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Colors.subheadline)
                         .frame(width: Sizes.Small, height: Sizes.Small)
                         .foregroundColor(Colors.subheadline)
                         .onTapGesture {

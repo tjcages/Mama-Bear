@@ -16,7 +16,7 @@ struct OnboardingView: View {
 
     var onboardingContent: [Onboarding] = [
         Onboarding(image: "onboardingGraphic_1", title: "Get a job next to you", subtitle: "Find interesting offer and manage your schedule right from the app.", id: 0),
-        Onboarding(image: "onboardingGraphic_2", title: "Find the best babysitter", subtitle: "Add an advertisement and wait. Then choose the best nanny.", id: 1),
+        Onboarding(image: "onboardingGraphic_2", title: "Find the best babysitter", subtitle: "Add an advertisement and wait. Then choose the best sitter.", id: 1),
         Onboarding(image: "onboardingGraphic_3", title: "Manage & pay from the app", subtitle: "Pay you babysitter using the app. Manage payments, and chat.", id: 2)
     ]
 

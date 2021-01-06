@@ -57,8 +57,9 @@ struct RegisterView: View {
     @State var phoneNumber = ""
     @State var verificationId: String?
     @State var password = ""
+    @State var verifyPassword = ""
     @State var userPhoneCredential: PhoneAuthCredential?
-    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", photoURL: "", accountType: "Nanny")
+    @State var newUser = FirestoreUser(id: "", name: "", email: "", phoneNumber: "", photoURL: "", accountType: "Sitter")
 
     var backPressed: () -> () = { }
 
@@ -90,7 +91,7 @@ struct RegisterView: View {
                     .opacity(showingVerify ? 1 : 0)
                     .modifier(Shake(animatableData: CGFloat(attempts)))
 
-                Password_RegisterView(password: $password)
+                Password_RegisterView(password: $password, verifyPassword: $verifyPassword)
                     .offset(x: showingPassword ? 0 : UIScreen.main.bounds.width)
                     .opacity(showingPassword ? 1 : 0)
             }
@@ -235,15 +236,21 @@ struct RegisterView: View {
         newUser.accountType = accountType.rawValue
         newUser.name = name
         newUser.email = email
-        if let phoneCredential = self.userPhoneCredential {
-            authenticationService.registerUser(newUser: newUser, phoneNumberCredential: phoneCredential, password: password) { (result, error) in
-                // Attempted login
-                if let error = error {
-                    alertMessage = error.localizedDescription
-                    showingAlert = true
-                    return
+        if password == verifyPassword {
+            if let phoneCredential = self.userPhoneCredential {
+                authenticationService.registerUser(newUser: newUser, phoneNumberCredential: phoneCredential, password: password) { (result, error) in
+                    // Attempted login
+                    if let error = error {
+                        alertMessage = error.localizedDescription
+                        showingAlert = true
+                        return
+                    }
                 }
             }
+        } else {
+            // Password and verifyPassword are not equal
+            alertMessage = "Your password fields do not match."
+            showingAlert = true
         }
     }
 

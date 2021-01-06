@@ -30,7 +30,7 @@ struct Upcoming_HomeView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            // Nanny details
+            // Sitter details
             if listingCellVM.listing.sitterId != "" {
                 HStack {
                     // Profile image
@@ -283,7 +283,7 @@ struct Upcoming_HomeView: View {
 
     private func getSitterName(authenticationService: AuthenticationService, listingCellVM: ListingCellViewModel) -> String {
         if authenticationService.user?.uid == listingCellVM.listing.sitterId {
-            // Nanny
+            // Sitter
             return listingCellVM.firestoreUser?.name ?? ""
         } else {
             // Family
@@ -293,7 +293,7 @@ struct Upcoming_HomeView: View {
 
     private func getSitterPhone(authenticationService: AuthenticationService, listingCellVM: ListingCellViewModel) -> String {
         if authenticationService.user?.uid == listingCellVM.listing.sitterId {
-            // Nanny
+            // Sitter
             return listingCellVM.firestoreUser?.phoneNumber ?? ""
         } else {
             // Family

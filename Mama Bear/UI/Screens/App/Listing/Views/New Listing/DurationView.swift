@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DurationView: View {
     @Binding var listingDate: Date
+    @Binding var startTime: Date
     @Binding var endingTime: Date
 
     @State private var showingDate = false
@@ -16,6 +17,8 @@ struct DurationView: View {
     @State private var showingEndTime = false
 
     var newListing: Bool
+    
+    let calendar = Calendar.current
 
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -29,10 +32,11 @@ struct DurationView: View {
         return formatter
     }
 
-    init(newListing: Bool, startDate: Binding<Date>, endDate: Binding<Date>) {
+    init(newListing: Bool, listingDate: Binding<Date>, startTime: Binding<Date>, endTime: Binding<Date>) {
         self.newListing = newListing
-        self._listingDate = startDate
-        self._endingTime = endDate
+        self._listingDate = listingDate
+        self._startTime = startTime
+        self._endingTime = endTime
     }
 
     var body: some View {
@@ -40,7 +44,6 @@ struct DurationView: View {
             // Date selection
             if showingDate {
                 DatePicker(selection: $listingDate.didSet { _ in
-                    endingTime = listingDate.addingTimeInterval(28800)
                     withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
                         self.showingDate.toggle()
                     }
@@ -135,7 +138,7 @@ struct DurationView: View {
                             .frame(width: Sizes.Small, height: Sizes.Small)
                             .foregroundColor(Colors.coral)
 
-                        Text("\(listingDate, formatter: timeFormatter)")
+                        Text("\(startTime, formatter: timeFormatter)")
                             .customFont(.medium, category: .medium)
                             .foregroundColor(Colors.headline)
 
@@ -183,7 +186,7 @@ struct DurationView: View {
                 }
             } else {
                 VStack(spacing: 0) {
-                    DatePicker(selection: showingStartTime ? $listingDate.didSet { _ in
+                    DatePicker(selection: showingStartTime ? $startTime.didSet { _ in
                         //
                     }: $endingTime.didSet { _ in
                             //

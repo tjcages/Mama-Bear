@@ -10,8 +10,10 @@ import SwiftUI
 struct Details_NewListingView: View {
     @ObservedObject var authenticationService: AuthenticationService
     @ObservedObject var listingCellVM: ListingCellViewModel
+    @ObservedObject var adminPrices = AdminViewModel()
 
     @Binding var showSheet: Bool
+    @State var duration: Double
     var onCommit: (Result<Listing, InputError>) -> Void = { _ in }
 
     @State var presentPartialSheet: Bool = false
@@ -59,24 +61,43 @@ struct Details_NewListingView: View {
                     })
 
                     // Sitter requirements
-                    Text("Sitter requirement")
-                        .customFont(.medium, category: .large)
-                        .foregroundColor(Colors.headline)
+                    Group {
+                        Text("Sitter requirement")
+                            .customFont(.medium, category: .large)
+                            .foregroundColor(Colors.headline)
+                            .padding(.top, Sizes.Default)
+                            .padding(.horizontal, Sizes.Default)
+
+                        SitterRequirementView(adminPrices: adminPrices, sitterRequirement: $sitterRequirement)
+                        
+                        HStack {
+                            Text("Total:")
+                                .customFont(.medium, category: .large)
+                                .foregroundColor(Colors.headline)
+                            
+                            Spacer()
+                            
+                            Text(String(format: "$%.2f", getPrice(requirement: sitterRequirement)))
+                                .customFont(.medium, category: .large)
+                                .foregroundColor(Colors.darkCoral)
+                        }
                         .padding(.top, Sizes.Default)
                         .padding(.horizontal, Sizes.Default)
-
-                    SitterRequirementView(sitterRequirement: $sitterRequirement)
-
-                    Spacer()
-
+                    }
+                    
                     Group {
                         ConfirmButton(title: "Post listing", style: .fill) {
                             // Post listing
                             setListingData()
                             
-                            onCommit(.success(self.listingCellVM.listing))
-                            
-                            showSheet.toggle()
+                            if checkUserInformation() {
+                                onCommit(.success(self.listingCellVM.listing))
+                                
+                                showSheet.toggle()
+                            } else {
+                                activeSheet = .third
+                                presentPartialSheet.toggle()
+                            }
                         }
                             .padding(.top, Sizes.Default)
                             .disabled(authenticationService.userChildren?.isEmpty ?? true)
@@ -98,7 +119,36 @@ struct Details_NewListingView: View {
                     AddChildView(authenticationService: authenticationService, showSheet: $presentPartialSheet, child: child)
                 } else if activeSheet == .second {
                     AddPetView(authenticationService: authenticationService, showSheet: $presentPartialSheet, pet: pet)
+                } else if activeSheet == .third {
+                    AdditionalDetails(authenticationService: authenticationService, showSheet: $presentPartialSheet)
                 }
+        }
+    }
+    
+    func checkUserInformation() -> Bool {
+        if let user = authenticationService.firestoreUser {
+            if user.name == "" || user.email == "" || user.phoneNumber == "" {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return false
+        }
+    }
+    
+    func getPrice(requirement: SitterRequirement) -> Double {
+        if let admin = adminPrices.admin.first {
+            switch requirement {
+            case .highSchool:
+                return Double(admin.highSchool) * duration
+            case .college:
+                return Double(admin.college) * duration
+            case .postGrad:
+                return Double(admin.postGrad) * duration
+            }
+        } else {
+            return 0
         }
     }
     

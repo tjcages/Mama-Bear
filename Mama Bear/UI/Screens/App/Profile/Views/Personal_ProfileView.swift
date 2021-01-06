@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseAuth
 
 struct Personal_ProfileView: View {
     @ObservedObject var authenticationService: AuthenticationService
     @Binding var activeSheet: ActiveSheet
 
+    @State private var showingAlert = false
     @State private var nameText: String = ""
     @State private var emailText: String = ""
     @State private var phoneNumberText: String = ""
@@ -53,7 +54,7 @@ struct Personal_ProfileView: View {
                     activeSheet = .third
                 })
             } else {
-                AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1), image: "onboardingGraphic_3", type: .nanny))
+                AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.subheadline.opacity(0.1), image: "onboardingGraphic_3", type: .sitter))
                     .onTapGesture {
                         activeSheet = .third
                     }
@@ -69,8 +70,7 @@ struct Personal_ProfileView: View {
                 Spacer()
 
                 Button(action: {
-                    // Confirm deletion
-                    // Deactivate account logic
+                    self.showingAlert.toggle()
                 }, label: {
                         Text("Deactivate account")
                             .customFont(.heavy, category: .small)
@@ -83,6 +83,22 @@ struct Personal_ProfileView: View {
 
             Spacer()
         }
+            .alert(isPresented:$showingAlert) {
+                Alert(title: Text("Are you sure you want deactivate your account permanently?"), message: Text("This action cannot be undone."), primaryButton: .destructive(Text("Delete")) {
+                    // Confirm deletion
+                    let user = Auth.auth().currentUser
+
+                    user?.delete { error in
+                        if let error = error {
+                        // An error happened.
+                            print("Error deactivating account. \(error.localizedDescription)")
+                      } else {
+                        // Account deleted.
+                        authenticationService.userLoggedIn = false
+                      }
+                    }
+                }, secondaryButton: .cancel())
+            }
             .onAppear {
                 nameText = authenticationService.firestoreUser?.name ?? ""
                 emailText = authenticationService.firestoreUser?.email ?? ""

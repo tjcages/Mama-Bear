@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Password_RegisterView: View {
     @Binding var password: String
+    @Binding var verifyPassword: String
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,6 +20,9 @@ struct Password_RegisterView: View {
                 .padding(.bottom, Sizes.xSmall)
 
             BrandTextView(item: .password, $password)
+                .padding(.bottom, Sizes.xSmall)
+            
+            BrandTextView(item: .verifyPassword, $verifyPassword)
 
             Text("Password must contain at least, big letter, and at least one special character.")
                 .customFont(.medium, category: .medium)

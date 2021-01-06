@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F33409B25A543AB00E6D630 /* AdditionalDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33409A25A543AB00E6D630 /* AdditionalDetails.swift */; };
+		2F3340A025A5572F00E6D630 /* CovidGuidelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33409F25A5572F00E6D630 /* CovidGuidelines.swift */; };
 		2F4770432540F761005D73EE /* SignInWithFacebookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4770422540F761005D73EE /* SignInWithFacebookCoordinator.swift */; };
+		2F4902F12564C3A900CF610B /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4902F02564C3A900CF610B /* Admin.swift */; };
+		2F4902F92564D41C00CF610B /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4902F82564D41C00CF610B /* AdminViewModel.swift */; };
 		2F4E5BA2252BC9F400E1C4FB /* Requests_ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E5BA1252BC9F400E1C4FB /* Requests_ProfileView.swift */; };
 		2F4F93242541F1A0007AF987 /* Address_NewListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F93232541F1A0007AF987 /* Address_NewListingView.swift */; };
 		2F550C0E252CDC6100DC523F /* PostListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F550C0D252CDC6100DC523F /* PostListingView.swift */; };
@@ -78,6 +82,7 @@
 		2FBD202B2526A16E000465D3 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD202A2526A16E000465D3 /* RegisterView.swift */; };
 		2FBD203A2526A6E4000465D3 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD20392526A6E4000465D3 /* BackButton.swift */; };
 		2FBD20402526A788000465D3 /* Name_RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD203F2526A788000465D3 /* Name_RegisterView.swift */; };
+		2FC7EE922589991B00D1D4D6 /* AddressAutocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7EE912589991B00D1D4D6 /* AddressAutocomplete.swift */; };
 		2FE58E04252B9DFF0090CB2F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE58E03252B9DFF0090CB2F /* HomeView.swift */; };
 		2FE58E09252B9E080090CB2F /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE58E08252B9E080090CB2F /* NotificationView.swift */; };
 		2FE58E0E252B9E0E0090CB2F /* NewListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE58E0D252B9E0E0090CB2F /* NewListingView.swift */; };
@@ -135,7 +140,11 @@
 /* Begin PBXFileReference section */
 		16460671E7765D45868EAC72 /* Pods_Mama_Bear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mama_Bear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E820029FA1AD842C16DD00D /* Pods-Mama BearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mama BearTests.release.xcconfig"; path = "Target Support Files/Pods-Mama BearTests/Pods-Mama BearTests.release.xcconfig"; sourceTree = "<group>"; };
+		2F33409A25A543AB00E6D630 /* AdditionalDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalDetails.swift; sourceTree = "<group>"; };
+		2F33409F25A5572F00E6D630 /* CovidGuidelines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidGuidelines.swift; sourceTree = "<group>"; };
 		2F4770422540F761005D73EE /* SignInWithFacebookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithFacebookCoordinator.swift; sourceTree = "<group>"; };
+		2F4902F02564C3A900CF610B /* Admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
+		2F4902F82564D41C00CF610B /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewModel.swift; sourceTree = "<group>"; };
 		2F4E5BA1252BC9F400E1C4FB /* Requests_ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests_ProfileView.swift; sourceTree = "<group>"; };
 		2F4F93232541F1A0007AF987 /* Address_NewListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address_NewListingView.swift; sourceTree = "<group>"; };
 		2F550C0D252CDC6100DC523F /* PostListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListingView.swift; sourceTree = "<group>"; };
@@ -212,6 +221,7 @@
 		2FBD202A2526A16E000465D3 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		2FBD20392526A6E4000465D3 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		2FBD203F2526A788000465D3 /* Name_RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name_RegisterView.swift; sourceTree = "<group>"; };
+		2FC7EE912589991B00D1D4D6 /* AddressAutocomplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAutocomplete.swift; sourceTree = "<group>"; };
 		2FE58E03252B9DFF0090CB2F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2FE58E08252B9E080090CB2F /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		2FE58E0D252B9E0E0090CB2F /* NewListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListingView.swift; sourceTree = "<group>"; };
@@ -418,6 +428,7 @@
 				2F59B64E252647AB002E057A /* ListingListViewModel.swift */,
 				2F550C43252CF9FE00DC523F /* NotificationViewModel.swift */,
 				2F550C4D252D097B00DC523F /* FAQViewModel.swift */,
+				2F4902F82564D41C00CF610B /* AdminViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -484,7 +495,9 @@
 				2F5A767E252E9FAD00321BA5 /* Child.swift */,
 				2F5A7683252EA00F00321BA5 /* Pet.swift */,
 				2FBB9B06253F561600B9E820 /* Address.swift */,
+				2F4902F02564C3A900CF610B /* Admin.swift */,
 				2F8AF0EA2540995200D257F8 /* InputError.swift */,
+				2FC7EE912589991B00D1D4D6 /* AddressAutocomplete.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -524,6 +537,7 @@
 				2F5A7674252E26C500321BA5 /* Address_ProfileView.swift */,
 				2F5A766C252E249200321BA5 /* NewAddress_ProfileView.swift */,
 				2F4E5BA1252BC9F400E1C4FB /* Requests_ProfileView.swift */,
+				2F33409A25A543AB00E6D630 /* AdditionalDetails.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -667,6 +681,7 @@
 			isa = PBXGroup;
 			children = (
 				2FE58E08252B9E080090CB2F /* NotificationView.swift */,
+				2F33409F25A5572F00E6D630 /* CovidGuidelines.swift */,
 			);
 			name = Notification;
 			sourceTree = "<group>";
@@ -1058,6 +1073,7 @@
 				2FF8222D2526610F00BA97C8 /* SkipButton.swift in Sources */,
 				2F59B665252647D6002E057A /* AddShadowModifier.swift in Sources */,
 				2FBD1FFC252677BF000465D3 /* ConfirmButton.swift in Sources */,
+				2F3340A025A5572F00E6D630 /* CovidGuidelines.swift in Sources */,
 				2FF4DFC4253E2F2300C533CE /* FirestoreUser.swift in Sources */,
 				2FF4E047253F4D9A00C533CE /* AsyncImage.swift in Sources */,
 				2FF1CB36252BB76100DA418E /* BrandSegmentedPickerView.swift in Sources */,
@@ -1066,8 +1082,10 @@
 				2F5A76BB252EBAE000321BA5 /* AgeView.swift in Sources */,
 				2FE58E13252B9E180090CB2F /* HelpView.swift in Sources */,
 				2FBB9B3A253FB46C00B9E820 /* ImagePicker.swift in Sources */,
+				2FC7EE922589991B00D1D4D6 /* AddressAutocomplete.swift in Sources */,
 				2F59B65D252647CA002E057A /* EnvironmentKey.swift in Sources */,
 				2F59B66D252647E9002E057A /* AppDelegate.swift in Sources */,
+				2F33409B25A543AB00E6D630 /* AdditionalDetails.swift in Sources */,
 				2F5A76B5252EB23A00321BA5 /* GenderView.swift in Sources */,
 				2FBD20142526816C000465D3 /* WelcomeDetailView.swift in Sources */,
 				2FF4E05B253F4DF300C533CE /* ImageLoader.swift in Sources */,
@@ -1090,6 +1108,7 @@
 				2FE58E18252B9E1D0090CB2F /* ProfileView.swift in Sources */,
 				2F550C34252CEBDA00DC523F /* TransactionsView.swift in Sources */,
 				2FAE72DB2541046E00F35EF9 /* Listings_HomeView.swift in Sources */,
+				2F4902F92564D41C00CF610B /* AdminViewModel.swift in Sources */,
 				2F59B64125264774002E057A /* Sizes.swift in Sources */,
 				2F5A7694252EAC3300321BA5 /* AddChildView.swift in Sources */,
 				2F59B5FA252646DA002E057A /* Mama_Bear.xcdatamodeld in Sources */,
@@ -1102,6 +1121,7 @@
 				2FF964862527A2D300CCB348 /* Email_RegisterView.swift in Sources */,
 				2F4E5BA2252BC9F400E1C4FB /* Requests_ProfileView.swift in Sources */,
 				2F59B67D25264811002E057A /* FirestoreListingRepository.swift in Sources */,
+				2F4902F12564C3A900CF610B /* Admin.swift in Sources */,
 				2F5A7675252E26C500321BA5 /* Address_ProfileView.swift in Sources */,
 				2FF82212252658D600BA97C8 /* OnboardingView.swift in Sources */,
 				2F550C53252D1A1A00DC523F /* ResizableTextView.swift in Sources */,
@@ -1303,7 +1323,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Mama Bear/Mama Bear.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.5;
 				DEVELOPMENT_ASSET_PATHS = "\"Mama Bear/Preview Content\"";
 				DEVELOPMENT_TEAM = 435YL82FQ2;
 				ENABLE_PREVIEWS = YES;
@@ -1313,7 +1333,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tjc.mamabear;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.mama-bear";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1330,7 +1350,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Mama Bear/Mama Bear.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.5;
 				DEVELOPMENT_ASSET_PATHS = "\"Mama Bear/Preview Content\"";
 				DEVELOPMENT_TEAM = 435YL82FQ2;
 				ENABLE_PREVIEWS = YES;
@@ -1340,7 +1360,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tjc.mamabear;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tjc.mama-bear";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

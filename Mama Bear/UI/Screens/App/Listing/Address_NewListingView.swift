@@ -16,7 +16,7 @@ struct Address_NewListingView: View {
         if authenticationService.userAddress != nil {
             Address_ProfileView(authenticationService: authenticationService, activeSheet: $activeSheet)
         } else {
-            AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.cellBackground, image: "onboardingGraphic_3", type: .nanny))
+            AccountSelectionView(CreateAccount(title: "Address", subtitle: "Add a home address", color: Colors.cellBackground, image: "onboardingGraphic_3", type: .sitter))
                 .shadow()
                 .onTapGesture {
                     activeSheet = .third

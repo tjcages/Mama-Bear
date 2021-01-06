@@ -17,7 +17,7 @@ struct HomeView: View {
         for listingCellVM in listingListVM.listingCellViewModels {
             if listingCellVM.listing.endDate.dateValue() > Date() {
                 if authenticationService.user?.uid == listingCellVM.firestoreSitter?.id {
-                    // Nanny upcoming listings
+                    // Sitter upcoming listings
                     listings.append(listingCellVM)
                 }
             }
@@ -29,11 +29,11 @@ struct HomeView: View {
         var listings: [ListingCellViewModel] = []
         for listingCellVM in listingListVM.listingCellViewModels {
             if listingCellVM.listing.endDate.dateValue() > Date() {
-                if authenticationService.firestoreUser?.accountType ?? "Nanny" == "Family" && listingCellVM.listing.userId == authenticationService.user?.uid {
+                if authenticationService.firestoreUser?.accountType ?? "Sitter" == "Family" && listingCellVM.listing.userId == authenticationService.user?.uid {
                     // Family upcoming listings
                     listings.append(listingCellVM)
-                } else if authenticationService.firestoreUser?.accountType ?? "Family" == "Nanny" && listingCellVM.listing.sitterId == "" {
-                    // Nanny available listings
+                } else if authenticationService.firestoreUser?.accountType ?? "Family" == "Sitter" && listingCellVM.listing.sitterId == "" {
+                    // Sitter available listings
                     listings.append(listingCellVM)
                 }
             }
@@ -55,7 +55,7 @@ struct HomeView: View {
                 }
                 
                 if !ongoingListing.isEmpty {
-                    // Only show upcoming listings for Nanny
+                    // Only show upcoming listings for Sitter
                     VStack(alignment: .leading) {
                         Text("Upcoming listings")
                             .customFont(.medium, category: .large)
@@ -72,7 +72,7 @@ struct HomeView: View {
                 }
 
                 if !listings.isEmpty {
-                    if authenticationService.firestoreUser?.accountType ?? "Nanny" == "Family" {
+                    if authenticationService.firestoreUser?.accountType ?? "Sitter" == "Family" {
                         // Only show families listings
                         VStack(alignment: .leading) {
                             Text("Upcoming listings")
@@ -110,7 +110,7 @@ struct HomeView: View {
                         .padding(.horizontal, Sizes.Big)
                         .padding(.top, !listings.isEmpty ? 0 : Sizes.Big)
 
-                    Text(authenticationService.firestoreUser?.accountType ?? "Nanny" == "Family" ? "No upcoming listings.\nAdd a listing to view here." : "No upcoming jobs.")
+                    Text(authenticationService.firestoreUser?.accountType ?? "Sitter" == "Family" ? "No upcoming listings.\nAdd a listing to view here." : "No upcoming jobs.")
                         .customFont(.medium, category: .medium)
                         .foregroundColor(Colors.subheadline)
                         .multilineTextAlignment(.center)

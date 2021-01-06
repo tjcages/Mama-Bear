@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 import MapKit
 
 struct Listings_HomeView: View {
@@ -40,13 +41,26 @@ struct Listings_HomeView: View {
         formatter.timeStyle = .short
         return formatter
     }
+    
+    func getUserName(fullName: String) -> String {
+        var name = fullName
+        let fullNameArr = fullName.components(separatedBy: " ")
+        let firstName: String = fullNameArr[0]
+        let lastName: String = fullNameArr.count > 1 ? fullNameArr[1] : ""
+        if let firstInitial = lastName.first {
+            name = "\(firstName) \(firstInitial)"
+        } else {
+            name = "\(firstName)"
+        }
+        return name
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
             // Family details
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Thomas")
+                    Text(getUserName(fullName: listingCellVM.firestoreUser?.name ?? ""))
                         .customFont(.medium, category: .medium)
                         .foregroundColor(Colors.headline)
 

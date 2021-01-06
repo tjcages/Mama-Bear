@@ -20,6 +20,7 @@ struct Header_HomeView: View {
                     Image(systemName: "person")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Colors.subheadline)
                         .frame(width: Sizes.Small, height: Sizes.Small)
                         .padding((Sizes.xLarge - Sizes.Small) / 2)
                         .background(Colors.subheadline.opacity(0.3))
@@ -49,7 +50,7 @@ struct Header_HomeView: View {
 
             // Name
             VStack(alignment: .leading) {
-                Text(firestoreUser.name)
+                Text(getUserName(fullName: firestoreUser.name))
                     .customFont(.medium, category: .medium)
                     .foregroundColor(Colors.headline)
 
@@ -91,5 +92,18 @@ struct Header_HomeView: View {
             .cornerRadius(Sizes.Spacer)
             .shadow()
             .padding(.horizontal, Sizes.Default)
+    }
+    
+    func getUserName(fullName: String) -> String {
+        var name = fullName
+        let fullNameArr = fullName.components(separatedBy: " ")
+        let firstName: String = fullNameArr[0]
+        let lastName: String = fullNameArr.count > 1 ? fullNameArr[1] : ""
+        if let firstInitial = lastName.first {
+            name = "\(firstName) \(firstInitial)"
+        } else {
+            name = "\(firstName)"
+        }
+        return name
     }
 }

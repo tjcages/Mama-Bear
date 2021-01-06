@@ -25,7 +25,7 @@ struct Colors {
     static let coral = Color("coral")
     static let lightCoral = Color("lightCoral")
     static let darkCoral = Color("darkCoral")
-    static let extraLightCoral = Color("coral").opacity(0.1)
+    static let extraLightCoral = Color("extraLightCoral")
     
     static let green = Color("green")
     static let lightGreen = Color("lightGreen")
@@ -41,5 +41,6 @@ struct Colors {
     static let darkBlue = Color("darkBlue")
     
     static let yellow = Color("yellow")
+    static let covid = Color("covid")
     
 }

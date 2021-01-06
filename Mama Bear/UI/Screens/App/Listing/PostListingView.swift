@@ -23,6 +23,7 @@ struct PostListingView: View {
 
     var onCommit: (Result<Listing, InputError>) -> Void = { _ in }
 
+    @State var presentPartialSheet = false
     @State var child = Child()
     @State var pet = Pet()
 
@@ -73,7 +74,7 @@ struct PostListingView: View {
                             .padding(.top, Sizes.Default)
                             .padding(.horizontal, Sizes.Default)
 
-                        DurationView(newListing: false, startDate: .constant(listingCellVM.listing.startDate.dateValue()), endDate: .constant(listingCellVM.listing.endDate.dateValue()))
+                        DurationView(newListing: false, listingDate: .constant(listingCellVM.listing.startDate.dateValue()), startTime: .constant(listingCellVM.listing.startDate.dateValue()), endTime: .constant(listingCellVM.listing.endDate.dateValue()))
                     }
 
                     // Location
@@ -137,12 +138,16 @@ struct PostListingView: View {
                             } else {
                                 ConfirmButton(title: "Book job", style: .fill) {
                                     // Confirm sitter
-                                    authenticationService.bookListing(listing: listingCellVM.listing)
-                                    
-                                    delayWithSeconds(Animation.animationOut) {
-                                        self.showingPostListing.toggle()
-                                        self.viewRouter.currentView = .profile
-                                        self.viewRouter.currentView = .home
+                                    if checkUserInformation() {
+                                        authenticationService.bookListing(listing: listingCellVM.listing)
+                                        
+                                        delayWithSeconds(Animation.animationOut) {
+                                            self.showingPostListing.toggle()
+                                            self.viewRouter.currentView = .profile
+                                            self.viewRouter.currentView = .home
+                                        }
+                                    } else {
+                                        self.presentPartialSheet.toggle()
                                     }
                                 }
                                     .padding(.top, Sizes.Default)
@@ -156,6 +161,21 @@ struct PostListingView: View {
                     Spacer()
                 }
             }
+            .sheet(isPresented: $presentPartialSheet) {
+                AdditionalDetails(authenticationService: authenticationService, showSheet: $presentPartialSheet)
+            }
+        }
+    }
+    
+    func checkUserInformation() -> Bool {
+        if let user = authenticationService.firestoreUser {
+            if user.name == "" || user.email == "" || user.phoneNumber == "" {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return false
         }
     }
 }

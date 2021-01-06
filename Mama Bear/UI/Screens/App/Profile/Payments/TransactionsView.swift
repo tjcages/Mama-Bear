@@ -63,7 +63,7 @@ struct TransactionsCell: View {
 
             // Details
             VStack(alignment: .leading, spacing: Sizes.Spacer / 2) {
-                Text("Nanny account")
+                Text("Sitter account")
                     .customFont(.heavy, category: .medium)
                     .foregroundColor(Colors.headline)
 

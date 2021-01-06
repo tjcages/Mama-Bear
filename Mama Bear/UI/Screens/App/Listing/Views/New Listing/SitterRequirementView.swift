@@ -14,6 +14,8 @@ enum SitterRequirement: String {
 }
 
 struct SitterRequirementView: View {
+    @ObservedObject var adminPrices: AdminViewModel
+    
     let size: CGFloat = 12
     @State var showingMultiple: Bool = false
     @Binding var sitterRequirement: SitterRequirement
@@ -22,9 +24,9 @@ struct SitterRequirementView: View {
         ZStack(alignment: .top) {
             HStack {
                 Spacer()
-
+                
                 VStack(spacing: Sizes.xSmall) {
-                    Text(sitterRequirement.rawValue)
+                    Text(getPrices(requirement: sitterRequirement))
                         .customFont(.medium, category: .medium)
                         .foregroundColor(showingMultiple ? Colors.coral : Colors.headline)
                         .onTapGesture {
@@ -34,7 +36,7 @@ struct SitterRequirementView: View {
                     }
 
                     if showingMultiple {
-                        Text(sitterRequirement == .highSchool ? "College" : "High School")
+                        Text(sitterRequirement == .highSchool ? getPrices(requirement: SitterRequirement.college) : getPrices(requirement: SitterRequirement.highSchool))
                             .customFont(.medium, category: .medium)
                             .foregroundColor(showingMultiple ? Colors.coral : Colors.headline)
                             .onTapGesture {
@@ -44,7 +46,7 @@ struct SitterRequirementView: View {
                                 }
                         }
 
-                        Text((sitterRequirement == .highSchool || sitterRequirement == .college) ? "Post Grad" : "College")
+                        Text((sitterRequirement == .highSchool || sitterRequirement == .college) ? getPrices(requirement: SitterRequirement.postGrad) : getPrices(requirement: SitterRequirement.college))
                             .customFont(.medium, category: .medium)
                             .foregroundColor(showingMultiple ? Colors.coral : Colors.headline)
                             .onTapGesture {
@@ -104,6 +106,21 @@ struct SitterRequirementView: View {
                 withAnimation(Animation.easeOut(duration: Animation.animationIn)) {
                     self.showingMultiple.toggle()
                 }
+        }
+    }
+    
+    func getPrices(requirement: SitterRequirement) -> String {
+        if let admin = adminPrices.admin.first {
+            switch requirement {
+            case .highSchool:
+                return "\(requirement.rawValue) $\(admin.highSchool)/hour"
+            case .college:
+                return "\(requirement.rawValue) $\(admin.college)/hour"
+            case .postGrad:
+                return "\(requirement.rawValue) $\(admin.postGrad)/hour"
+            }
+        } else {
+            return ""
         }
     }
 }

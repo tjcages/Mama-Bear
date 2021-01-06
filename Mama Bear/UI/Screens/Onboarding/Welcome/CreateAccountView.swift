@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AccountType: String {
-    case nanny = "Nanny"
+    case sitter = "Sitter"
     case family = "Family"
 }
 
@@ -27,13 +27,13 @@ struct CreateAccountView: View {
     var accountPressed: () -> () = { }
 
     var accounts: [CreateAccount] = [
-        CreateAccount(title: "Parent account", subtitle: "Find the best babysitter", color: Colors.lightCoral.opacity(0.5), image: "parentGraphic", type: .family),
-        CreateAccount(title: "Nanny account", subtitle: "Get jobs near you", color: Colors.lightBlue, image: "nannyGraphic", type: .nanny)
+        CreateAccount(title: "Parent account", subtitle: "Find the best babysitter", color: Colors.extraLightCoral, image: "parentGraphic", type: .family),
+        CreateAccount(title: "Sitter account", subtitle: "Get jobs near you", color: Colors.lightBlue, image: "nannyGraphic", type: .sitter)
     ]
 
     var body: some View {
         VStack(alignment: .center, spacing: Sizes.Spacer) {
-            Text("Choose your account type. \nAre you a parent or nanny?")
+            Text("Choose your account type. \nAre you a parent or sitter?")
                 .customFont(.medium, category: .medium)
                 .foregroundColor(Colors.subheadline)
 

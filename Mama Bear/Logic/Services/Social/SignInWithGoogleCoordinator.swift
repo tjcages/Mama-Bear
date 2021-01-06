@@ -72,7 +72,7 @@ struct GoogleSignInRepresentable: UIViewControllerRepresentable {
                 }
                 // Successful sign in
                 if let result = authResult {
-                    self.onCommit(result)
+                    self.parent.onCommit(result)
                 }
             }
         }

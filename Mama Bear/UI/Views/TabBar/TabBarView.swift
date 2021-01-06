@@ -33,8 +33,9 @@ struct TabBarView: View {
         VStack {
             HStack {
                 // Home
-                Image(systemName: "list.bullet.below.rectangle")
+                Image("ListIcon")
                     .resizable()
+                    .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
                     .padding(padding)
@@ -54,8 +55,9 @@ struct TabBarView: View {
                 Spacer()
 
                 // User messages
-                Image(systemName: "bell")
+                Image("ChatIcon")
                     .resizable()
+                    .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
                     .padding(padding)
@@ -76,8 +78,9 @@ struct TabBarView: View {
 
                 if family {
                     // Add new listing
-                    Image(systemName: "plus")
+                    Image("PlusIcon")
                         .resizable()
+                        .renderingMode(.template)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: Sizes.Default, height: Sizes.Default)
                         .foregroundColor(viewRouter.currentView == .newListing ? Colors.white : Colors.subheadline)
@@ -96,8 +99,9 @@ struct TabBarView: View {
                 }
 
                 // Get help/feedback
-                Image(systemName: "questionmark.circle")
+                Image("HelpIcon")
                     .resizable()
+                    .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
                     .padding(padding)
@@ -117,8 +121,9 @@ struct TabBarView: View {
                 Spacer()
 
                 // User profile
-                Image(systemName: "person.crop.circle")
+                Image("ProfileIcon")
                     .resizable()
+                    .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
                     .padding(padding)
